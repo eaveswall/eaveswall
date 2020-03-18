@@ -1,0 +1,89 @@
+// <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500,500i,600,700|Nanum+Myeongjo:400,700,800|Questrial|Satisfy&display=swap" rel="stylesheet">
+
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap-grid";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/utilities/sizing";
+@import "~bootstrap/scss/utilities/borders";
+@import "~bootstrap/scss/mixins/text-truncate";
+@import "./variables";
+
+$sm: map-get(
+  $map: $grid-breakpoints,
+  $key: sm,
+);
+$md: map-get(
+  $map: $grid-breakpoints,
+  $key: md,
+);
+$lg: map-get(
+  $map: $grid-breakpoints,
+  $key: lg,
+);
+$xl: map-get(
+  $map: $grid-breakpoints,
+  $key: xl,
+);
+
+html,
+body {
+  height: 100%;
+  font-family: "Cormorant Garamond", serif;
+  font-family: "Nanum Myeongjo", serif;
+  font-family: "Satisfy", cursive;
+  font-family: "Questrial", sans-serif;
+}
+
+::selection {
+  background-color: rgba(66, 104, 230, 0.541);
+}
+
+.tile-text {
+  background-color: $color-bright;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .row {
+    padding: 0 1rem;
+    @media (min-width: $lg) {
+      padding: 0 3.5rem;
+    }
+  }
+
+  .tile-lead {
+    padding: 1rem 0;
+    font-size: 1.3rem;
+    color: $color-dark;
+    font-family: "Cormorant Garamond", serif;
+    font-family: "Nanum Myeongjo", serif;
+    width: 100%;
+    font-size: 1.5rem;
+  }
+
+  .clippy {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(250, 62, 4);
+    background-image: linear-gradient(
+      bottom left,
+      rgb(250, 62, 4),
+      rgb(250, 143, 4)
+    );
+    color: $color-bright;
+    clip-path: inset(10% 2%, 1% 0);
+  }
+}
+
+.text-truncate {
+  @include text-truncate();
+}
+
+.text-muted {
+  color: $mute;
+}
+
+.text-muted-bright {
+  color: $color-alt;
+}
