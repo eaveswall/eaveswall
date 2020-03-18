@@ -72,7 +72,9 @@ body {
       rgb(250, 143, 4)
     );
     color: $color-bright;
-    clip-path: inset(10% 2%, 1% 0);
+    clip-path: polygon(0 24%, 100% 0, 100% 100%, 0% 100%);
+    clip-path: polygon(50% 40%, 100% 0, 100% 100%, 0 100%, 0 0);
+    clip-path: polygon(50% 40%, 90% 0, 98% 100%, 0 100%, 0 0);
   }
 }
 

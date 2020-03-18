@@ -52,7 +52,7 @@ const FrontTile = ({ children }) => {
       >
         <div
           className="d-none d-md-flex flex-shrink-0"
-          style={{ width: `60vw`, height: `100vh`, overflow: `hidden` }}
+          style={{ width: `60vw`, height: `100vh`, overflow: `hidden`, clipPath: `polygon(0 0, 100% 0, 100% 100%, 10% 100%)` }}
         >
           {tile.map(({ childImageSharp: { fluid } }, index) => {
             return (
