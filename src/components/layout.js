@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
             </div>
             <div className="row">
               <section className="col-4 tile-lead m-auto"></section>
-              <section className="col-8 tile-lead " style={{ fontWeight: 500 }}>
+              <section className="col-8 tile-lead " style={{ fontSize: `1.2rem`, fontWeight: 500 }}>
                 {data.site.siteMetadata.description}
               </section>
             </div>
@@ -50,8 +50,8 @@ const Layout = ({ children }) => {
         </div>
       </FrontTile>
       <Header siteTitle={data.site.siteMetadata.title} isHome />
-      <div>
-        <div className="mt-5 px-0 px-sm-3">
+      <div className="d-flex flex-column" style={{ minHeight: `calc(100vh - 102px)` }}>
+        <div className="mt-5 mb-3 px-0 px-sm-3">
           <main>{children}</main>
         </div>
         <Footer />
