@@ -3,7 +3,9 @@
   "private": true,
   "description": "A simple blog for us",
   "version": "0.1.0",
-  "author": ["Caleb Adepitan", "John Oluwakeye"],
+  "author": {
+    "name": "The Eaveswall contributors"
+  },
   "dependencies": {
     "@mdx-js/mdx": "^1.5.7",
     "@mdx-js/react": "^1.5.7",
