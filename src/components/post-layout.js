@@ -15,19 +15,35 @@ import "./post-layout.mod.scss"
 
 const shortcodes = { Link, SEO }
 
+const authorTransform = (author, siteTitle) => {
+  let lauthor = author.toLowerCase()
+  if (lauthor === siteTitle.toLowerCase()) return "../"
+  return lauthor.replace(/\s*/g, "")
+}
+
+const timeToRead = time =>
+  time > 1 ? `${time} minutes read` : `${time} minute read`
+
 function CreateTOC({ items, depth = 0 }) {
   return (
     <>
-      <ul className="list-unstyled" style={{ padding: `0 ${1 * depth}rem` }}>
+      <ul
+        className="list-unstyled"
+        style={{ padding: `0 0 0 ${1 * depth}rem` }}
+      >
         {items.map(({ url, title, items: nestedItems }, index) => {
           return nestedItems === null || nestedItems === undefined ? (
             <li className="text-truncate" key={index}>
-              <a href={`${url}`} styleName="toc-links">{title}</a>
+              <a href={`${url}`} styleName="toc-links">
+                {title}
+              </a>
             </li>
           ) : (
             <React.Fragment key={index}>
               <li className="text-truncate" key={index}>
-                <a href={`${url}`} styleName="toc-links">{title}</a>
+                <a href={`${url}`} styleName="toc-links">
+                  {title}
+                </a>
               </li>
               <CreateTOC items={nestedItems} depth={++depth} />
             </React.Fragment>
@@ -55,7 +71,11 @@ const PostLayout = ({ data: { mdx, site } }) => {
           title="Related Posts"
           width="370px"
         >
-          <AllPosts />
+          <AllPosts
+            related
+            to={mdx.frontmatter.tags.split(`,`)}
+            exclude={mdx.id}
+          />
         </Sidebar>
         <div
           className="d-flex flex-column flex-shrink-1"
@@ -67,32 +87,35 @@ const PostLayout = ({ data: { mdx, site } }) => {
               <div className="flex-grow-1" styleName="presents">
                 <h1>{mdx.frontmatter.title}</h1>
                 <div>
-                  <p style={{opacity: .8}}>{mdx.frontmatter.desc}</p>
+                  <p style={{ opacity: 0.8 }}>{mdx.frontmatter.desc}</p>
                 </div>
                 <div className="d-flex">
                   <ul className="list-unstyled flex-shrink-0 mr-3">
                     <li>
-                      <strong className="text-muted-bright">Author</strong>
+                      <span className="text-muted-bright">Author</span>
                     </li>
                     <li>
                       <Link
-                        to={`/authors/@${mdx.frontmatter.author}`}
+                        to={`/authors/${authorTransform(
+                          mdx.frontmatter.author,
+                          site.siteMetadata.title
+                        )}`}
                         styleName="author-link"
                       >
-                        <strong>{mdx.frontmatter.author}</strong>
+                        <span>{mdx.frontmatter.author}</span>
                       </Link>
                     </li>
                   </ul>
                   <ul className="list-unstyled mr-2">
                     <li>
-                      <strong className="text-muted-bright">
+                      <span className="text-muted-bright">
                         Last updated
-                      </strong>
+                      </span>
                     </li>
                     <li>
-                      <strong>
-                        {mdx.parent.ctf} &mdash; {mdx.parent.ctd}
-                      </strong>
+                      <span>
+                        {mdx.parent.ctf} &mdash; {timeToRead(mdx.timeToRead)}
+                      </span>
                     </li>
                   </ul>
                 </div>
@@ -127,7 +150,13 @@ const PostLayout = ({ data: { mdx, site } }) => {
               title="Table of Contents"
               width="250px"
             >
-              <CreateTOC items={mdx.tableOfContents.items} />
+              {mdx.tableOfContents.items !== void 0 ? (
+                <CreateTOC items={mdx.tableOfContents.items} />
+              ) : (
+                <span style={{ textAlign: `center`, display: `block` }}>
+                  There are no sub-headings
+                </span>
+              )}
             </Sidebar>
           </div>
           <Footer />
@@ -147,6 +176,7 @@ export const pageQuery = graphql`
         author
         authorTwitter
         desc
+        tags
         featuredImage {
           childImageSharp {
             fluid(maxWidth: 1200) {
