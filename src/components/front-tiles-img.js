@@ -47,7 +47,7 @@ const FrontTile = ({ children }) => {
   return (
     <>
       <div
-        className="d-flex flex-row-reverse"
+        className="d-none d-xl-flex flex-row-reverse"
         style={{ height: `100vh`, overflow: `hidden` }}
       >
         <div
