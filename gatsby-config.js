@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Eaveswall`,
     author: [`Caleb Pitan`, `John Oluwakeye`],
-    description: `The gist, the vibe, the media, the wall, the eaves that drop at the University of Ibadan.`,
+    description: `Engage in the interesting discussions going on the eaves blogging site and the media wall for all`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -36,15 +36,15 @@ module.exports = {
         name: `Eaveswall`,
         short_name: `Eaveswall`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#3d1928`,
+        theme_color: `#3d1928`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-sass`,
       options: {
