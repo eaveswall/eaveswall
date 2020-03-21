@@ -6,8 +6,8 @@ import "./footer.mod.scss"
 const Footer = () => (
   <footer styleName="footer">
     <div style={{ maxWidth: `860px`, margin: `auto` }}>
-      Eaveswall brought to you by <Link to="/authors/@john">@john</Link> &amp;{" "}
-      <Link to="/authors/@calebpitan">@calebpitan</Link>
+      Eaveswall brought to you by <Link to="/authors/john">@john</Link> &amp;{" "}
+      <Link to="/authors/calebpitan">@calebpitan</Link>
       <div>Copyright &copy; {new Date().getFullYear()} Eaveswall</div>
       <ul className="d-flex" styleName="unstyle">
         <li className="mr-auto">
