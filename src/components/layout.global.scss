@@ -32,10 +32,17 @@ body {
   font-family: "Nanum Myeongjo", serif;
   font-family: "Satisfy", cursive;
   font-family: "Questrial", sans-serif;
+  // font-weight: 600;
 }
 
 ::selection {
   background-color: rgba(66, 104, 230, 0.541);
+}
+
+@for $i from 2 through 6 {
+  h#{$i} {
+    margin: 3rem 0 1rem;
+  }
 }
 
 .tile-text {
@@ -67,7 +74,7 @@ body {
     height: 100%;
     background-color: rgb(250, 62, 4);
     background-image: linear-gradient(
-      bottom left,
+      to left,
       rgb(250, 62, 4),
       rgb(250, 143, 4)
     );
