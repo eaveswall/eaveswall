@@ -11,6 +11,10 @@ const headerLinks = [
     link: "/",
   },
   {
+    text: "Featured",
+    link: "/posts/featured/",
+  },
+  {
     text: "Advertise",
     link: "/advertise",
   },
@@ -33,10 +37,10 @@ const handleNav = ({ navState: { isOpen }, setNavState }) => {
     })
 }
 
-const Header = ({ siteTitle, isHome }) => {
+const Header = ({ siteTitle, active, shade }) => {
   const [navState, setNavState] = useState({ isOpen: false, style: null })
   return (
-    <header styleName="header" style={isHome ? { top: `0px` } : {}}>
+    <header styleName="header" style={shade ? { top: `0px` } : {}}>
       <div className="px-3 py-3" styleName="heads" role="banner">
         <h1
           style={{
@@ -59,7 +63,7 @@ const Header = ({ siteTitle, isHome }) => {
         className="d-flex flex-column"
         styleName="heads"
         role="navigation"
-        style={isHome ? { boxShadow: `0 5px 10px rgba(0,0,0,.4)` } : {}}
+        style={shade ? { boxShadow: `0 5px 10px rgba(0,0,0,.4)` } : {}}
       >
         <div className="px-2">
           <button
@@ -86,7 +90,7 @@ const Header = ({ siteTitle, isHome }) => {
             return (
               <Link
                 to={link}
-                styleName="nav-link"
+                styleName={`nav-link ${active === ++index ? "active" : ""}`}
                 key={index}
                 style={navState.isOpen ? { marginTop: 0 } : null}
               >
@@ -109,12 +113,14 @@ const Header = ({ siteTitle, isHome }) => {
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-  isHome: PropTypes.bool,
+  shade: PropTypes.bool,
+  active: PropTypes.number,
 }
 
 Header.defaultProps = {
   siteTitle: ``,
-  isHome: false,
+  shade: false,
+  active: 1,
 }
 
 export default Header
