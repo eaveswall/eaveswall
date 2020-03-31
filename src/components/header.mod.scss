@@ -1,0 +1,73 @@
+@import "./variables";
+
+.header,
+.header-home {
+  background-color: $primary;
+  @supports (position: sticky) {
+    position: sticky;
+    top: -55px;
+    z-index: 10;
+  }
+
+  .heads {
+    width: 100%;
+
+    &:first-of-type {
+      background-color: $color-bright;
+
+      & > h1 {
+        font-size: 1.2rem !important;
+      }
+    }
+
+    &:last-of-type {
+      border-bottom: $border-width solid $border-color-bright;
+      background-color: $primary;
+    }
+
+    @media (max-width: $md - $diff) {
+      .nav-container {
+        visibility: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: all linear $trans-time;
+        overflow: hidden;
+      }
+    }
+
+    .nav-link {
+      padding: 0.7rem 1rem;
+      color: white;
+      text-decoration: none;
+      @media (max-width: $md - $diff) {
+        margin-top: -20px;
+        transition: margin-top $trans-time linear;
+        border-bottom: $border-width solid $border-color-bright;
+      }
+
+      &.active {
+        position: relative;
+        &::after {
+          content: "";
+          width: 100%;
+          bottom: -1px;
+          left: 0;
+          position: absolute;
+          height: 4px;
+          background-color: $color-bright;
+          border-radius: 3px 3px 0 0px;
+          display: block;
+        }
+      }
+
+      &.active,
+      &:hover {
+        background-color: rgba($color: #000000, $alpha: 0.3);
+      }
+    }
+  }
+}
+
+.header-home {
+  top: 100vh;
+}
