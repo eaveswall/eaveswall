@@ -17,6 +17,7 @@
     display: block;
     height: 300px;
     border-radius: $border-radius;
+    box-shadow: 10px 10px 16px rgba($color: #000000, $alpha: .3), -15px -15px 15px rgba($color: #ffffff, $alpha: 1);
   }
 
   &:hover .card-meta {
