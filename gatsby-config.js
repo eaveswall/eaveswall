@@ -27,9 +27,17 @@ module.exports = {
         path: `${__dirname}/src/posts/`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: `${__dirname}/src/data/`,
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-transformer-remark`,
     `gatsby-plugin-sharp`,
+    `gatsby-transformer-json`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -85,6 +93,12 @@ module.exports = {
             options: {
               maxWidth: 1200,
             },
+          },
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            offsetY: `47`,
+            icon: false,
+            removeAccents: true,
           },
         ],
       },
