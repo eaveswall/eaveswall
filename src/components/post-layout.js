@@ -40,12 +40,16 @@ function CreateTOC({ items, depth = 0 }) {
             </li>
           ) : (
             <React.Fragment key={index}>
-              <li className="text-truncate" key={index}>
-                <a href={`${url}`} styleName="toc-links">
-                  {title}
-                </a>
+              {url && (
+                <li className="text-truncate" key={index}>
+                  <a href={`${url}`} styleName="toc-links">
+                    {title}
+                  </a>
+                </li>
+              )}
+              <li>
+                <CreateTOC items={nestedItems} depth={depth + 1} />
               </li>
-              <CreateTOC items={nestedItems} depth={++depth} />
             </React.Fragment>
           )
         })}
@@ -60,6 +64,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
       <Header
         siteTitle={site.siteMetadata.title}
         color={["#ffffff", "#af3769"]}
+        active={mdx.frontmatter.tags.split(`,`).includes(`featured`) ? 2 : 0}
       />
       <div
         className="d-flex post-layer"
@@ -108,9 +113,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
                   </ul>
                   <ul className="list-unstyled mr-2">
                     <li>
-                      <span className="text-muted-bright">
-                        Last updated
-                      </span>
+                      <span className="text-muted-bright">Last updated</span>
                     </li>
                     <li>
                       <span>
