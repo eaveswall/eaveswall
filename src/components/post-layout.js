@@ -61,6 +61,22 @@ function CreateTOC({ items, depth = 0 }) {
 const PostLayout = ({ data: { mdx, site } }) => {
   return (
     <>
+      <SEO
+        title={mdx.frontmatter.title}
+        description={mdx.frontmatter.desc}
+        keywords={mdx.frontmatter.tags.split(',')}
+        meta={[
+          {
+            name: "author",
+            content: `${mdx.frontmatter.author}`,
+          },
+          {
+            name: "twitter:site",
+            content: `${mdx.frontmatter.authorTwitter}`,
+          },
+        ]}
+        image={mdx.frontmatter.featuredImage.childImageSharp.fluid.src}
+      />
       <Header
         siteTitle={site.siteMetadata.title}
         color={["#ffffff", "#af3769"]}
