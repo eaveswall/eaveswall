@@ -117,7 +117,6 @@ const AllPosts = ({ related = false, to = [], exclude = "" }) => {
   resolveAllMdx(allMdx)
   if (related) return <Related data={allMdx} tags={to} exclude={exclude} />
   return allMdx.edges.map(({ node }, index) => {
-    console.log(node.fields.slug)
     return <PostCard key={index} node={node} />
   })
 }
