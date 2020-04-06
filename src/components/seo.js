@@ -26,6 +26,49 @@ function SEO({ description, lang, meta, keywords = [], title, image, isHome }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
+  const og = [
+    {
+      property: `og:title`,
+      content: title,
+    },
+    {
+      property: `og:description`,
+      content: metaDescription,
+    },
+    {
+      property: `og:type`,
+      content: `website`,
+    },
+  ]
+  const twitter = [
+    {
+      name: `twitter:card`,
+      content: !!image && !isHome ? `summary_large_image` : `summary`,
+    },
+    {
+      name: `twitter:creator`,
+      content: site.siteMetadata.author,
+    },
+    {
+      name: `twitter:title`,
+      content: title,
+    },
+    {
+      name: `twitter:description`,
+      content: metaDescription,
+    },
+  ]
+  if (image) {
+    console.log(image)
+    twitter.push({
+      name: `twitter:image`,
+      content: `https://eaveswall.com${image}`,
+    })
+    og.push({
+      name: `og:image`,
+      content: `https://eaveswall.com${image}`,
+    })
+  }
 
   return (
     <Helmet
@@ -39,51 +82,12 @@ function SEO({ description, lang, meta, keywords = [], title, image, isHome }) {
           name: `description`,
           content: metaDescription,
         },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: !!image && !isHome ? `summary_large_image` : `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
       ]
-        .concat(
-          keywords.length > 0
-            ? {
-                name: `keywords`,
-                content: keywords.join(`,`),
-              }
-            : []
-        )
-        .concat(
-          image
-            ? {
-                name: `twitter:image`,
-                content: `https://eaveswall.com${image}`,
-              }
-            : []
-        )
+        .concat(og, twitter)
+        .concat({
+          name: `keywords`,
+          content: keywords.join(`,`),
+        })
         .concat(meta)}
     />
   )
