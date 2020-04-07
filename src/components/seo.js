@@ -62,11 +62,11 @@ function SEO({ description, lang, meta, keywords = [], title, image, isHome }) {
     console.log(image)
     twitter.push({
       name: `twitter:image`,
-      content: `https://eaveswall.com${image}`,
+      content: `${location.origin}${image}`,
     })
     og.push({
       name: `og:image`,
-      content: `https://eaveswall.com${image}`,
+      content: `${location.origin}${image}`,
     })
   }
 
