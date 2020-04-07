@@ -69,7 +69,7 @@ const relationshipCount = (xlist, ylist) => {
 }
 
 const resolveAllMdx = allMdx => {
-  allMdx.edges.reverse()
+  return [...allMdx.edges].reverse()
 }
 
 const Related = ({ data, tags, exclude }) => {
