@@ -3,6 +3,7 @@ module.exports = {
     title: `Eaveswall`,
     author: [`Caleb Pitan`, `John Oluwakeye`],
     description: `Engage in the interesting discussions going on the eaves blogging site and the media wall for all`,
+    siteUrl: 'https://eaveswall.com'
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -45,9 +46,9 @@ module.exports = {
         short_name: `Eaveswall`,
         start_url: `/`,
         background_color: `#3d1928`,
-        theme_color: `#3d1928`,
-        display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        theme_color: `#290514`,
+        display: `standalone`,
+        icon: `src/images/eaveswall-icon.png`, // This path is relative to the root of the site.
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
@@ -97,7 +98,7 @@ module.exports = {
           {
             resolve: `gatsby-remark-autolink-headers`,
             offsetY: `47`,
-            icon: false,
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 24 24" width="24" height="24" preserveAspectRatio="xMinYMin" class="jam jam-hashtag"><path d='M6 6v2h2V6H6zm0-2h2V1a1 1 0 1 1 2 0v3h3a1 1 0 0 1 0 2h-3v2h3a1 1 0 0 1 0 2h-3v3a1 1 0 0 1-2 0v-3H6v3a1 1 0 0 1-2 0v-3H1a1 1 0 1 1 0-2h3V6H1a1 1 0 1 1 0-2h3V1a1 1 0 1 1 2 0v3z'/></svg>`,
             removeAccents: true,
           },
         ],
@@ -108,14 +109,6 @@ module.exports = {
       options: {
         fonts: [
           {
-            family: `Cormorant Garamond`,
-            variants: [`400`, `500`, `500i`, `600`, `700`],
-          },
-          {
-            family: `Nanum Myeongjo`,
-            variants: [`400`, `700`, `800`],
-          },
-          {
             family: `Questrial`,
           },
           {
@@ -124,5 +117,22 @@ module.exports = {
         ],
       },
     },
+    // `gatsby-plugin-styled-components`,
+    // `gatsby-plugin-algolia`,
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: `UA-135955038-2`,
+        head: true,
+        respectDNT: true,
+        pageTransitionDelay: 1000,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        sitemapSize: 5000
+      }
+    }
   ],
 }
