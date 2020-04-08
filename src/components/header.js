@@ -4,6 +4,7 @@ import React from "react"
 
 import "./header.mod.scss"
 import { useState } from "react"
+import { TwitterSVG, InstagramSVG } from "./social-icons"
 
 const headerLinks = [
   {
@@ -24,6 +25,11 @@ const headerLinks = [
   },
 ]
 const contact = "mailto:contact@eaveswall.com"
+const socialLinks = {
+  twitter: "https://twitter.com/eaveswall",
+  instagram: "https://instagram.com/eaveswall",
+}
+
 const handleNav = ({ navState: { isOpen }, setNavState }) => {
   if (isOpen) setNavState({ isOpen: false, style: null })
   else
@@ -40,7 +46,7 @@ const handleNav = ({ navState: { isOpen }, setNavState }) => {
 const Header = ({ siteTitle, active, shade }) => {
   const [navState, setNavState] = useState({ isOpen: false, style: null })
   return (
-    <header styleName="header" style={shade ? { top: `0px` } : {}}>
+    <header styleName="header" style={shade ? { top: `0.0px` } : {}}>
       <div className="px-3 py-3" styleName="heads" role="banner">
         <h1
           style={{
@@ -82,7 +88,7 @@ const Header = ({ siteTitle, active, shade }) => {
           </button>
         </div>
         <div
-          className="d-flex flex-column flex-md-row"
+          className="d-flex flex-column flex-md-row flex-grow-1"
           styleName="nav-container"
           style={navState.style}
         >
@@ -105,6 +111,32 @@ const Header = ({ siteTitle, active, shade }) => {
           >
             Contact
           </a>
+          <div className="ml-auto p-2">
+            <a
+              href={socialLinks.twitter}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <span
+                className="mx-2"
+                style={{ fill: `rgba(255, 255, 255, .5)` }}
+              >
+                <TwitterSVG width="30" height="30" />
+              </span>
+            </a>
+            <a
+              href={socialLinks.instagram}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <span
+                className="mx-2"
+                style={{ fill: `rgba(255, 255, 255, .5)` }}
+              >
+                <InstagramSVG width="30" height="30" />
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </header>

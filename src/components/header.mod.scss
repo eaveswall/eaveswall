@@ -23,6 +23,8 @@
     &:last-of-type {
       border-bottom: $border-width solid $border-color-bright;
       background-color: $primary;
+      background: rgb(41, 5, 20);
+      background: $lower-header-bg
     }
 
     @media (max-width: $md - $diff) {
@@ -45,18 +47,20 @@
         border-bottom: $border-width solid $border-color-bright;
       }
 
-      &.active {
-        position: relative;
-        &::after {
-          content: "";
-          width: 100%;
-          bottom: -1px;
-          left: 0;
-          position: absolute;
-          height: 4px;
-          background-color: $color-bright;
-          border-radius: 3px 3px 0 0px;
-          display: block;
+      @media (min-width: $md) {
+        &.active {
+          position: relative;
+          &::after {
+            content: "";
+            width: 100%;
+            bottom: -1px;
+            left: 0;
+            position: absolute;
+            height: 4px;
+            background-color: $color-bright;
+            border-radius: 3px 3px 0 0px;
+            display: block;
+          }
         }
       }
 
