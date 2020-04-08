@@ -10,6 +10,8 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
+const HOST = `https://eaveswall.com`
+
 function SEO({ description, lang, meta, keywords = [], title, image, isHome }) {
   const { site } = useStaticQuery(
     graphql`
@@ -62,11 +64,11 @@ function SEO({ description, lang, meta, keywords = [], title, image, isHome }) {
     console.log(image)
     twitter.push({
       name: `twitter:image`,
-      content: `${location.origin}${image}`,
+      content: `${HOST}${image}`,
     })
     og.push({
       name: `og:image`,
-      content: `${location.origin}${image}`,
+      content: `${HOST}${image}`,
     })
   }
 
