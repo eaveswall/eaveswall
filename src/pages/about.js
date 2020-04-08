@@ -1,7 +1,7 @@
 import React from "react"
 
 import PageLayout from "../components/page-layout"
-import SEO from "../components/seo"
+// import SEO from "../components/seo"
 
 const About = () => (
   <>
