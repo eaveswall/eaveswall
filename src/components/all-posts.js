@@ -31,6 +31,21 @@ export const allMdxFragment = graphql`
   }
 `
 
+const resolveAllMdx = allMdx => {
+  return {
+    ...allMdx,
+    edges: [...allMdx.edges].reverse()
+  }
+}
+
+const relationshipCount = (xlist, ylist) => {
+  let count = 0
+  xlist.forEach(xvalue => {
+    if (ylist.includes(xvalue)) count++
+  })
+  return count
+}
+
 const PostCard = ({ node }) => (
   <div className="mx-auto my-4">
     <Link
@@ -59,18 +74,6 @@ const NoRelatedPosts = () => (
     <span> I'm surprised there are no related posts.</span>
   </div>
 )
-
-const relationshipCount = (xlist, ylist) => {
-  let count = 0
-  xlist.forEach(xvalue => {
-    if (ylist.includes(xvalue)) count++
-  })
-  return count
-}
-
-const resolveAllMdx = allMdx => {
-  return [...allMdx.edges].reverse()
-}
 
 const Related = ({ data, tags, exclude }) => {
   const priorityQueue = [] // queue a descent ordered list of relationship rank
@@ -114,9 +117,11 @@ const AllPosts = ({ related = false, to = [], exclude = "" }) => {
       }
     `
   )
-  resolveAllMdx(allMdx)
-  if (related) return <Related data={allMdx} tags={to} exclude={exclude} />
-  return allMdx.edges.map(({ node }, index) => {
+  const allMdxResolved = resolveAllMdx(allMdx)
+  
+  if (related) return <Related data={allMdxResolved} tags={to} exclude={exclude} />
+
+  return allMdxResolved.edges.map(({ node }, index) => {
     return <PostCard key={index} node={node} />
   })
 }
