@@ -26,6 +26,8 @@
 
   .post-presentation {
     background-color: $primary;
+    background: $lower-header-bg;
+    
     .presenter {
       .presents {
         color: $color-alt-2;
