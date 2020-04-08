@@ -12,6 +12,14 @@ $mute: #969595;
 $border-color: rgba(0,0,0,.1);
 $border-color-bright: rgba(250,250,250,.1);
 
+$lower-header-color-stops: darken($primary, 5), $primary, lighten($primary, 15);
+$lower-header-bg: linear-gradient(
+  90deg,
+  darken($primary, 5) 5%,
+  $primary 50%,
+  lighten($primary, 15) 100%
+);
+
 $trans-time: .4s;
 
 $border-width: 1px;

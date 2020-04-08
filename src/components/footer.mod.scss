@@ -1,7 +1,7 @@
 @import "./variables";
 
 .footer {
-  background: $primary;
+  background: $lower-header-bg;
   color: white;
   font-size: 0.9rem;
   padding: 1rem;
@@ -9,7 +9,7 @@
   height: fit-content;
   position: relative;
   width: 100%;
-  
+
   a {
     color: $link-color-alt;
     &:hover,
