@@ -6,7 +6,7 @@ import AllPosts from "../components/all-posts"
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" isHome />
+    <SEO title="Eaveswall" isHome />
     <div className="d-flex flex-wrap justify-content-evenly mt-3 mb-5">
       <AllPosts />
     </div>
