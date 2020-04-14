@@ -4,7 +4,11 @@ import React from "react"
 
 import "./header.mod.scss"
 import { useState } from "react"
-import { TwitterSVG, InstagramSVG } from "./social-icons"
+
+import EaveswallIcon from "../images/svg/eaveswall-icon.inline.svg"
+import MenuIcon from "../images/svg/menu.inline.svg"
+import InstagramSVG from "../images/svg/instagram.inline.svg"
+import TwitterSVG from "../images/svg/twitter-circle.inline.svg"
 
 const headerLinks = [
   {
@@ -47,29 +51,27 @@ const Header = ({ siteTitle, active, shade }) => {
   const [navState, setNavState] = useState({ isOpen: false, style: null })
   return (
     <header styleName="header" style={shade ? { top: `0.0px` } : {}}>
-      <div className="px-3 py-3" styleName="heads" role="banner">
-        <h1
-          style={{
-            maxWidth: `860px`,
-            margin: `0 auto`,
-          }}
-        >
-          <Link
-            to="/"
-            style={{
-              color: `black`,
-              textDecoration: `none`,
-            }}
-          >
-            {siteTitle}
-          </Link>
-        </h1>
+      <div className="px-3 py-2" styleName="heads" role="banner">
+        <div>
+          <EaveswallIcon width="35" height="35" />
+          <span>
+            <Link
+              to="/"
+              style={{
+                color: `black`,
+                textDecoration: `none`,
+              }}
+            >
+              {siteTitle}
+            </Link>
+          </span>
+        </div>
       </div>
       <div
         className="d-flex flex-column"
         styleName="heads"
         role="navigation"
-        style={shade ? { boxShadow: `0 5px 10px rgba(0,0,0,.4)` } : {}}
+        style={shade ? { boxShadow: `0 5px 7px rgba(0,0,0,.1)` } : {}}
       >
         <div className="px-2">
           <button
@@ -84,7 +86,7 @@ const Header = ({ siteTitle, active, shade }) => {
             }}
             onClick={handleNav.bind(null, { navState, setNavState })}
           >
-            ||||
+            <MenuIcon width="30" height="30" style={{fill: `white`}} />
           </button>
         </div>
         <div
