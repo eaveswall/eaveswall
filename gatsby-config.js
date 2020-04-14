@@ -3,7 +3,7 @@ module.exports = {
     title: `Eaveswall`,
     author: [`Caleb Pitan`, `John Oluwakeye`],
     description: `Engage in the interesting discussions going on the eaves blogging site and the media wall for all`,
-    siteUrl: 'https://eaveswall.com'
+    siteUrl: "https://eaveswall.com",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -105,6 +105,14 @@ module.exports = {
       },
     },
     {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /\.inline\.svg$/,
+        },
+      },
+    },
+    {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
         fonts: [
@@ -113,6 +121,10 @@ module.exports = {
           },
           {
             family: `Satisfy`,
+          },
+          {
+            family: `Roboto`,
+            variants: [`500`, `600`],
           },
         ],
       },
@@ -131,8 +143,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
-        sitemapSize: 5000
-      }
-    }
+        sitemapSize: 5000,
+      },
+    },
   ],
 }
