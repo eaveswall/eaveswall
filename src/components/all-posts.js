@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import { useStaticQuery, graphql } from "gatsby"
 import PropTypes from "prop-types"
 
-import Card from "../components/cards"
+import Card from "./cards"
 
 export const allMdxFragment = graphql`
   fragment AllMdxFrag on MdxConnection {
@@ -118,7 +118,7 @@ const AllPosts = ({ related = false, to = [], exclude = "" }) => {
     `
   )
   const allMdxResolved = resolveAllMdx(allMdx)
-  
+
   if (related) return <Related data={allMdxResolved} tags={to} exclude={exclude} />
 
   return allMdxResolved.edges.map(({ node }, index) => {
