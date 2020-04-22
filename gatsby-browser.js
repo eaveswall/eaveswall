@@ -6,5 +6,5 @@
 
 // You can delete this file if you're not using it
 
-
-import "./src/components/layout.global.scss"
+import "whatwg-fetch"
+import "./src/components/layouts/layout.global.scss"
