@@ -3,10 +3,11 @@
 @import "~bootstrap/scss/bootstrap-reboot";
 @import "~bootstrap/scss/bootstrap-grid";
 @import "~bootstrap/scss/type";
+@import "~bootstrap/scss/utilities/screenreaders";
 @import "~bootstrap/scss/utilities/sizing";
 @import "~bootstrap/scss/utilities/borders";
 @import "~bootstrap/scss/mixins/text-truncate";
-@import "./variables";
+@import "../variables";
 
 $sm: map-get(
   $map: $grid-breakpoints,
