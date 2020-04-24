@@ -1,20 +1,18 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import "./sidebar.mod.scss"
+import StyledSidebar, {
+  StyledSidebarHeader,
+  StyledSidebarMain,
+} from "./sidebar"
 
 const Sidebar = ({ children, title, className = "", width, ...rest }) => (
-  <aside
-    className={className}
-    styleName="sidebar"
-    style={{ width: `${width}` }}
-    {...rest}
-  >
-    <div styleName="sidebar-header">
+  <StyledSidebar className={className} style={{ width: `${width}` }} {...rest}>
+    <StyledSidebarHeader>
       <h3 style={{ margin: 0 }}>{title}</h3>
-    </div>
-    <div styleName="aside-main">{children}</div>
-  </aside>
+    </StyledSidebarHeader>
+    <StyledSidebarMain tabIndex={-1}>{children}</StyledSidebarMain>
+  </StyledSidebar>
 )
 
 Sidebar.propTypes = {

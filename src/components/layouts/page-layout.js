@@ -1,10 +1,11 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
-import Header from "./header"
-import Footer from "./footer"
+import Header from "../header"
+import Footer from "../footer"
+import { SiteTheme } from "../theme"
 
-const PageLayout = ({ children }) => {
+const PageLayout = ({ children, activeNav }) => {
   const {site} = useStaticQuery(graphql`
     query {
       site {
@@ -16,11 +17,10 @@ const PageLayout = ({ children }) => {
     }
   `)
   return (
-    <>
+    <SiteTheme>
       <Header
         siteTitle={site.siteMetadata.title}
-        color={["#ffffff", "#af3769"]}
-        active={4}
+        active={activeNav || 4}
         shade
       />
       <div
@@ -34,7 +34,7 @@ const PageLayout = ({ children }) => {
         </div>
         <Footer />
       </div>
-    </>
+    </SiteTheme>
   )
 }
 

@@ -4,14 +4,18 @@ import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
+import { createGlobalStyle } from "styled-components"
 
-import Header from "./header"
-import Footer from "./footer"
-import Sidebar from "./sidebar"
-import SEO from "./seo"
-import AllPosts from "./all-posts"
+import Header from "../../header"
+import Footer from "../../footer"
+import Sidebar from "../../sidebar"
+import SEO from "../../seo"
+import AllPosts from "../../all-posts"
 
 import "./post-layout.mod.scss"
+import NWSForm from "../../newsletter-sub"
+import AuthorDetails from "../../author-details"
+import { SiteTheme } from "../../theme"
 
 const shortcodes = { Link, SEO }
 
@@ -58,13 +62,39 @@ function CreateTOC({ items, depth = 0 }) {
   )
 }
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: ${({ theme: { main } }) => main.bg};
+  }
+  main.post {
+    background-color: ${({ theme: { main } }) => main.bg};
+    color: ${({ theme: { main } }) => main.fgAlt};
+    h2, h3, h4, a {
+      color: ${({ theme: { main } }) => main.fg};
+    }
+    a:not([class*=button]) {
+      text-decoration: underline dashed;
+      &:hover {
+        color: darkcyan;
+        text-decoration: underline dashed;
+      }
+    }
+    img,
+    span.gatsby-resp-image-background-image {
+      border-radius: 20px;
+      margin: 2rem 0;
+    }
+  }
+`
+
 const PostLayout = ({ data: { mdx, site } }) => {
   return (
-    <>
+    <SiteTheme>
+      <GlobalStyle />
       <SEO
         title={mdx.frontmatter.title}
         description={mdx.frontmatter.desc}
-        keywords={mdx.frontmatter.tags.split(',')}
+        keywords={mdx.frontmatter.tags.split(",")}
         meta={[
           {
             name: "author",
@@ -79,7 +109,6 @@ const PostLayout = ({ data: { mdx, site } }) => {
       />
       <Header
         siteTitle={site.siteMetadata.title}
-        color={["#ffffff", "#af3769"]}
         active={mdx.frontmatter.tags.split(`,`).includes(`featured`) ? 2 : 0}
       />
       <div
@@ -156,7 +185,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
                   fluid={mdx.frontmatter.featuredImage.childImageSharp.fluid}
                 />
               </div>
-              <main className="p-3 p-md-5">
+              <main className="post p-3 p-md-5" role="main">
                 <MDXProvider components={shortcodes}>
                   <MDXRenderer frontmatter={mdx.frontmatter}>
                     {mdx.body}
@@ -178,10 +207,18 @@ const PostLayout = ({ data: { mdx, site } }) => {
               )}
             </Sidebar>
           </div>
+
+          <div>
+            <div className="d-xl-flex justify-content-center align-items-center p-3 p-md-5">
+              <AuthorDetails author={mdx.frontmatter.author} />
+            </div>
+            <NWSForm className="mt-3 mt-xl-0" />
+          </div>
+
           <Footer />
         </div>
       </div>
-    </>
+    </SiteTheme>
   )
 }
 
