@@ -1,11 +1,11 @@
-@import "./variables";
+@import "../variables";
 
 .header,
 .header-home {
   background-color: $primary;
   @supports (position: sticky) {
     position: sticky;
-    top: -55px;
+    top: -52px;
     z-index: 10;
   }
 

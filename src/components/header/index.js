@@ -28,7 +28,7 @@ const headerLinks = [
     link: "/about",
   },
 ]
-const contact = "mailto:contact@eaveswall.com"
+const contact = "mailto:team@eaveswall.com"
 const socialLinks = {
   twitter: "https://twitter.com/eaveswall",
   instagram: "https://instagram.com/eaveswall",
@@ -71,7 +71,7 @@ const Header = ({ siteTitle, active, shade }) => {
         className="d-flex flex-column"
         styleName="heads"
         role="navigation"
-        style={shade ? { boxShadow: `0 5px 7px rgba(0,0,0,.1)` } : {}}
+        style={shade ? { boxShadow: `0 5px 7px rgba(0,0,0,.1)` } : null}
       >
         <div className="px-2">
           <button
