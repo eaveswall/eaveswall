@@ -12,7 +12,10 @@ const StyledCardMeta = styled.div`
   border-radius: ${BORDER_RADIUS};
   display: block;
   overflow: hidden;
-  border: ${BORDER_WIDTH} solid ${({ theme: { main } }) => main.shade};
+  border-width: ${BORDER_WIDTH};
+  border-style: solid;
+  border-color: ${({ theme: { main } }) => main.shade} rgba(0, 0, 0, 0.2)
+    rgba(0, 0, 0, 0.2) ${({ theme: { main } }) => main.shade};
   margin: -17.75rem 0 0 -1.2rem;
   z-index: 10;
 `
@@ -25,13 +28,20 @@ const StyledCard = styled.div`
   &::before {
     content: "";
     background-color: rgb(124, 50, 50);
+    background-color: ${({ theme: { main } }) => main.bgAlt};
     width: 18rem;
     max-width: 19rem;
     display: block;
     height: 300px;
     border-radius: ${BORDER_RADIUS};
-    box-shadow: 10px 10px 16px rgba(#000000, 0.3),
-      -15px -15px 15px rgba(#ffffff, 1);
+    ${
+      "" /* box-shadow: 10px 10px 16px rgba(0,0,0, 0.3),
+      -15px -15px 15px rgba(255,255,255, 1); */
+    }
+    box-shadow: 6px 6px 16px ${({ theme: { main } }) =>
+      main.night ? `rgba(0,0,0, .7)` : `rgba(0,0,0, .3)`},
+      -6px -6px 16px ${({ theme: { main } }) =>
+        main.day ? `rgba(255,255,255, 1)` : `rgba(255,255,255, .2)`};
   }
   &:hover ${StyledCardMeta} {
     box-shadow: 5px 5px 16px rgba(0, 0, 0, 0.4),
@@ -50,7 +60,8 @@ const StyledCardImage = styled.div`
 const StyledCardContent = styled.div`
   width: 18rem;
   max-width: 21rem;
-  color: #e1e1e1;
+  color: ${({ theme: { main } }) => main.fg};
+  font-weight: 600;
   border-radius: ${BORDER_RADIUS};
   font-size: ${FONT_SIZE_SM};
   display: inline-block;
