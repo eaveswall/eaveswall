@@ -26,6 +26,11 @@ export const allMdxFragment = graphql`
           }
         }
         excerpt(pruneLength: 70)
+        parent {
+          ... on File {
+            birthTime(formatString: "MMM DD, YYYY")
+          }
+        }
       }
     }
   }
