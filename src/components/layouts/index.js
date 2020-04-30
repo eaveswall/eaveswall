@@ -5,13 +5,7 @@ import { createGlobalStyle } from "styled-components"
 
 import Header from "../header"
 import Footer from "../footer"
-import { SiteTheme } from "../theme"
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: ${({ theme: { main } }) => main.bgAlt};
-  }
-`
+import { SiteTheme, GlobalStyle, SIZES } from "../theme"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -31,7 +25,7 @@ const Layout = ({ children }) => {
       <Header siteTitle={data.site.siteMetadata.title} shade />
       <div
         className="d-flex flex-column"
-        style={{ minHeight: `calc(100vh - 102px)` }}
+        style={{ minHeight: `calc(100vh - ${SIZES.headerHeight})` }}
       >
         <div className="mt-5 mb-3 px-0 px-sm-3">
           <main>{children}</main>

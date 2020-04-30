@@ -12,59 +12,19 @@ import Sidebar from "../../sidebar"
 import SEO from "../../seo"
 import AllPosts from "../../all-posts"
 
-import "./post-layout.mod.scss"
 import NWSForm from "../../newsletter-sub"
 import AuthorDetails from "../../author-details"
-import { SiteTheme } from "../../theme"
+import { SiteTheme, SIZES } from "../../theme"
+import CreateTOC from "./toc"
+import PostContent from "./post-content"
+import PostPresentation from "./presentation"
 
 const shortcodes = { Link, SEO }
 
-const authorTransform = (author, siteTitle) => {
-  let lauthor = author.toLowerCase()
-  if (lauthor === siteTitle.toLowerCase()) return "../"
-  return lauthor.replace(/\s*/g, "")
-}
-
-const timeToRead = time =>
-  time > 1 ? `${time} minutes read` : `${time} minute read`
-
-function CreateTOC({ items, depth = 0 }) {
-  return (
-    <>
-      <ul
-        className="list-unstyled"
-        style={{ padding: `0 0 0 ${1 * depth}rem` }}
-      >
-        {items.map(({ url, title, items: nestedItems }, index) => {
-          return nestedItems === null || nestedItems === undefined ? (
-            <li className="text-truncate" key={index}>
-              <a href={`${url}`} styleName="toc-links">
-                {title}
-              </a>
-            </li>
-          ) : (
-            <React.Fragment key={index}>
-              {url && (
-                <li className="text-truncate" key={index}>
-                  <a href={`${url}`} styleName="toc-links">
-                    {title}
-                  </a>
-                </li>
-              )}
-              <li>
-                <CreateTOC items={nestedItems} depth={depth + 1} />
-              </li>
-            </React.Fragment>
-          )
-        })}
-      </ul>
-    </>
-  )
-}
-
-const GlobalStyle = createGlobalStyle`
+const ComponentScopedGlobalStyle = createGlobalStyle`
   body {
     background-color: ${({ theme: { main } }) => main.bg};
+    color: ${({ theme: { main } }) => main.fg};
   }
   main.post {
     background-color: ${({ theme: { main } }) => main.bg};
@@ -90,7 +50,7 @@ const GlobalStyle = createGlobalStyle`
 const PostLayout = ({ data: { mdx, site } }) => {
   return (
     <SiteTheme>
-      <GlobalStyle />
+      <ComponentScopedGlobalStyle />
       <SEO
         title={mdx.frontmatter.title}
         description={mdx.frontmatter.desc}
@@ -113,13 +73,13 @@ const PostLayout = ({ data: { mdx, site } }) => {
       />
       <div
         className="d-flex post-layer"
-        style={{ minHeight: `calc(100vh - 60px)` }}
+        style={{ minHeight: `calc(100vh - ${SIZES.headerHeight})` }}
       >
         {/* Related Posts */}
         <Sidebar
           className="d-none d-lg-block flex-shrink-0"
           title="Related Posts"
-          width="370px"
+          width={SIZES.relatedPostsWidth}
         >
           <AllPosts
             related
@@ -127,56 +87,9 @@ const PostLayout = ({ data: { mdx, site } }) => {
             exclude={mdx.id}
           />
         </Sidebar>
-        <div
-          className="d-flex flex-column flex-shrink-1"
-          styleName="post-content"
-        >
+        <PostContent>
           {/* Post Presentation */}
-          <div styleName="post-presentation">
-            <div className="d-flex" styleName="presenter">
-              <div className="flex-grow-1" styleName="presents">
-                <h1>{mdx.frontmatter.title}</h1>
-                <div>
-                  <p style={{ opacity: 0.8 }}>{mdx.frontmatter.desc}</p>
-                </div>
-                <div className="d-flex">
-                  <ul className="list-unstyled flex-shrink-0 mr-3">
-                    <li>
-                      <span className="text-muted-bright">Author</span>
-                    </li>
-                    <li>
-                      <Link
-                        to={`/authors/${authorTransform(
-                          mdx.frontmatter.author,
-                          site.siteMetadata.title
-                        )}`}
-                        styleName="author-link"
-                      >
-                        <span>{mdx.frontmatter.author}</span>
-                      </Link>
-                    </li>
-                  </ul>
-                  <ul className="list-unstyled mr-2">
-                    <li>
-                      <span className="text-muted-bright">Last updated</span>
-                    </li>
-                    <li>
-                      <span>
-                        {mdx.parent.ctf} &mdash; {timeToRead(mdx.timeToRead)}
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="d-none d-md-block" styleName="presenter-image">
-                <Img
-                  fluid={mdx.frontmatter.featuredImage.childImageSharp.fluid}
-                  fadeIn={true}
-                  durationFadeIn={2000}
-                />
-              </div>
-            </div>
-          </div>
+          <PostPresentation {...{mdx, site}} />
 
           <div className="d-flex">
             <div className="flex-shrink-1">
@@ -196,7 +109,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
             <Sidebar
               className="d-none d-xl-block flex-shrink-0 border-rounded mt-5"
               title="Table of Contents"
-              width="250px"
+              width={SIZES.tocWidth}
             >
               {mdx.tableOfContents.items !== void 0 ? (
                 <CreateTOC items={mdx.tableOfContents.items} />
@@ -209,14 +122,14 @@ const PostLayout = ({ data: { mdx, site } }) => {
           </div>
 
           <div>
-            <div className="d-xl-flex justify-content-center align-items-center p-3 p-md-5">
+            <div className="d-xl-flex p-3 p-md-5">
               <AuthorDetails author={mdx.frontmatter.author} />
             </div>
             <NWSForm className="mt-3 mt-xl-0" />
           </div>
 
           <Footer />
-        </div>
+        </PostContent>
       </div>
     </SiteTheme>
   )
@@ -247,8 +160,8 @@ export const pageQuery = graphql`
         ... on File {
           id
           name
-          ctf: changeTime(formatString: "MMM DD, YYYY")
-          ctd: changeTime(fromNow: true)
+          mtf: modifiedTime(formatString: "MMM DD, YYYY")
+          mtd: modifiedTime(fromNow: true)
         }
       }
     }

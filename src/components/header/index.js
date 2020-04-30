@@ -1,14 +1,18 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React from "react"
+import React, { useState } from "react"
 
-import "./header.mod.scss"
-import { useState } from "react"
-
-import EaveswallIcon from "../images/svg/eaveswall-icon.inline.svg"
-import MenuIcon from "../images/svg/menu.inline.svg"
-import InstagramSVG from "../images/svg/instagram.inline.svg"
-import TwitterSVG from "../images/svg/twitter-circle.inline.svg"
+import EaveswallIcon from "../../images/svg/eaveswall-icon.inline.svg"
+import MenuIcon from "../../images/svg/menu.inline.svg"
+import StyledHeader, {
+  StyledHeaderGroup,
+  StyledNavlink,
+  StyledNavContainer,
+  StyledNavButton,
+} from "./header"
+import Social from "./social"
+import ThemeSwitch from "./theme-switch"
+import Divider from "../divider"
 
 const headerLinks = [
   {
@@ -29,10 +33,6 @@ const headerLinks = [
   },
 ]
 const contact = "mailto:team@eaveswall.com"
-const socialLinks = {
-  twitter: "https://twitter.com/eaveswall",
-  instagram: "https://instagram.com/eaveswall",
-}
 
 const handleNav = ({ navState: { isOpen }, setNavState }) => {
   if (isOpen) setNavState({ isOpen: false, style: null })
@@ -50,15 +50,14 @@ const handleNav = ({ navState: { isOpen }, setNavState }) => {
 const Header = ({ siteTitle, active, shade }) => {
   const [navState, setNavState] = useState({ isOpen: false, style: null })
   return (
-    <header styleName="header" style={shade ? { top: `0.0px` } : {}}>
-      <div className="px-3 py-2" styleName="heads" role="banner">
+    <StyledHeader {...(shade ? { isHome: true } : null)}>
+      <StyledHeaderGroup className="px-3 py-2" role="banner">
         <div>
           <EaveswallIcon width="35" height="35" />
           <span>
             <Link
               to="/"
               style={{
-                color: `black`,
                 textDecoration: `none`,
               }}
             >
@@ -66,82 +65,59 @@ const Header = ({ siteTitle, active, shade }) => {
             </Link>
           </span>
         </div>
-      </div>
-      <div
+      </StyledHeaderGroup>
+      <StyledHeaderGroup
         className="d-flex flex-column"
-        styleName="heads"
         role="navigation"
         style={shade ? { boxShadow: `0 5px 7px rgba(0,0,0,.1)` } : null}
       >
-        <div className="px-2">
-          <button
+        <div className="d-flex d-md-block px-2">
+          <StyledNavButton
             className="d-md-none"
-            style={{
-              padding: `10px`,
-              borderRadius: `50%`,
-              border: 0,
-              outline: 0,
-              backgroundColor: `transparent`,
-              color: `white`,
-            }}
             onClick={handleNav.bind(null, { navState, setNavState })}
           >
-            <MenuIcon width="30" height="30" style={{fill: `white`}} />
-          </button>
+            <MenuIcon
+              width="30"
+              height="30"
+              style={{ fill: `white` }}
+              className="icon"
+              presentation="true"
+            />
+            <span className="sr-only">Menu</span>
+          </StyledNavButton>
+          <ThemeSwitch className="d-md-none ml-auto" />
         </div>
-        <div
+        <StyledNavContainer
           className="d-flex flex-column flex-md-row flex-grow-1"
-          styleName="nav-container"
           style={navState.style}
         >
           {headerLinks.map(({ text, link }, index) => {
             return (
-              <Link
+              <StyledNavlink
                 to={link}
-                styleName={`nav-link ${active === ++index ? "active" : ""}`}
+                className={`${active === ++index ? "active" : ""}`}
                 key={index}
                 style={navState.isOpen ? { marginTop: 0 } : null}
               >
                 {text}
-              </Link>
+              </StyledNavlink>
             )
           })}
-          <a
+          <StyledNavlink
+            as="a"
             href={contact}
-            styleName="nav-link"
             style={navState.isOpen ? { marginTop: 0 } : null}
           >
             Contact
-          </a>
-          <div className="ml-auto p-2">
-            <a
-              href={socialLinks.twitter}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <span
-                className="mx-2"
-                style={{ fill: `rgba(255, 255, 255, .5)` }}
-              >
-                <TwitterSVG width="30" height="30" />
-              </span>
-            </a>
-            <a
-              href={socialLinks.instagram}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <span
-                className="mx-2"
-                style={{ fill: `rgba(255, 255, 255, .5)` }}
-              >
-                <InstagramSVG width="30" height="30" />
-              </span>
-            </a>
+          </StyledNavlink>
+          <div className="d-flex ml-0 ml-md-auto">
+            <ThemeSwitch className="d-none d-md-block" />
+            <Divider width="5px" height="100%" vertical />
+            <Social className="ml-auto" />
           </div>
-        </div>
-      </div>
-    </header>
+        </StyledNavContainer>
+      </StyledHeaderGroup>
+    </StyledHeader>
   )
 }
 

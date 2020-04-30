@@ -1,7 +1,11 @@
-// <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500,500i,600,700|Nanum+Myeongjo:400,700,800|Questrial|Satisfy&display=swap" rel="stylesheet">
-
 @import "~bootstrap/scss/bootstrap-reboot";
-@import "~bootstrap/scss/bootstrap-grid";
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/mixins";
+@import '~bootstrap/scss/utilities/display';
+@import "~bootstrap/scss/utilities/flex";
+@import "~bootstrap/scss/utilities/spacing";
+
 @import "~bootstrap/scss/type";
 @import "~bootstrap/scss/utilities/screenreaders";
 @import "~bootstrap/scss/utilities/sizing";
@@ -29,9 +33,6 @@ $xl: map-get(
 html,
 body {
   height: 100%;
-  font-family: "Cormorant Garamond", serif;
-  font-family: "Nanum Myeongjo", serif;
-  font-family: "Satisfy", cursive;
   font-family: "Questrial", sans-serif;
   // font-weight: 600;
 }
@@ -43,46 +44,6 @@ body {
 @for $i from 2 through 6 {
   h#{$i} {
     margin: 3rem 0 1rem;
-  }
-}
-
-.tile-text {
-  background-color: $color-bright;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-
-  .row {
-    padding: 0 1rem;
-    @media (min-width: $lg) {
-      padding: 0 3.5rem;
-    }
-  }
-
-  .tile-lead {
-    padding: 1rem 0;
-    font-size: 1.3rem;
-    color: $color-dark;
-    font-family: "Cormorant Garamond", serif;
-    font-family: "Nanum Myeongjo", serif;
-    width: 100%;
-    font-size: 1.5rem;
-  }
-
-  .clippy {
-    width: 100%;
-    height: 100%;
-    background-color: rgb(250, 62, 4);
-    background-image: linear-gradient(
-      to left,
-      rgb(250, 62, 4),
-      rgb(250, 143, 4)
-    );
-    color: $color-bright;
-    clip-path: polygon(0 24%, 100% 0, 100% 100%, 0% 100%);
-    clip-path: polygon(50% 40%, 100% 0, 100% 100%, 0 100%, 0 0);
-    clip-path: polygon(50% 40%, 90% 0, 98% 100%, 0 100%, 0 0);
   }
 }
 
