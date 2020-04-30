@@ -61,7 +61,6 @@ function SEO({ description, lang, meta, keywords = [], title, image, isHome }) {
     },
   ]
   if (image) {
-    console.log(image)
     twitter.push({
       name: `twitter:image`,
       content: `${HOST}${image}`,
