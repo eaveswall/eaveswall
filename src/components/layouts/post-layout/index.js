@@ -163,7 +163,6 @@ export const pageQuery = graphql`
         }
       }
       tableOfContents
-      timeToRead
       parent {
         ... on File {
           id

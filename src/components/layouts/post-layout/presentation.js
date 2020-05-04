@@ -66,7 +66,7 @@ const PostDetails = ({ mdx, site }) => {
           </li>
           <li>
             <span>
-              {mdx.parent.mtf} &mdash; {timeToRead(mdx.timeToRead)}
+              {mdx.parent.mtf} {/* &mdash; {timeToRead(mdx.timeToRead)} */}
             </span>
           </li>
         </ul>
