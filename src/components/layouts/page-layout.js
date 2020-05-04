@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Header from "../header"
 import Footer from "../footer"
 import { SiteTheme, GlobalStyle, SIZES } from "../theme"
+import Divider from "../divider"
 
 const PageLayout = ({ children, activeNav }) => {
   const {site} = useStaticQuery(graphql`
@@ -33,7 +34,8 @@ const PageLayout = ({ children, activeNav }) => {
             {children}
           </main>
         </div>
-        <Footer />
+        <Divider />
+        <Footer withCredits />
       </div>
     </SiteTheme>
   )

@@ -39,6 +39,14 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
         text-decoration: underline dashed;
       }
     }
+    h2, h3, h4 {
+      a.anchor.before {
+        text-decoration: none;
+        svg {
+          display: none;
+        }
+      }
+    }
     img,
     span.gatsby-resp-image-background-image {
       border-radius: 20px;
@@ -89,7 +97,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
         </Sidebar>
         <PostContent>
           {/* Post Presentation */}
-          <PostPresentation {...{mdx, site}} />
+          <PostPresentation {...{ mdx, site }} />
 
           <div className="d-flex">
             <div className="flex-shrink-1">
@@ -125,7 +133,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
             <div className="d-xl-flex p-3 p-md-5">
               <AuthorDetails author={mdx.frontmatter.author} />
             </div>
-            <NWSForm className="mt-3 mt-xl-0" />
+            <NWSForm className="px-xl-5 mt-3 mt-xl-0" />
           </div>
 
           <Footer />

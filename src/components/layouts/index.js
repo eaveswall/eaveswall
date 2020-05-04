@@ -6,6 +6,8 @@ import { createGlobalStyle } from "styled-components"
 import Header from "../header"
 import Footer from "../footer"
 import { SiteTheme, GlobalStyle, SIZES } from "../theme"
+import NWSForm from "../newsletter-sub"
+import Divider from "../divider"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -30,7 +32,13 @@ const Layout = ({ children }) => {
         <div className="mt-5 mb-3 px-0 px-sm-3">
           <main>{children}</main>
         </div>
-        <Footer />
+
+        <div className="mt-auto">
+          <Divider />
+          <NWSForm className="px-xl-5" />
+          <Footer withCredits />
+        </div>
+
       </div>
     </SiteTheme>
   )

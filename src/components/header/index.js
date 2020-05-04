@@ -25,11 +25,11 @@ const headerLinks = [
   },
   {
     text: "Advertise",
-    link: "/advertise",
+    link: "/advertise/",
   },
   {
     text: "About",
-    link: "/about",
+    link: "/about/",
   },
 ]
 const contact = "mailto:team@eaveswall.com"
@@ -54,7 +54,7 @@ const Header = ({ siteTitle, active, shade }) => {
       <StyledHeaderGroup className="px-3 py-2" role="banner">
         <div>
           <EaveswallIcon width="35" height="35" />
-          <span>
+          <span style={{fontFamily: `Satisfy`}}>
             <Link
               to="/"
               style={{

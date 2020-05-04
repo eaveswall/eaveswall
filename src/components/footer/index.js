@@ -1,7 +1,7 @@
 import React from "react"
 import {
   StyledFooter,
-  StyledFooterSocial,
+  StyledFooterHeading,
   StyledFooterLink,
   StyledFooterGroup,
   StyledFooterGroupItem,
@@ -10,6 +10,7 @@ import TwitterSVG from "../../images/svg/twitter.inline.svg"
 import InstagramSVG from "../../images/svg/instagram.inline.svg"
 import { StyledNavButton } from "../header/header"
 import { ThemeContext } from "styled-components"
+import PropTypes from "prop-types"
 
 const footerLinks = [
   {
@@ -55,7 +56,7 @@ const FooterSocial = () => {
   const theme = React.useContext(ThemeContext)
   return (
     <>
-      <StyledFooterSocial>Social</StyledFooterSocial>
+      <StyledFooterHeading>Social Profiles & Media</StyledFooterHeading>
       <div className="d-flex">
         {footerLinks[0].Social.map(({ link, Icon, text }, index) => {
           return (
@@ -90,7 +91,7 @@ const FooterNav = () => {
     <>
       {groups.map((group, index) => {
         return (
-          <StyledFooterGroup style={{ margin: `0 2rem` }} key={index}>
+          <StyledFooterGroup className="mr-auto mx-xl-2" key={index}>
             <StyledFooterGroupItem style={{ fontSize: `1.3rem` }}>
               {group}
             </StyledFooterGroupItem>
@@ -116,22 +117,57 @@ const FooterNav = () => {
   )
 }
 
-const Footer = ({ children, className, ...rest }) => {
+const Footer = ({ children, className, withCredits, ...rest }) => {
   return (
-    <StyledFooter className="d-flex px-xl-5 py-4">
-      <div>
-        Eaveswall brought to you with all the love in the world and outside it
+    <StyledFooter className="d-flex flex-column flex-lg-row px-xl-5 py-4">
+      <div
+        className="d-flex flex-column-reverse flex-lg-row"
+        style={{ minWidth: `55%` }}
+      >
         <div>
-          Copyright &copy; {new Date().getFullYear()} Eaveswall. All rights
-          reserved
+          Eaveswall brought to you with all the love in the world and outside it
+          <div>
+            Copyright &copy; {new Date().getFullYear()} Eaveswall. All rights
+            reserved
+          </div>
+          <FooterSocial />
         </div>
-        <FooterSocial />
+        <div className="d-flex flex-row mx-0 mx-lg-4">
+          <FooterNav />
+        </div>
       </div>
-      <div className="d-flex flex-column flex-sm-row mx-4">
-        <FooterNav />
-      </div>
+
+      {withCredits && (
+        <div>
+          <StyledFooterHeading style={{ marginTop: 0 }}>
+            Images Credit & Attribution
+          </StyledFooterHeading>
+          <div className="mt-3">
+            Thanks to our folks at{" "}
+            <StyledFooterLink
+              as="a"
+              href="https://unsplash.com"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Unsplash
+            </StyledFooterLink>{" "}
+            and a large community of professional photographers who make cool
+            awesome photos available for free.
+            <div>
+              Majority of our images are from this great community and we are
+              grateful.
+            </div>
+          </div>
+        </div>
+      )}
     </StyledFooter>
   )
+}
+
+Footer.propTypes = {
+  children: PropTypes.elementType.isRequired,
+  withCredits: PropTypes.bool,
 }
 
 export default Footer

@@ -2,6 +2,7 @@ import React from "react"
 import day from "./day"
 import night from "./night"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
+import { saveTheme, retrieveTheme } from "./theme-store"
 
 const STATIC_THEME = {
   primary: `#3d1928`,
@@ -16,7 +17,7 @@ const STATIC_THEME = {
 const SIZES = {
   tocWidth: `250px`,
   relatedPostsWidth: `370px`,
-  headerHeight: `99.38px`
+  headerHeight: `99.38px`,
 }
 
 const BREAKPOINTS = {
@@ -42,14 +43,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const saveTheme = theme => {
-  localStorage.setItem("theme", JSON.stringify(theme))
-}
-
-const retrieveTheme = () => {
-  return JSON.parse(localStorage.getItem("theme"))
-}
-
 const ThemeUpdaterContext = React.createContext()
 const useThemeToggle = () => {
   const setTheme = React.useContext(ThemeUpdaterContext)
@@ -64,7 +57,9 @@ const useThemeToggle = () => {
 }
 
 const SiteTheme = ({ children }) => {
-  const [theme, setTheme] = React.useState(retrieveTheme() || day)
+  const [theme, setTheme] = React.useState(
+    (typeof retrieveTheme == "function" && retrieveTheme()) || day
+  )
   return (
     <ThemeProvider
       theme={{
@@ -88,7 +83,5 @@ export {
   SIZES,
   BREAKPOINTS,
   L_BREAKPOINTS,
-  saveTheme,
-  retrieveTheme,
   useThemeToggle,
 }

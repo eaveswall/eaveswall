@@ -1,0 +1,19 @@
+[{
+  "name": "Caleb Pitan",
+  "link": "/authors/calebpitan",
+  "bio": "Caleb Pitan is a student at the University of Ibadan. He is also an artist, a programmer and a web development enthusiast, ah, lest I forget a co-founder of Eaveswall.",
+  "image": "../images/default-profile.png",
+  "social": {
+  	"twitter": "realongman",
+  	"instagram": "realongman"
+  }
+}, {
+  "name": "Eaveswall",
+  "link": "/",
+  "bio": "Engage in the interesting discussions and gists that happen on the eaves blogging site and the media wall for all",
+  "image": "../images/eaveswall-icon.png",
+  "social": {
+  	"twitter": "eaveswall",
+  	"instagram": "eaveswall"
+  }
+}]

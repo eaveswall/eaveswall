@@ -7,7 +7,7 @@ const StyledFooter = styled.footer`
   font-size: 0.9rem;
   font-family: "Roboto";
   padding: 1rem;
-  margin: auto 0 0;
+  margin: 0 0 0;
   height: fit-content;
   position: relative;
   width: 100%;
@@ -33,7 +33,7 @@ const StyledFooterLink = styled(Link)`
     text-decoration: underline;
   }
 `
-const StyledFooterSocial = styled.div`
+const StyledFooterHeading = styled.div`
   font-size: 1.6rem;
   margin-top: 1rem;
   &:after {
@@ -51,5 +51,5 @@ export {
   StyledFooterGroup,
   StyledFooterGroupItem,
   StyledFooterLink,
-  StyledFooterSocial,
+  StyledFooterHeading,
 }

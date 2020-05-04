@@ -13,12 +13,13 @@ const FormContainer = styled.div`
 
 const FormDetail = styled.p`
   font-size: 1.4rem;
-  font-weight: 500;
+  font-weight: 400;
+  font-family: "Roboto";
 `
 
 const FormSubContainer = styled.div`
   @media (min-width: ${BREAKPOINTS.md}px) {
-    max-width: 860px;
+    ${'' /* max-width: 860px; */}
     margin: auto;
   }
 `
@@ -26,7 +27,7 @@ const FormSubContainer = styled.div`
 const FormTitle = styled.span`
   display: block;
   font-weight: 500;
-  color: ${({ theme }) => theme.main.day ? theme.primary : `mistyrose`};
+  color: ${({ theme }) => theme.main.day ? theme.primary : theme.secondary};
   margin-bottom: 1rem;
   font-size: 1.35rem;
   font-family: "Satisfy", san-serif;

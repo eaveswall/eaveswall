@@ -13,23 +13,6 @@
 @import "~bootstrap/scss/mixins/text-truncate";
 @import "../variables";
 
-$sm: map-get(
-  $map: $grid-breakpoints,
-  $key: sm,
-);
-$md: map-get(
-  $map: $grid-breakpoints,
-  $key: md,
-);
-$lg: map-get(
-  $map: $grid-breakpoints,
-  $key: lg,
-);
-$xl: map-get(
-  $map: $grid-breakpoints,
-  $key: xl,
-);
-
 html,
 body {
   height: 100%;
