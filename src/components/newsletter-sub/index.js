@@ -42,7 +42,6 @@ const encode = data => {
 }
 
 const handleSubmitHelper = (data, writeSuccess, writeError) => {
-  console.log(encodeURIComponent(data))
   fetch(`/`, {
     method: `POST`,
     headers: { "Content-Type": `aplication/x-www-form-urlencoded` },
@@ -83,6 +82,7 @@ const NWSForm = props => {
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
+          action="/"
         >
           <input type="hidden" name="form-name" value="newsletter" />
           <label htmlFor="nwsIfield" className="sr-only">
