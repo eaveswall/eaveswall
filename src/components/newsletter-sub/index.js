@@ -44,7 +44,7 @@ const encode = data => {
 const handleSubmitHelper = (data, writeSuccess, writeError) => {
   fetch(`/`, {
     method: `POST`,
-    headers: { "Content-Type": `aplication/x-www-form-urlencoded` },
+    headers: { "Content-Type": `application/x-www-form-urlencoded` },
     body: encode(data),
   })
     .then(() => {
