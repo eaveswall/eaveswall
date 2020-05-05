@@ -34,7 +34,7 @@ const StyledFooterLink = styled(Link)`
   }
 `
 const StyledFooterHeading = styled.div`
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin-top: 1rem;
   &:after {
     content: "";
