@@ -65,7 +65,7 @@ const NWSForm = props => {
       writeSuccess(msg)
       setEmail("")
     }
-    handleSubmitHelper({ email }, onsuccess, writeError)
+    handleSubmitHelper({"form-name": "newsletter", email }, onsuccess, writeError)
     e.preventDefault()
   }
   return (
