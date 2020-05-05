@@ -19,7 +19,7 @@ const FormDetail = styled.p`
 
 const FormSubContainer = styled.div`
   @media (min-width: ${BREAKPOINTS.md}px) {
-    ${'' /* max-width: 860px; */}
+    ${"" /* max-width: 860px; */}
     margin: auto;
   }
 `
@@ -27,18 +27,26 @@ const FormSubContainer = styled.div`
 const FormTitle = styled.span`
   display: block;
   font-weight: 500;
-  color: ${({ theme }) => theme.main.day ? theme.primary : theme.secondary};
+  color: ${({ theme }) => (theme.main.day ? theme.primary : theme.secondary)};
   margin-bottom: 1rem;
   font-size: 1.35rem;
   font-family: "Satisfy", san-serif;
 `
+
+const encode = data => {
+  return Object.keys(data)
+    .map(key => {
+      return `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+    })
+    .join("&")
+}
 
 const handleSubmitHelper = (data, writeSuccess, writeError) => {
   console.log(encodeURIComponent(data))
   fetch(`/`, {
     method: `POST`,
     headers: { "Content-Type": `aplication/x-www-form-urlencoded` },
-    body: encodeURIComponent(data),
+    body: encode(data),
   })
     .then(() => {
       writeSuccess("Subscribed successfully")
@@ -58,7 +66,7 @@ const NWSForm = props => {
       writeSuccess(msg)
       setEmail("")
     }
-    handleSubmitHelper(email, onsuccess, writeError)
+    handleSubmitHelper({ email }, onsuccess, writeError)
     e.preventDefault()
   }
   return (

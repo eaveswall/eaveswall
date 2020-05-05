@@ -162,6 +162,7 @@ export const pageQuery = graphql`
           }
         }
       }
+      timeToRead
       tableOfContents
       parent {
         ... on File {
