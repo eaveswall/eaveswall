@@ -47,20 +47,25 @@
     "styled-components": "^5.0.1",
     "whatwg-fetch": "^3.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "netlify-lambda": "^1.6.3"
+  },
   "keywords": [
     "gatsby"
   ],
   "license": "MIT",
   "scripts": {
-    "build-beta": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
     "build": "gatsby build",
+    "build-beta": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
+    "clean": "gatsby clean",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "svg-icon": "svgo --config svgo.yml -i eaveswall-icon.inline.svg",
-    "start": "npm run develop",
+    "lambda:build": "netlify-lambda build functions/",
+    "lambda:serve": "netlify-lambda serve functions/",
+    "prebuild": "cd functions && npm install",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
+    "start": "npm run develop",
+    "svg-icon": "svgo --config svgo.yml -i eaveswall-icon.inline.svg",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "repository": {
