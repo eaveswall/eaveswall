@@ -1,10 +1,10 @@
 const path = require("path")
 const ejs = require("ejs")
-const sendConfirmMail = require("./send-mail")
+const sendConfirmMail = require("./assets/send-mail")
 
 const BASE_URL = "https://eaveswall.com"
 const NEWSLETTER = "newsletter"
-// const NEWSLETTER_CONFIRM_MSG = "documents/confirm-newsletter.ejs"
+const NEWSLETTER_CONFIRM_MSG = "./assets/confirm-newsletter.ejs"
 const NEWSLETTER_SUCCESS =
   "Submitted successfully. We just sent you a conformation email, please check your inbox to confirm"
 
@@ -19,14 +19,13 @@ exports.handler = (event, _context, callback) => {
     ].map(value => encodeURIComponent(value))
 
     const confirmLink = `${BASE_URL}/newsletter-confirm?em=${email}&id=${id}&fid=${fid}`
-    // const messageFile = path.resolve(__dirname, NEWSLETTER_CONFIRM_MSG)
-    const message = require("./document.confirm-newsletter").data
+    const messageFile = path.resolve(NEWSLETTER_CONFIRM_MSG)
 
     sendConfirmMail({
       from: "Eaveswall Team <team@eaveswall.com>",
       to: decodeURIComponent(email),
       subject: "Newsletter Confirmation",
-      html: ejs.render(message, { data: { confirmLink } }),
+      html: ejs.renderFile(messageFile, { data: { confirmLink } }),
     }).then(({ success, info }) => {
       if (success) {
         callback(null, {
