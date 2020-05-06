@@ -1,4 +1,3 @@
-const path = require("path")
 const ejs = require("ejs")
 const sendMail = require("./assets/send-mail")
 
@@ -12,9 +11,6 @@ exports.handler = (event, _context, callback) => {
   const payload = JSON.parse(event.body).payload
 
   if (payload.form_name === NEWSLETTER) {
-    try {
-      console.log(require.resolve(NEWSLETTER_CONFIRM_MSG))
-    } catch (e) {console.log("failed")}
     const [email, id, fid] = [
       payload.data.email,
       payload.id,
@@ -22,7 +18,7 @@ exports.handler = (event, _context, callback) => {
     ].map(value => encodeURIComponent(value))
 
     const confirmLink = `${BASE_URL}/newsletter-confirm?em=${email}&id=${id}&fid=${fid}`
-    const messageFile = path.resolve(NEWSLETTER_CONFIRM_MSG)
+    const messageFile = require.resolve(NEWSLETTER_CONFIRM_MSG)
 
     sendMail({
       from: "Eaveswall Team <team@eaveswall.com>",
