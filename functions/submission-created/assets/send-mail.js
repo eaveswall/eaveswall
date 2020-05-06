@@ -15,13 +15,13 @@ const sendMail = async ({ from, to, subject, html = null, text = null }) => {
     to: to,
     subject: subject,
     html: html,
-    text: text
+    text: text,
   }
 
   const feedback = await new Promise((resolve, reject) => {
     transport.sendMail(message, (err, info) => {
-      if (err) reject({success: false, info: err})
-      else resolve({success: true, info})
+      if (err) reject(err)
+      else resolve(info)
     })
   })
 

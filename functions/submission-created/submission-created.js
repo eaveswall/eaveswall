@@ -16,7 +16,7 @@ exports.handler = (event, _context, callback) => {
       payload.id,
       payload.form_id,
     ].map(value => encodeURIComponent(value))
-
+    console.log("email", decodeURIComponent(email))
     const confirmLink = `${BASE_URL}/newsletter-confirm?em=${email}&id=${id}&fid=${fid}`
     const messageFile = require.resolve(NEWSLETTER_CONFIRM_MSG)
 
@@ -25,15 +25,13 @@ exports.handler = (event, _context, callback) => {
       to: decodeURIComponent(email),
       subject: "Newsletter Confirmation",
       html: ejs.renderFile(messageFile, { data: { confirmLink } }),
-    }).then(({ success, info }) => {
-      if (success) {
+    })
+      .then(info => {
         callback(null, {
           statusCode: 200,
-          body: NEWSLETTER_SUCCESS,
+          body: JSON.stringify({ info, message: NEWSLETTER_SUCCESS }),
         })
-      } else {
-        callback(info)
-      }
-    })
+      })
+      .catch(err => console.log(err.errorMessage, err.reason.errorMessage))
   }
 }
