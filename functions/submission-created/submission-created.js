@@ -32,6 +32,6 @@ exports.handler = (event, _context, callback) => {
           body: JSON.stringify({ info, message: NEWSLETTER_SUCCESS }),
         })
       })
-      .catch(err => console.log(err.errorMessage, err.reason.errorMessage))
+      .catch(err => console.log(err))
   }
 }
