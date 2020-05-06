@@ -1,6 +1,6 @@
 const path = require("path")
 const ejs = require("ejs")
-const sendConfirmMail = require("./assets/send-mail")
+const sendMail = require("./assets/send-mail")
 
 const BASE_URL = "https://eaveswall.com"
 const NEWSLETTER = "newsletter"
@@ -21,7 +21,7 @@ exports.handler = (event, _context, callback) => {
     const confirmLink = `${BASE_URL}/newsletter-confirm?em=${email}&id=${id}&fid=${fid}`
     const messageFile = path.resolve(NEWSLETTER_CONFIRM_MSG)
 
-    sendConfirmMail({
+    sendMail({
       from: "Eaveswall Team <team@eaveswall.com>",
       to: decodeURIComponent(email),
       subject: "Newsletter Confirmation",
