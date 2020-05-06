@@ -12,6 +12,9 @@ exports.handler = (event, _context, callback) => {
   const payload = JSON.parse(event.body).payload
 
   if (payload.form_name === NEWSLETTER) {
+    try {
+      console.log(require.resolve(NEWSLETTER_CONFIRM_MSG))
+    } catch (e) {console.log("failed")}
     const [email, id, fid] = [
       payload.data.email,
       payload.id,
