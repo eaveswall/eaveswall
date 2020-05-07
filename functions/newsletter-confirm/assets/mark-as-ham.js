@@ -8,7 +8,7 @@ const SITE = `${NETLIFY_API}/sites/${SITE_ID}`
 const FORM = `${SITE}/forms/${FORM_ID}`
 
 const hamSubmissionState = async id => {
-  const path = `${FORM}/${ENDPOINT}/${id}/ham?access_token=${process.env.APP_ACCESS_TOKEN}`
+  const path = `${NETLIFY_API}/${ENDPOINT}/${id}/ham?access_token=${process.env.APP_ACCESS_TOKEN}`
   const res = await fetch(path, {
     method: "PUT",
     body: "ham",
