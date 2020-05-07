@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer")
 
-const sendMail = async ({ from, to, subject, html = null, text = null }) => {
+const sendMail = ({ from, to, subject, html = null, text = null }) => {
   const transport = nodemailer.createTransport({
     host: process.env.MAIL_PROVIDER,
     port: 465,
@@ -18,7 +18,7 @@ const sendMail = async ({ from, to, subject, html = null, text = null }) => {
     text: text,
   }
 
-  const feedback = await new Promise((resolve, reject) => {
+  const feedback = new Promise((resolve, reject) => {
     transport.sendMail(message, (err, info) => {
       if (err) reject(err)
       else resolve(info)
