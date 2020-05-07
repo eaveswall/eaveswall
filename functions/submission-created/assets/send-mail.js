@@ -1,6 +1,9 @@
 const nodemailer = require("nodemailer")
 
-const sendMail = ({ from, to, subject, html = null, text = null }, callback) => {
+const sendMail = (
+  { from, to, subject, html = null, text = null },
+  callback
+) => {
   const transport = nodemailer.createTransport({
     host: process.env.MAIL_PROVIDER,
     port: 465,
@@ -18,9 +21,14 @@ const sendMail = ({ from, to, subject, html = null, text = null }, callback) => 
     text: text,
   }
 
+  {
+    const { MAIL_PROVIDER, ADMIN_MAIL_ADDR, EMAIL_AUTH_KEY } = process.env
+    console.log(MAIL_PROVIDER, ADMIN_MAIL_ADDR, EMAIL_AUTH_KEY)
+  }
+
   transport.sendMail(message, (err, info) => {
-    if (err) callback({success: false, err})
-    else callback({success: true, info})
+    if (err) callback({ success: false, err })
+    else callback({ success: true, info })
   })
 }
 
