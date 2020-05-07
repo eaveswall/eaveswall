@@ -13,7 +13,7 @@ const spamSubmissionState = async id => {
   const res = await fetch(path, {
     method: "PUT",
     referrer: "",
-    body: "spam",
+    body: "spam=1",
   })
   return res
 }

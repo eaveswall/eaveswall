@@ -20,6 +20,7 @@ const handleNewsletter = (payload) => {
   const messageFile = require.resolve(NEWSLETTER_CONFIRM_MSG)
 
   existsInSpam(id).then(yes => {
+    console.log("exists in spam: ", yes)
     if (!yes) {
       ejs.renderFile(messageFile, { data: { confirmLink } }).then(message => {
         sendMail({

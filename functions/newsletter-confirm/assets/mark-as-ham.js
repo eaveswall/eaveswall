@@ -13,7 +13,7 @@ const hamSubmissionState = async id => {
   const res = await fetch(path, {
     method: "PUT",
     referrer: "",
-    body: "ham",
+    body: "ham=1",
   })
   return res
 }
