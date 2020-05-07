@@ -15,7 +15,7 @@ const spamSubmissionState = async id => {
     referrer: "",
     body: "spam",
   })
-  return await res.json()
+  return res
 }
 
 const existsInSpam = async id => {

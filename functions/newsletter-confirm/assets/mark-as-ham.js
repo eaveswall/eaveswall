@@ -15,7 +15,7 @@ const hamSubmissionState = async id => {
     referrer: "",
     body: "ham",
   })
-  return await res.json()
+  return res
 }
 
 module.exports = hamSubmissionState
