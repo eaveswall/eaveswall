@@ -3,6 +3,7 @@ const hamSubmissionState = require("./assets/mark-as-ham")
 const FORM_ID = "5eb03b64ed85550007242fba"
 
 exports.handler = (event, _ctx, callback) => {
+  console.log(event)
   const { id, fid } = event.queryStringParameters
   console.log(id, fid)
   if (fid !== FORM_ID) {

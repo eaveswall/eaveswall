@@ -8,6 +8,7 @@ const NEWSLETTER = "newsletter"
 const NEWSLETTER_CONFIRM_MSG = "./assets/confirm-newsletter.ejs"
 
 exports.handler = (event, _context, callback) => {
+  console.log(event)
   const payload = JSON.parse(event.body).payload
 
   if (payload.form_name === NEWSLETTER) {
@@ -18,7 +19,7 @@ exports.handler = (event, _context, callback) => {
     ].map(value => encodeURIComponent(value))
 
     console.log("email", decodeURIComponent(email))
-    const confirmLink = `${BASE_URL}/${FUNCTIONS_ENDPOINT}/newsletter-confirm?em=${email}&id=${id}&fid=${fid}`
+    const confirmLink = `${BASE_URL}/${FUNCTIONS_ENDPOINT}/newsletter-confirm?id=${id}&fid=${fid}`
     const messageFile = require.resolve(NEWSLETTER_CONFIRM_MSG)
 
     ejs.renderFile(messageFile, { data: { confirmLink } }).then(message => {

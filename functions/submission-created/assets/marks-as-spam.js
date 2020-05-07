@@ -13,7 +13,6 @@ const spamSubmissionState = async id => {
     method: "PUT",
     body: "spam",
   })
-  console.log("mark-as-spam: function resolved to ", res)
   return res
 }
 
