@@ -1,17 +1,19 @@
 const ejs = require("ejs")
 const sendMail = require("./assets/send-mail")
-const spamSubmissionState = require("./assets/marks-as-spam")
+const spamSubmissionState = require("./assets/api-requests").spamSubmissionState
+const existsInSpam = require("./assets/api-requests").existsInSpam
 
+const POST = "POST"
 const BASE_URL = "https://eaveswall.com"
 const FUNCTIONS_ENDPOINT = ".netlify/functions"
 const NEWSLETTER = "newsletter"
 const NEWSLETTER_CONFIRM_MSG = "./assets/confirm-newsletter.ejs"
 
-exports.handler = (event, _context, callback) => {
+exports.handler = event => {
   console.log(event)
   const payload = JSON.parse(event.body).payload
 
-  if (payload.form_name === NEWSLETTER) {
+  if (payload.form_name === NEWSLETTER && event.httpMethod == POST && payload.data.referrer !== "") {
     const [email, id, fid] = [
       payload.data.email,
       payload.id,
@@ -35,6 +37,12 @@ exports.handler = (event, _context, callback) => {
         .catch(err => console.log("Failed to send email", err))
     })
 
-    spamSubmissionState(id).then((status) => console.log("Submission added to spam ", status)).catch(err => console.log("Error setting submission as spam", err))
+    existsInSpam(id).then(yes => {
+      if (!yes) {
+        spamSubmissionState(id)
+          .then(status => console.log("Submission added to spam ", status))
+          .catch(err => console.log("Error setting submission as spam", err))
+      }
+    })
   }
 }
