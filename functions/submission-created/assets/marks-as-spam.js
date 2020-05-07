@@ -7,10 +7,11 @@ const FORM_ID = "5eb03b64ed85550007242fba"
 const SITE = `${NETLIFY_API}/sites/${SITE_ID}`
 const FORM = `${SITE}/forms/${FORM_ID}`
 
-const spamSubmissionState = async (id) => {
+const spamSubmissionState = async id => {
   const path = `${FORM}/${ENDPOINT}/${id}/spam?access_token=${process.env.APP_ACCESS_TOKEN}`
   const res = await fetch(path, {
-    method: "PUT"
+    method: "PUT",
+    body: "spam",
   })
   console.log("mark-as-spam: function resolved to ", res)
   return res
