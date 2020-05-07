@@ -9,7 +9,6 @@ const NEWSLETTER_CONFIRM_MSG = "./assets/confirm-newsletter.ejs"
 
 exports.handler = (event, _context, callback) => {
   const payload = JSON.parse(event.body).payload
-  console.log(payload)
 
   if (payload.form_name === NEWSLETTER) {
     const [email, id, fid] = [
@@ -35,6 +34,6 @@ exports.handler = (event, _context, callback) => {
         .catch(err => console.log("Failed to send email", err))
     })
 
-    spamSubmissionState(id).catch(err => console.log("Error setting submission as spam", err))
+    spamSubmissionState(id).then((status) => console.log("Submission added to spam ", status)).catch(err => console.log("Error setting submission as spam", err))
   }
 }
