@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer")
 
-const sendMail = ({ from, to, subject, html = null, text = null }) => {
+const sendMail = ({ from, to, subject, html = null, text = null }, callback) => {
   const transport = nodemailer.createTransport({
     host: process.env.MAIL_PROVIDER,
     port: 465,
@@ -18,14 +18,10 @@ const sendMail = ({ from, to, subject, html = null, text = null }) => {
     text: text,
   }
 
-  const feedback = new Promise((resolve, reject) => {
-    transport.sendMail(message, (err, info) => {
-      if (err) reject(err)
-      else resolve(info)
-    })
+  transport.sendMail(message, (err, info) => {
+    if (err) callback({success: false, err})
+    else callback({success: true, info})
   })
-
-  return feedback
 }
 
 module.exports = sendMail

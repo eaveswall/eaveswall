@@ -25,13 +25,15 @@ exports.handler = (event, _context, callback) => {
       to: decodeURIComponent(email),
       subject: "Newsletter Confirmation",
       html: ejs.renderFile(messageFile, { data: { confirmLink } }),
-    })
-      .then(info => {
+    }, (status) => {
+      if (status.success) {
         callback(null, {
           statusCode: 200,
           body: JSON.stringify({ info, message: NEWSLETTER_SUCCESS }),
         })
-      })
-      .catch(err => console.log(err))
+      } else {
+        callback(null)
+      }
+    })
   }
 }
