@@ -20,20 +20,25 @@ exports.handler = (event, _context, callback) => {
     const confirmLink = `${BASE_URL}/newsletter-confirm?em=${email}&id=${id}&fid=${fid}`
     const messageFile = require.resolve(NEWSLETTER_CONFIRM_MSG)
 
-    sendMail({
-      from: "Eaveswall Team <team@eaveswall.com>",
-      to: decodeURIComponent(email),
-      subject: "Newsletter Confirmation",
-      html: ejs.renderFile(messageFile, { data: { confirmLink } }),
-    }, (status) => {
-      if (status.success) {
-        callback(null, {
-          statusCode: 200,
-          body: JSON.stringify({ info, message: NEWSLETTER_SUCCESS }),
-        })
-      } else {
-        callback(null)
+    sendMail(
+      {
+        from: "Eaveswall Team <team@eaveswall.com>",
+        to: decodeURIComponent(email),
+        subject: "Newsletter Confirmation",
+        html: ejs.renderFile(messageFile, { data: { confirmLink } }),
+      },
+      status => {
+        if (status.success) {
+          console.log("Confirmation mail sent successfully", status.info)
+          callback(null, {
+            statusCode: 200,
+            body: JSON.stringify({ info, message: NEWSLETTER_SUCCESS }),
+          })
+        } else {
+          console.log("Failed to send mail", status.err)
+          callback(null)
+        }
       }
-    })
+    )
   }
 }
