@@ -1,7 +1,13 @@
 const ejs = require("ejs")
 const querystring = require("querystring")
+const fetch = require("node-fetch")
 const sendMail = require("./assets/send-mail")
-const { spamSubmissionState, existsInSpam } = require("./assets/api-requests")
+const {
+  spamSubmissionState,
+  existsInSpam,
+  emailExists,
+  getSubmissionFromCustomId,
+} = require("./assets/api-requests")
 
 const POST = "POST"
 const BASE_URL = "https://eaveswall.com"
@@ -22,58 +28,92 @@ const encode = data => {
     .join("&")
 }
 
+const sendVerification = (id, fid, email) => {
+  const confirmLink = `${BASE_URL}/${FUNCTIONS_ENDPOINT}/newsletter-confirm?id=${id}&fid=${fid}`
+  const messageFile = require.resolve(NEWSLETTER_CONFIRM_MSG)
+
+  existsInSpam(id).then(yes => {
+    console.log("Exists in spam: ", yes)
+    if (!yes) {
+      ejs.renderFile(messageFile, { data: { confirmLink } }).then(message => {
+        sendMail({
+          from: "Eaveswall Team <team@eaveswall.com>",
+          to: email,
+          subject: "Newsletter Confirmation",
+          html: message,
+        })
+          .then(info => {
+            console.log("Confirmation email sent successfully", info)
+          })
+          .catch(err => console.log("Failed to send email", err))
+      })
+    }
+  })
+}
+
 const netlifySubmit = async data => {
-  const fetch = require("node-fetch")
   const res = await fetch(BASE_URL, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: encode(data),
   })
-  console.log("Response Body", await res.body())
   return res
 }
 
-const handleNewsletter = payload => {
+const handleNewsletter = (payload, callback) => {
   const [email, id, form_name] = [
     payload.email,
     generateId(),
     payload["form-name"],
   ]
 
-  netlifySubmit({ "form-name": form_name, email, id })
-    .then(data => console.log(data))
-    .catch(console.error)
+  emailExists(email)
+    .then(yes => {
+      if (yes) {
+        return callback(null, {
+          statusCode: 200,
+          body: JSON.stringify({ message: "Subscription already exists." }),
+        })
+      }
 
-  // const confirmLink = `${BASE_URL}/${FUNCTIONS_ENDPOINT}/newsletter-confirm?id=${id}&fid=${fid}`
-  // const messageFile = require.resolve(NEWSLETTER_CONFIRM_MSG)
-
-  // existsInSpam(id).then(yes => {
-  //   console.log("exists in spam: ", yes)
-  //   if (!yes) {
-  //     ejs.renderFile(messageFile, { data: { confirmLink } }).then(message => {
-  //       sendMail({
-  //         from: "Eaveswall Team <team@eaveswall.com>",
-  //         to: decodeURIComponent(email),
-  //         subject: "Newsletter Confirmation",
-  //         html: message,
-  //       })
-  //         .then(info => {
-  //           console.log("Confirmation email sent successfully", info)
-  //         })
-  //         .catch(err => console.log("Failed to send email", err))
-  //     })
-
-  //     spamSubmissionState(id)
-  //       .then(status => console.log("Submission added to spam ", status))
-  //       .catch(err => console.log("Error setting submission as spam", err))
-  //   }
-  // })
+      netlifySubmit({ "form-name": form_name, email, id })
+        .then(data => {
+          console.log("Form submitted", data)
+          getSubmissionFromCustomId(id).then(submission => {
+            spamSubmissionState(submission.id)
+              .then(status => {
+                console.log("Submission added to spam ", status)
+                sendVerification(submission.id, submission.form_id, email)
+              })
+              .catch(err =>
+                console.log("Error setting submission as spam", err)
+              )
+          })
+        })
+        .catch(e =>
+          callback(e, {
+            statusCode: "502",
+            body: "Bad Gateway",
+          })
+        )
+    })
+    .catch(e =>
+      callback(e, {
+        statusCode: "502",
+        body: "Bad Gateway",
+      })
+    )
+  console.log("SUCCESS!!!!!!!!")
+  callback(null, {
+    statusCode: "200",
+    body: JSON.stringify({message: "Subscription successful. Confirmation email already sent"})
+  })
 }
 
-exports.handler = event => {
+exports.handler = (event, _c, callback) => {
   console.log(event)
   const payload = querystring.parse(event.body)
   if (payload["form-name"] === NEWSLETTER || event.httpMethod === POST) {
-    handleNewsletter(payload)
+    handleNewsletter(payload, callback)
   }
 }
