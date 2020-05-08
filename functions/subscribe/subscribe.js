@@ -34,7 +34,7 @@ const sendVerification = (id, fid, email) => {
 
   existsInSpam(id).then(yes => {
     console.log("Exists in spam: ", yes)
-    if (!yes) {
+    if (yes) {
       ejs.renderFile(messageFile, { data: { confirmLink } }).then(message => {
         sendMail({
           from: "Eaveswall Team <team@eaveswall.com>",
@@ -103,11 +103,6 @@ const handleNewsletter = (payload, callback) => {
         body: "Bad Gateway",
       })
     )
-  console.log("SUCCESS!!!!!!!!")
-  callback(null, {
-    statusCode: "200",
-    body: JSON.stringify({message: "Subscription successful. Confirmation email already sent"})
-  })
 }
 
 exports.handler = (event, _c, callback) => {
