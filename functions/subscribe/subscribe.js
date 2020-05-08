@@ -29,6 +29,7 @@ const netlifySubmit = async data => {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: encode(data),
   })
+  console.log("Response Body", await res.body())
   return res
 }
 
