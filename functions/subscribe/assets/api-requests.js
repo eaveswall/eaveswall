@@ -28,6 +28,7 @@ const spamSubmissionState = async id => {
 
 const getSubmissionFromCustomId = async customId => {
   const submissions = await getSubmissions()
+  console.log(submissions)
   return submissions.filter(({data: {id}}) => id === customId)[0]
 }
 
