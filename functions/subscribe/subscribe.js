@@ -38,7 +38,7 @@ const handleNewsletter = payload => {
     payload.email,
     generateId(),
     payload["form-name"],
-  ].map(value => encodeURIComponent(value))
+  ]
 
   netlifySubmit({ "form-name": form_name, email, id })
     .then(data => console.log(data))
