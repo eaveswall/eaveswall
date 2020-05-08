@@ -60,12 +60,13 @@ const NWSForm = props => {
   const [email, setEmail] = useState("")
   const [success, writeSuccess] = useState("")
   const [error, writeError] = useState("")
+  const id = new Date().getTime().toString(36)
   const handleSubmit = e => {
     const onsuccess = msg => {
       writeSuccess(msg)
       setEmail("")
     }
-    handleSubmitHelper({"form-name": "newsletter", email }, onsuccess, writeError)
+    handleSubmitHelper({"form-name": "newsletter", email, id }, onsuccess, writeError)
     e.preventDefault()
   }
   return (
@@ -96,6 +97,7 @@ const NWSForm = props => {
             value={email}
             onChange={evt => setEmail(evt.target.value)}
           />
+          <input type="hidden" name="id" value={id} />
           <SubmitButton
             className="ml-md-5 mt-2 mt-md-0"
             name="submit"
