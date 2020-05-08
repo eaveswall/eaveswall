@@ -42,7 +42,7 @@ const encode = data => {
 }
 
 const handleSubmitHelper = (data, writeSuccess, writeError) => {
-  fetch(`/`, {
+  fetch(`/.netlify/functions/subscribe`, {
     method: `POST`,
     headers: { "Content-Type": `application/x-www-form-urlencoded` },
     body: encode(data),
@@ -82,7 +82,7 @@ const NWSForm = props => {
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
-          action="/"
+          action="/.netlify/functions/subscribe"
         >
           <input type="hidden" name="form-name" value="newsletter" />
           <label htmlFor="nwsIfield" className="sr-only">

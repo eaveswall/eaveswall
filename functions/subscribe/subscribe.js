@@ -1,7 +1,7 @@
 const ejs = require("ejs")
+const querystring = require("querystring")
 const sendMail = require("./assets/send-mail")
-const spamSubmissionState = require("./assets/api-requests").spamSubmissionState
-const existsInSpam = require("./assets/api-requests").existsInSpam
+const { spamSubmissionState, existsInSpam } = require("./assets/api-requests")
 
 const POST = "POST"
 const BASE_URL = "https://eaveswall.com"
@@ -9,7 +9,7 @@ const FUNCTIONS_ENDPOINT = ".netlify/functions"
 const NEWSLETTER = "newsletter"
 const NEWSLETTER_CONFIRM_MSG = "./assets/confirm-newsletter.ejs"
 
-const handleNewsletter = (payload) => {
+const handleNewsletter = payload => {
   const [email, id, fid] = [
     payload.data.email,
     payload.id,
@@ -43,8 +43,9 @@ const handleNewsletter = (payload) => {
 }
 
 exports.handler = event => {
-  const payload = JSON.parse(event.body).payload
   console.log(event)
+  const payload = JSON.parse(event.body).payload
+  console.log(payload)
   if (payload.form_name === NEWSLETTER || event.httpMethod === POST) {
     handleNewsletter(payload)
   }
