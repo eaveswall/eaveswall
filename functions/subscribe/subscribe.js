@@ -23,6 +23,7 @@ const encode = data => {
 }
 
 const netlifySubmit = async data => {
+  const fetch = require("node-fetch")
   const res = await fetch(BASE_URL, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
