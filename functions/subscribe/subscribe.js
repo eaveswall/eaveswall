@@ -29,7 +29,7 @@ const netlifySubmit = async data => {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: encode(data),
   })
-  return await res.json()
+  return res
 }
 
 const handleNewsletter = payload => {
