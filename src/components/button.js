@@ -26,12 +26,12 @@ const Button = styled.button`
   }
 `
 
-export const LinkButton = ({to, text, ...rest}) => (
-  <Button as={Link} to={to} {...rest}>{text}</Button>
+export const LinkButton = ({to, children, text, ...rest}) => (
+  <Button as={Link} to={to} {...rest}>{children || text}</Button>
 )
 
-export const LinkButtonGeneric = ({to, text, ...rest}) => (
-  <Button as="a" href={to} {...rest}>{text}</Button>
+export const LinkButtonGeneric = ({to, children, text, ...rest}) => (
+  <Button as="a" href={to} {...rest}>{children || text}</Button>
 )
 
 export default Button
