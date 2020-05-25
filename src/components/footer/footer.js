@@ -1,11 +1,13 @@
 import styled from "styled-components"
 import { Link } from "gatsby"
+import { L_BREAKPOINTS } from "../theme"
 
 const StyledFooter = styled.footer`
   background: ${({ theme: { main } }) => main.bgAlt};
   color: ${({ theme: { main } }) => main.fgFair};
   font-size: 0.9rem;
   font-family: "Roboto";
+  font-weight: 500;
   padding: 1rem;
   margin: 0 0 0;
   height: fit-content;
@@ -15,27 +17,29 @@ const StyledFooter = styled.footer`
 const StyledFooterGroup = styled.ul`
   padding: 0;
   list-style: none;
-  font-weight: 400;
-  & > li:not(ul ul > li) {
-    font-weight: 600;
-    font-weight: 2rem;
-  }
+  font-weight: 500;
 `
 const StyledFooterGroupItem = styled.li`
   margin: 0 0 1rem;
 `
 const StyledFooterLink = styled(Link)`
-  color: ${({ theme: { main } }) => main.fg};
+  color: currentColor;
   text-decoration: underline;
+  font-weight: 500;
   &:hover,
   &:active {
-    color: currentColor;
+    color: ${({ theme: { main } }) => main.fg};
     text-decoration: underline;
   }
 `
 const StyledFooterHeading = styled.div`
   font-size: 1.4rem;
+  font-weight: 500;
   margin-top: 1rem;
+  display: inline-block;
+  @media (max-width: ${L_BREAKPOINTS.lsm}px) {
+    display: block;
+  }
   &:after {
     content: "";
     width: 100%;

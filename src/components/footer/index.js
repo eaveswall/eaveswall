@@ -49,6 +49,16 @@ const footerLinks = [
         text: "Featured",
       },
     ],
+    Explore: [
+      {
+        link: "/tags/",
+        text: "Tags",
+      },
+      {
+        link: "/author/",
+        text: "Authors",
+      },
+    ],
   },
 ]
 
@@ -89,17 +99,17 @@ const FooterNav = () => {
   const groups = Object.keys(targetLinks)
   return (
     <>
-      {groups.map((group, index) => {
+      {groups.map(group => {
         return (
-          <StyledFooterGroup className="mr-auto mx-xl-2" key={index}>
-            <StyledFooterGroupItem style={{ fontSize: `1.3rem` }}>
-              {group}
+          <StyledFooterGroup className="mr-auto mr-lg-3 mx-xl-2" key={group}>
+            <StyledFooterGroupItem style={{ fontSize: `0.9rem` }}>
+              {group.toUpperCase()}
             </StyledFooterGroupItem>
             <StyledFooterGroupItem>
               <StyledFooterGroup>
-                {targetLinks[group].map(({ link, text, generic }, idx) => {
+                {targetLinks[group].map(({ link, text, generic }) => {
                   return (
-                    <StyledFooterGroupItem key={++index * idx}>
+                    <StyledFooterGroupItem key={text}>
                       <StyledFooterLink
                         {...(generic ? { as: "a", href: link } : { to: link })}
                       >
@@ -117,7 +127,7 @@ const FooterNav = () => {
   )
 }
 
-const Footer = ({ children, className, withCredits, ...rest }) => {
+const Footer = ({ withCredits }) => {
   return (
     <StyledFooter className="d-flex flex-column flex-lg-row px-xl-5 py-4">
       <div
@@ -125,14 +135,14 @@ const Footer = ({ children, className, withCredits, ...rest }) => {
         style={{ minWidth: `55%` }}
       >
         <div>
-          Eaveswall brought to you with all the love in the world and outside it
+          Eaveswall brought to you with all the <span role="img" aria-label="love">💖</span> in the world and outside it
           <div>
             Copyright &copy; {new Date().getFullYear()} Eaveswall. All rights
             reserved
           </div>
           <FooterSocial />
         </div>
-        <div className="d-flex flex-row mx-0 mx-lg-4">
+        <div className="d-flex flex-row flex-wrapx mx-0 mx-lg-3">
           <FooterNav />
         </div>
       </div>
@@ -152,12 +162,12 @@ const Footer = ({ children, className, withCredits, ...rest }) => {
             >
               Unsplash
             </StyledFooterLink>{" "}
-            and a large community of professional photographers who make cool
+            , a large community of professional photographers who make cool
             awesome photos available for free.
-            <div>
+            {/* <div>
               Majority of our images are from this great community and we are
               grateful.
-            </div>
+            </div> */}
           </div>
         </div>
       )}
@@ -166,7 +176,6 @@ const Footer = ({ children, className, withCredits, ...rest }) => {
 }
 
 Footer.propTypes = {
-  children: PropTypes.elementType.isRequired,
   withCredits: PropTypes.bool,
 }
 
