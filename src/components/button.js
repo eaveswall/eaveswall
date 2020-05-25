@@ -7,7 +7,7 @@ const Button = styled.button`
   font-family: 'Roboto', sans-serif;
   font-size: 0.9rem;
   font-weight: 500;
-  color: ${({theme: {main}}) => main.fg};
+  color: ${({theme: {main}}) => main.fg || '#000000'};
   text-align: center;
   white-space: normal;
   vertical-align: middle;
@@ -17,12 +17,12 @@ const Button = styled.button`
   border-radius: 0.25rem;
   padding: 0.4rem 1rem;
   transition: all ease .4s;
-  background-color: ${({theme: {main}}) => main.bg};;
-  box-shadow: 0 0.2rem 0.728rem 0.2rem ${({theme: {main}}) => main.shade};;
+  background-color: ${({theme: {main}}) => main.bg || '#ffffff'};
+  box-shadow: 0 0.2rem 0.728rem 0.2rem ${({theme: {main}}) => main.shade || '#f9f9f9'};
   &:hover {
     color: currentColor;
     text-decoration: none;
-    background-color: ${({theme: {main}}) => main.bgFair};;
+    background-color: ${({theme: {main}}) => main.bgFair || '#f1f1f1'};
   }
 `
 
