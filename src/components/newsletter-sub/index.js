@@ -13,7 +13,7 @@ const FormContainer = styled.div`
 
 const FormDetail = styled.p`
   font-size: 1.4rem;
-  font-weight: 400;
+  font-weight: 500;
   font-family: "Roboto";
 `
 
@@ -66,46 +66,58 @@ const NWSForm = props => {
       writeSuccess(msg)
       setEmail("")
     }
-    handleSubmitHelper({"form-name": "newsletter", email, id }, onsuccess, writeError)
+    handleSubmitHelper(
+      { "form-name": "newsletter", email, id },
+      onsuccess,
+      writeError
+    )
     e.preventDefault()
   }
   return (
     <FormContainer {...props}>
       <FormSubContainer>
-        <FormDetail>
-          Let's give you a heads up anytime we put something on the wall.
-        </FormDetail>
-        <FormTitle>Sign up for our newsletter!</FormTitle>
+        {success ? (
+          <FormDetail>{success}</FormDetail>
+        ) : error ? (
+          <FormDetail>{error}</FormDetail>
+        ) : (
+          <>
+            <FormDetail>
+              Let's give you a heads up anytime we put something on the wall.
+            </FormDetail>
+            <FormTitle>Sign up for our newsletter!</FormTitle>
 
-        <form
-          name="newsletter"
-          method="post"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-          onSubmit={handleSubmit}
-          action="/.netlify/functions/subscribe"
-        >
-          <input type="hidden" name="form-name" value="newsletter" />
-          <label htmlFor="nwsIfield" className="sr-only">
-            Email Address
-          </label>
-          <Input
-            id="nwsIfield"
-            placeholder="you@subscribe.com"
-            name="email"
-            type="email"
-            value={email}
-            onChange={evt => setEmail(evt.target.value)}
-          />
-          <input type="hidden" name="id" value={id} />
-          <SubmitButton
-            className="ml-md-5 mt-2 mt-md-0"
-            name="submit"
-            value="Subscribe"
-            type="submit"
-            disabled={!email ? true : false}
-          />
-        </form>
+            <form
+              name="newsletter"
+              method="post"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
+              action="/.netlify/functions/subscribe"
+            >
+              <input type="hidden" name="form-name" value="newsletter" />
+              <label htmlFor="nwsIfield" className="sr-only">
+                Email Address
+              </label>
+              <Input
+                id="nwsIfield"
+                placeholder="you@subscribe.com"
+                name="email"
+                type="email"
+                value={email}
+                onChange={evt => setEmail(evt.target.value)}
+              />
+              <input type="hidden" name="id" value={id} />
+              <SubmitButton
+                className="ml-md-5 mt-2 mt-md-0"
+                name="submit"
+                value="Subscribe"
+                type="submit"
+                disabled={!email ? true : false}
+              />
+            </form>
+          </>
+        )}
       </FormSubContainer>
     </FormContainer>
   )

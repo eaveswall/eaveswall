@@ -15,7 +15,7 @@ const Input = styled.input`
   transition: box-shadow ease 0.4s;
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 0.1rem ${({ theme: { primary, secondary, main } }) => main.day ? primary : secondary};
+    box-shadow: 0 0 0 0.1rem ${({ theme: { themeColor } }) => themeColor};
   }
   @media (min-width: ${BREAKPOINTS.md}px) {
     width: 190px;
@@ -27,13 +27,14 @@ const Input = styled.input`
 `
 
 const SubmitButton = styled(Input)`
-  background-color: ${({ theme: { primary, secondary, main } }) => main.day ? primary : secondary};
-  color: ${({ theme: { main } }) => main.day ? `#fff` : `#000`};
+  background-color: ${({ theme: { themeColor } }) => themeColor};
+  color: #ffffff;
   text-align: center;
   font-weight: 500;
   position: relative;
   &:hover:not(:disabled) {
-    background-color: ${({ theme: { primaryLight, secondaryLight, main } }) => main.day ? primaryLight : secondaryLight};
+    background-color: ${({ theme: { themeColor } }) => themeColor};
+    background: ${({ theme: { primaryGradient } }) => primaryGradient};
   }
   &:disabled {
     opacity: 0.7;
