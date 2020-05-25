@@ -7,11 +7,14 @@ import { saveTheme, retrieveTheme } from "./theme-store"
 const STATIC_THEME = {
   primary: `#3d1928`,
   primaryLight: `#732f4c`,
-  primaryGradient: `linear-gradient(90deg, #2b121c 5%, #3d1928 50%, #732f4c 100%);`,
+  themeColor: `#B80B2C`,
+  themeColorAlt: `#1A2B2F`,
+  primaryGradient: `linear-gradient(90deg, #2b121c 5%, #1A2B2F 55%, #B80B2C 100%);`,
   secondary: `darksalmon`,
   secondaryLight: `bisque`,
   borderWidth: `1px`,
-  fontsizeSM: `.85rem`,
+  fontsizeSM: `0.85rem`,
+  fontsizeMD: `0.95rem`,
 }
 
 const SIZES = {
@@ -40,6 +43,14 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${({ theme: { main } }) => main.bgAlt};
     color: ${({ theme: { main } }) => main.fg};
+  }
+  a:not([class]) {
+    color: ${({ theme: { main } }) => main.fg};
+    text-decoration: underline dashed;
+    &:hover {
+      color: ${({ theme: { themeColor } }) => themeColor};
+      text-decoration: underline dashed;
+    }
   }
 `
 
