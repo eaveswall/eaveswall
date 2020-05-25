@@ -2,10 +2,9 @@ import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
 import Img from "gatsby-image"
-import Divider from "../divider"
 import { SIZES, BREAKPOINTS } from "../theme"
 
-import AuthorHighlight from "../../images/svg/author-highlight.inline.svg"
+// import AuthorHighlight from "../../images/svg/author-highlight.inline.svg"
 
 const AuthorContainer = styled.div`
   background-color: ${({ theme: { main } }) => main.bg};
@@ -19,6 +18,9 @@ const AuthorContainer = styled.div`
 
 const AuthorSubConatainer = styled.div`
   padding: 1rem;
+  &:first-of-type {
+    border-bottom: ${({theme: {borderWidth}}) => borderWidth} solid ${({theme: {main}}) => main.shade};
+  }
 `
 
 const AuthorImage = styled.div`
@@ -97,7 +99,7 @@ const AuthorDetails = ({ author }) => {
           <AuthorImage>
             <Img
               fluid={authorDetails.image.childImageSharp.fluid}
-              draggable="false"
+              draggable={false}
             />
           </AuthorImage>
           {/* <AuthorHighlight
@@ -109,9 +111,8 @@ const AuthorDetails = ({ author }) => {
 
         <Author>{authorDetails.name}</Author>
       </AuthorSubConatainer>
-      <Divider />
       <AuthorSubConatainer>
-        <AuthorBio>{authorDetails.bio}</AuthorBio>
+        <AuthorBio><span dangerouslySetInnerHTML={{__html: authorDetails.bio}} /></AuthorBio>
       </AuthorSubConatainer>
     </AuthorContainer>
   )
