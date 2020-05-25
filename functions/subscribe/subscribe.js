@@ -28,27 +28,30 @@ const encode = data => {
     .join("&")
 }
 
-const sendVerification = (id, fid, email) => {
+const sendVerification = (id, fid, email, callback) => {
   const confirmLink = `${BASE_URL}/${FUNCTIONS_ENDPOINT}/newsletter-confirm?id=${id}&fid=${fid}`
   const messageFile = require.resolve(NEWSLETTER_CONFIRM_MSG)
 
-  existsInSpam(id).then(yes => {
-    console.log("Exists in spam: ", yes)
-    if (yes) {
-      ejs.renderFile(messageFile, { data: { confirmLink } }).then(message => {
-        sendMail({
-          from: "Eaveswall Team <team@eaveswall.com>",
-          to: email,
-          subject: "Newsletter Confirmation",
-          html: message,
-        })
-          .then(info => {
-            console.log("Confirmation email sent successfully", info)
-          })
-          .catch(err => console.log("Failed to send email", err))
+  existsInSpam(id)
+    .then(yes => {
+      console.log("Exists in spam: ", yes)
+      if (yes) {
+        return ejs.renderFile(messageFile, { data: { confirmLink } })
+      }
+    })
+    .then(message => {
+      return sendMail({
+        from: "Eaveswall Team <team@eaveswall.com>",
+        to: email,
+        subject: "Newsletter Confirmation",
+        html: message,
       })
-    }
-  })
+    })
+    .then(info => {
+      console.log("Confirmation email sent successfully: ", info)
+      callback()
+    })
+    .catch(err => console.log("Failed to send email", err))
 }
 
 const netlifySubmit = async data => {
@@ -76,33 +79,34 @@ const handleNewsletter = (payload, callback) => {
         })
       }
 
-      netlifySubmit({ "form-name": form_name, email, id })
-        .then(data => {
-          console.log("Form submitted", data)
-          getSubmissionFromCustomId(id).then(submission => {
-            spamSubmissionState(submission.id)
-              .then(status => {
-                console.log("Submission added to spam ", status)
-                sendVerification(submission.id, submission.form_id, email)
-              })
-              .catch(err =>
-                console.log("Error setting submission as spam", err)
-              )
-          })
-        })
-        .catch(e =>
-          callback(e, {
-            statusCode: "502",
-            body: "Bad Gateway",
-          })
-        )
+      return netlifySubmit({ "form-name": form_name, email, id })
     })
-    .catch(e =>
+    .then(() => {
+      console.log("Form submitted")
+      return getSubmissionFromCustomId(id)
+    })
+    .then(submission => {
+      console.log("Submission retrieved")
+      return spamSubmissionState(submission.id)
+    })
+    .then(() => {
+      console.log("Submission added to spam")
+      sendVerification(submission.id, submission.form_id, email, () => {
+        callback(null, {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: `Subscribed sucessfully. A confirmation email has been sent to '${email}'`,
+          }),
+        })
+      })
+    })
+    .catch(e => {
+      console.log("AN ERROR OCCURED! ☹", e)
       callback(e, {
         statusCode: "502",
         body: "Bad Gateway",
       })
-    )
+    })
 }
 
 exports.handler = (event, _c, callback) => {

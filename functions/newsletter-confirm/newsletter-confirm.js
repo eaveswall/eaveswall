@@ -15,15 +15,15 @@ exports.handler = (event, _ctx, callback) => {
 
   if (event.httpMethod === GET) {
     return hamSubmissionState(id)
-      .then(status => {
-        console.log("STATUS: ", status)
+      .then(() => {
+        console.log("Email verified successfully")
         callback(null, {
           statusCode: 200,
           body: "Email verification successful",
         })
       })
       .catch(err => {
-        console.log("Error setting submission as spam: ", err)
+        console.log("Error verifying email.\nCould not 'ham' submission ", err)
         callback(true, {
           statusCode: 502,
           body: "Bad Gateway"
