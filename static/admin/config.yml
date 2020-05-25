@@ -1,0 +1,66 @@
+backend:
+  name: git-gateway
+  branch: master
+publish_mode: editorial_workflow
+media_folder: "src/images/wiki"
+public_folder: "images/wiki"
+site_url: https://eaveswall.com
+display_url: https://eaveswall.com
+collections:
+  - name: "article"
+    label: "Article"
+    folder: "src/posts/featured"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Author", name: "author", widget: "string" }
+      - {
+          label: "Author's Twitter",
+          name: "author-twitter",
+          widget: "string",
+          default: "@eaveswall",
+        }
+      - { label: "Created Date", name: "date", widget: "date" }
+      - {
+          label: "Last modified",
+          name: "last-modified",
+          widget: "hidden",
+          default: "{{day}}-{{month}}-{{year}}",
+        }
+      - { label: "Description", name: "desc", widget: "text" }
+      - {
+          label: "Tags",
+          name: "tags",
+          collapsed: false,
+          widget: "list",
+          default: ["featured"],
+        }
+      - {
+          label: "Thumbnail",
+          name: "featuredImage",
+          widget: "image",
+          media_library: { config: { multiple: false } },
+        }
+      - {
+          label: "Publish",
+          name: "publish",
+          widget: "hidden",
+          default: false,
+        }
+      - {
+          label: "Post Content",
+          name: "body",
+          widget: "markdown",
+          buttons:
+            [
+              "bold",
+              "italic",
+              "heading-two",
+              "heading-three",
+              "heading-four",
+              "bulleted-list",
+              "numbered-list",
+              "quote",
+            ],
+        }
