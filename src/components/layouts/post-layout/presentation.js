@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
 import { Link } from "gatsby"
+import kebabCase from 'lodash/kebabCase'
 
 const Presentation = styled.div`
   background-color: ${({ theme: { primary } }) => primary};
@@ -30,9 +31,8 @@ const AuthorLink = styled(Link)`
 
 const PostDetails = ({ mdx, site }) => {
   const authorTransform = (author, siteTitle) => {
-    author = author.toLowerCase()
     if (author === siteTitle.toLowerCase()) return "../"
-    return author.replace(/\s*/g, "")
+    return kebabCase(author)
   }
 
   const timeToRead = time => {
@@ -45,28 +45,28 @@ const PostDetails = ({ mdx, site }) => {
         <p style={{ opacity: 0.8 }}>{mdx.frontmatter.desc}</p>
       </div>
       <div className="d-flex">
-        <ul className="list-unstyled flex-shrink-0 mr-3">
-          <li>
-            <span className="text-muted-bright">Author</span>
+        <ul className="list-unstyled flex-shrink-0 mr-3" role="presentation">
+          <li role="presentation">
+            <span className="text-muted-bright" id="author_desc" style={{fontSize: `0.95rem`}}>Author</span>
           </li>
-          <li>
+          <li role="presentation">
             <AuthorLink
               to={`/authors/${authorTransform(
                 mdx.frontmatter.author,
                 site.siteMetadata.title
               )}`}
             >
-              <span>{mdx.frontmatter.author}</span>
+              <span aria-describedby="author_desc">{mdx.frontmatter.author}</span>
             </AuthorLink>
           </li>
         </ul>
-        <ul className="list-unstyled mr-2">
-          <li>
-            <span className="text-muted-bright">Last updated</span>
+        <ul className="list-unstyled mr-2" role="presentation">
+          <li role="presentation">
+            <span className="text-muted-bright" id="last_mod_desc" style={{fontSize: `0.95rem`}}>Last updated</span>
           </li>
-          <li>
-            <span>
-              {mdx.parent.mtf} &mdash; {timeToRead(mdx.timeToRead)}
+          <li role="presentation">
+            <span aria-describedby="last_mod_desc">
+              {mdx.frontmatter.last_modified} &mdash; {timeToRead(mdx.timeToRead)}
             </span>
           </li>
         </ul>

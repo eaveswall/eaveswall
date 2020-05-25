@@ -14,10 +14,11 @@ import AllPosts from "../../all-posts"
 
 import NWSForm from "../../newsletter-sub"
 import AuthorDetails from "../../author-details"
-import { SiteTheme, SIZES } from "../../theme"
+import { SiteTheme, SIZES, BREAKPOINTS } from "../../theme"
 import CreateTOC from "./toc"
 import PostContent from "./post-content"
 import PostPresentation from "./presentation"
+import Tags from "./tags"
 
 const shortcodes = { Link, SEO }
 
@@ -52,17 +53,52 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
       border-radius: 20px;
       margin: 2rem 0;
     }
+    blockquote {
+      color: ${({ theme: { main } }) => main.fg};
+      padding: 1rem;
+      border-left-width: 5px;
+      border-left-style: solid;
+      border-left-color: ${({ theme }) =>
+        theme.main.day ? theme.primary : theme.secondary};
+      p:last-of-type {
+        margin: 0;
+      }
+    }
   }
 `
 
+const updateSidebarHeight = (header, sideNav) => {
+  const headerHeight = header.offsetHeight
+  const sidebarHeight = parseInt(getComputedStyle(sideNav).height) // statically store sideNav height
+  const onScroll = () => {
+    sideNav.style.maxHeight =
+      document.documentElement.scrollTop > headerHeight
+        ? `${sidebarHeight + headerHeight}px`
+        : document.documentElement.scrollTop < headerHeight
+        ? `${sidebarHeight + document.documentElement.scrollTop}px`
+        : `${sidebarHeight}px`
+  }
+
+  window.matchMedia(`(min-width: ${BREAKPOINTS.lg}px)`).matches &&
+    window.addEventListener("scroll", onScroll, true)
+  return () => {
+    window.removeEventListener("scroll", onScroll, true)
+  }
+}
+
 const PostLayout = ({ data: { mdx, site } }) => {
+  const sidebarRef = React.useRef(null)
+  const headerRef = React.useRef(null)
+  React.useEffect(() => {
+    return updateSidebarHeight(headerRef.current, sidebarRef.current)
+  }, [headerRef, sidebarRef])
   return (
     <SiteTheme>
       <ComponentScopedGlobalStyle />
       <SEO
         title={mdx.frontmatter.title}
         description={mdx.frontmatter.desc}
-        keywords={mdx.frontmatter.tags.split(",")}
+        keywords={mdx.frontmatter.tags}
         meta={[
           {
             name: "author",
@@ -70,14 +106,15 @@ const PostLayout = ({ data: { mdx, site } }) => {
           },
           {
             name: "twitter:site",
-            content: `${mdx.frontmatter.authorTwitter}`,
+            content: `${mdx.frontmatter.author_twitter}`,
           },
         ]}
         image={mdx.frontmatter.featuredImage.childImageSharp.fluid.src}
       />
       <Header
         siteTitle={site.siteMetadata.title}
-        active={mdx.frontmatter.tags.split(`,`).includes(`featured`) ? 2 : 0}
+        active={mdx.frontmatter.tags.includes(`featured`) ? 2 : 0}
+        ref={headerRef}
       />
       <div
         className="d-flex post-layer"
@@ -88,12 +125,9 @@ const PostLayout = ({ data: { mdx, site } }) => {
           className="d-none d-lg-block flex-shrink-0"
           title="Related Posts"
           width={SIZES.relatedPostsWidth}
+          ref={sidebarRef}
         >
-          <AllPosts
-            related
-            to={mdx.frontmatter.tags.split(`,`)}
-            exclude={mdx.id}
-          />
+          <AllPosts related to={mdx.frontmatter.tags} exclude={mdx.id} />
         </Sidebar>
         <PostContent>
           {/* Post Presentation */}
@@ -130,6 +164,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
           </div>
 
           <div>
+            <Tags tags={mdx.frontmatter.tags} className="px-3 px-md-5" />
             <div className="d-xl-flex p-3 p-md-5">
               <AuthorDetails author={mdx.frontmatter.author} />
             </div>
@@ -151,7 +186,9 @@ export const pageQuery = graphql`
       frontmatter {
         title
         author
-        authorTwitter
+        author_twitter
+        date(formatString: "MMM DD, YYYY")
+        last_modified(formatString: "MMM DD, YYYY")
         desc
         tags
         featuredImage {
@@ -164,14 +201,6 @@ export const pageQuery = graphql`
       }
       timeToRead
       tableOfContents
-      parent {
-        ... on File {
-          id
-          name
-          mtf: modifiedTime(formatString: "MMM DD, YYYY")
-          mtd: modifiedTime(fromNow: true)
-        }
-      }
     }
     site {
       siteMetadata {

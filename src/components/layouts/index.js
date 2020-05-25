@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import { createGlobalStyle } from "styled-components"
 
 import Header from "../header"
 import Footer from "../footer"
@@ -24,7 +23,7 @@ const Layout = ({ children }) => {
   return (
     <SiteTheme>
       <GlobalStyle />
-      <Header siteTitle={data.site.siteMetadata.title} shade />
+      <Header siteTitle={data.site.siteMetadata.title} shade sticky isHome />
       <div
         className="d-flex flex-column"
         style={{ minHeight: `calc(100vh - ${SIZES.headerHeight})` }}
