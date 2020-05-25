@@ -47,14 +47,14 @@ const handleNav = ({ navState: { isOpen }, setNavState }) => {
     })
 }
 
-const Header = ({ siteTitle, active, shade }) => {
+const Header = React.forwardRef(({ siteTitle, active, shade, sticky, isHome }, ref) => {
   const [navState, setNavState] = useState({ isOpen: false, style: null })
   return (
-    <StyledHeader {...(shade ? { isHome: true } : null)}>
+    <StyledHeader {...{ isHome, sticky }} ref={ref}>
       <StyledHeaderGroup className="px-3 py-2" role="banner">
         <div>
           <EaveswallIcon width="35" height="35" />
-          <span style={{fontFamily: `Satisfy`}}>
+          <span style={{ fontFamily: `Satisfy` }}>
             <Link
               to="/"
               style={{
@@ -119,11 +119,13 @@ const Header = ({ siteTitle, active, shade }) => {
       </StyledHeaderGroup>
     </StyledHeader>
   )
-}
+})
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
   shade: PropTypes.bool,
+  sticky: PropTypes.bool,
+  isHome: PropTypes.bool,
   active: PropTypes.number,
 }
 
@@ -131,6 +133,8 @@ Header.defaultProps = {
   siteTitle: ``,
   shade: false,
   active: 1,
+  isHome: false,
+  sticky: false,
 }
 
 export default Header

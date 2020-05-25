@@ -1,14 +1,26 @@
+import React from "react"
 import styled from "styled-components"
 import { L_BREAKPOINTS, BREAKPOINTS } from "../theme"
 import { Link } from "gatsby"
 import Button from "../button"
 
-const StyledHeader = styled.header`
+const RefHeader = React.forwardRef(({ children, className }, ref) => {
+  return <header className={className} ref={ref}>{children}</header>
+})
+
+const getSticky = isHome => `
+@supports (position: sticky) {
+  position: sticky;
+  top: ${isHome ? 0 : `-52px`};
+  z-index: 10;
+}
+`
+
+const StyledHeader = styled(RefHeader)`
   background-color: ${({ theme: { primary } }) => primary};
-  @supports (position: sticky) {
-    position: sticky;
-    top: ${({ isHome }) => (isHome ? 0 : `-52px`)};
-    z-index: 10;
+  font-family: 'Roboto';
+  @media (min-width: ${BREAKPOINTS.xl}px) {
+    ${({ sticky, isHome }) => (sticky ? getSticky(isHome) : null)}
   }
 `
 const StyledHeaderGroup = styled.div`
@@ -31,6 +43,7 @@ const StyledHeaderGroup = styled.div`
       ${({ theme: { main } }) => main.shadeAlt};
     background-color: ${({ theme: { primary } }) => primary};
     background: ${({ theme: { primaryGradient } }) => primaryGradient};
+    font-size: ${({ theme: { fontsizeMD } }) => fontsizeMD};
   }
 `
 const StyledNavContainer = styled.div`
@@ -70,7 +83,7 @@ const StyledNavlink = styled(Link)`
   }
   &.active,
   &:hover {
-    ${'' /* background-color: rgba(0, 0, 0, 0.3); */}
+    ${"" /* background-color: rgba(0, 0, 0, 0.3); */}
     background-color: rgba(255,255,255,.1);
     color: #ffffff;
     text-decoration: none;
@@ -98,7 +111,7 @@ const StyledNavButton = styled(Button)`
     visibility: hidden;
     position: absolute;
     transform: scale(0.3);
-    ${'' /* background-color: rgba(0,0,0,.2); */}
+    ${"" /* background-color: rgba(0,0,0,.2); */}
     background-color: ${({ theme: { main } }) => main.shade};
   }
   &:focus {
