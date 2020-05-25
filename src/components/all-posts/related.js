@@ -19,7 +19,7 @@ const NoRelatedPosts = () => (
       margin: `auto`,
     }}
   >
-    <span> I'm surprised there are no related posts.</span>
+    <span>Yikes! I'm surprised there are no related posts.</span>
   </div>
 )
 
@@ -29,7 +29,7 @@ const Related = ({ data, tags, exclude }) => {
 
   data.edges.forEach(({ node }) => {
     if (node.id === exclude) return // we'd want to exclude the post that queried for related posts when we come across it in an edge
-    const rc = relationshipCount(tags, node.frontmatter.tags.split(`,`)) // factor relationship based on similar tags
+    const rc = relationshipCount(tags, node.frontmatter.tags) // factor relationship based on similar tags
     if (rc) {
       if (priorityQueue.includes(rc)) {
         // when relationship becomes ambiguous, make a list for all ambiguously related posts
@@ -43,8 +43,9 @@ const Related = ({ data, tags, exclude }) => {
   })
   // if no relationship found by not having tags common to other posts
   if (!Object.keys(relationshipRank).length) return <NoRelatedPosts />
-  priorityQueue.sort(() => -1)
-  return priorityQueue.map((value, index) => {
+  
+  priorityQueue.sort((a, b) => b - a)
+  return priorityQueue.slice(0, 5).map((value, index) => {
     const node = relationshipRank[value]
     if (node instanceof Array) {
       return node.map((nodeListElement, idx) => (
@@ -65,7 +66,8 @@ Related.propTypes = {
           frontmatter: PropTypes.shape({
             title: PropTypes.string,
             author: PropTypes.string,
-            tags: PropTypes.string,
+            date: PropTypes.string,
+            tags: PropTypes.arrayOf(PropTypes.string),
             featuredImage: PropTypes.shape({
               childImageSharp: PropTypes.shape({ fluid: PropTypes.object }),
             }),
