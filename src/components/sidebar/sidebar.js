@@ -1,14 +1,21 @@
+import React from "react"
 import styled from "styled-components"
+import { SIZES } from "../theme"
 
-const StyledSidebar = styled.aside`
+const RefSidebar = React.forwardRef(({ children, ...rest }, ref) => {
+  return <aside {...rest} ref={ref}>{children}</aside>
+})
+
+const StyledSidebar = styled(RefSidebar)`
   width: auto;
-  max-height: calc(100vh - 60px);
+  max-height: calc(100vh - ${SIZES.headerHeight});
   padding: 0;
   overflow-y: hidden;
   background-color: ${({ theme: { main } }) => main.bgAlt};
   @supports (position: sticky) {
     position: sticky;
     top: 47px;
+    top: 0;
   }
 `
 
@@ -21,6 +28,7 @@ const StyledSidebarHeader = styled.div`
   @supports (position: sticky) {
     position: sticky;
     top: -46.38px;
+    top: 0;
     z-index: 10;
   }
 `
