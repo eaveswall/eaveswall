@@ -7,7 +7,7 @@ export default {
   fgAlt: `#cccccc`,
   fgCold: `#f1f1f1`,
   fgFair: `#eeeeee`,
-  shade: `rgba(255,255,255,.1)`,
+  shade: `rgba(255,255,255,.3)`,
   shadeAlt: `rgba(0,0,0,.1)`,
   day: false,
   night: true
