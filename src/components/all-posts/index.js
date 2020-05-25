@@ -17,6 +17,7 @@ export const allMdxFragment = graphql`
           title
           author
           tags
+          date(formatString: "ddd, MMM DD, YYYY")
           featuredImage {
             childImageSharp {
               fluid(maxWidth: 800) {
@@ -26,12 +27,9 @@ export const allMdxFragment = graphql`
           }
         }
         excerpt(pruneLength: 70)
-        parent {
-          ... on File {
-            birthTime(formatString: "MMM DD, YYYY")
-          }
-        }
       }
+    }
+  }
     }
   }
 `
