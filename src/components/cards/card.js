@@ -14,8 +14,7 @@ const StyledCardMeta = styled.div`
   overflow: hidden;
   border-width: ${BORDER_WIDTH};
   border-style: solid;
-  border-color: ${({ theme: { main } }) => main.shade} rgba(0, 0, 0, 0.2)
-    rgba(0, 0, 0, 0.2) ${({ theme: { main } }) => main.shade};
+  border-color: ${({ theme: { main } }) => main.shade};
   margin: -17.75rem 0 0 -1.2rem;
   z-index: 10;
 `
