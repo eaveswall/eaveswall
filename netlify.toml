@@ -1,6 +1,9 @@
 [[plugins]]
   package = "netlify-plugin-gatsby-cache"
 
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
+
 [build]
   command = "npm run prebuild && npm run build-beta"
   functions = "functions"
