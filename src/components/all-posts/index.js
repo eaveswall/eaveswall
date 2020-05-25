@@ -30,33 +30,26 @@ export const allMdxFragment = graphql`
       }
     }
   }
-    }
-  }
 `
-
-const resolveAllMdx = allMdx => {
-  return {
-    ...allMdx,
-    edges: [...allMdx.edges].reverse(),
-  }
-}
 
 const AllPosts = ({ related = false, to = [], exclude = "" }) => {
   const { allMdx } = useStaticQuery(
     graphql`
       query {
-        allMdx {
+        allMdx(
+          sort: { fields: frontmatter___date, order: DESC }
+          limit: 22
+          filter: { frontmatter: { publish: { eq: true } } }
+        ) {
           ...AllMdxFrag
         }
       }
     `
   )
-  const allMdxResolved = resolveAllMdx(allMdx)
 
-  if (related)
-    return <Related data={allMdxResolved} tags={to} exclude={exclude} />
+  if (related) return <Related data={allMdx} tags={to} exclude={exclude} />
 
-  return allMdxResolved.edges.map(({ node }, index) => {
+  return allMdx.edges.map(({ node }, index) => {
     return <PostCard key={index} node={node} />
   })
 }
