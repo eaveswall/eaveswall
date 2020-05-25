@@ -13,7 +13,7 @@ const PostCard = ({ node }) => (
     >
       <Card
         title={node.frontmatter.title}
-        mute={`${node.frontmatter.author} — ${node.parent.birthTime}`}
+        mute={`${node.frontmatter.author} — ${node.frontmatter.date}`}
         content={node.excerpt}
         image={node.frontmatter.featuredImage.childImageSharp.fluid}
       />
@@ -28,7 +28,7 @@ PostCard.propTypes = {
     frontmatter: PropTypes.shape({
       title: PropTypes.string,
       author: PropTypes.string,
-      tags: PropTypes.string,
+      tags: PropTypes.arrayOf(PropTypes.string),
       featuredImage: PropTypes.shape({
         childImageSharp: PropTypes.shape({ fluid: PropTypes.object }),
       }),
