@@ -21,12 +21,14 @@ function SEO({ description, lang, meta, keywords = [], title, image, isHome }) {
             title
             description
             author
+            siteUrl
           }
         }
       }
     `
   )
 
+  const host = site.siteMetadata.siteUrl | HOST
   const metaDescription = description || site.siteMetadata.description
   const og = [
     {
@@ -63,11 +65,11 @@ function SEO({ description, lang, meta, keywords = [], title, image, isHome }) {
   if (image) {
     twitter.push({
       name: `twitter:image`,
-      content: `${HOST}${image}`,
+      content: `${host}${image}`,
     })
     og.push({
       name: `og:image`,
-      content: `${HOST}${image}`,
+      content: `${host}${image}`,
     })
   }
 
@@ -77,7 +79,7 @@ function SEO({ description, lang, meta, keywords = [], title, image, isHome }) {
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={!isHome ? `%s | ${ site.siteMetadata.title}` : `%s`}
       meta={[
         {
           name: `description`,
