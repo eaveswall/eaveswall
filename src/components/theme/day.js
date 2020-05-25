@@ -1,8 +1,8 @@
 export default {
   bg: `#ffffff`,
-  bgAlt: `#eeeeee`,
-  bgCold: `#f1f1f1`,
-  bgFair: `#f9f9f9`,
+  bgAlt: `#f7fafc`, //`#eeeeee` <- formerly
+  bgCold: `#e2e8f0`, // `#f1f1f1` <- formerly
+  bgFair: `#edf2f7`, // #f9f9f9 <- formerly
   fg: `#000000`,
   fgAlt: `#555555`,
   fgCold: `#222222`,
