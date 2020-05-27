@@ -2,7 +2,6 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import PropTypes from "prop-types"
 import Img from "gatsby-image"
-import Clip from "../../images/svg/clip-path.inline.svg"
 
 import {
   StyledSpot,
@@ -79,6 +78,32 @@ const Spotlight = ({ children, className, ...rest }) => {
       </StyledSpot>
     </>
   )
+}
+
+Spotlight.propTypes = {
+  data: PropTypes.shape({
+    spotlight: PropTypes.shape({
+      edges: PropTypes.arrayOf(
+        PropTypes.shape({
+          node: PropTypes.shape({
+            frontmatter: PropTypes.shape({
+              title: PropTypes.string,
+              author: PropTypes.string,
+              featuredImage: PropTypes.shape({
+                childImageSharp: PropTypes.shape({
+                  fluid: PropTypes.object,
+                }),
+              }),
+            }),
+            field: PropTypes.shape({
+              slug: PropTypes.string,
+            }),
+            excerpt: PropTypes.string,
+          })
+        })
+      ),
+    }),
+  }),
 }
 
 export default Spotlight
