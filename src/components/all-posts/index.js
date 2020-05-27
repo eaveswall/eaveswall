@@ -17,7 +17,7 @@ export const allMdxFragment = graphql`
           title
           author
           tags
-          date(formatString: "ddd, MMM DD, YYYY")
+          date(formatString: "ddd. MMM DD, YYYY")
           featuredImage {
             childImageSharp {
               fluid(maxWidth: 800) {
@@ -38,8 +38,9 @@ const AllPosts = ({ related = false, to = [], exclude = "" }) => {
       query {
         allMdx(
           sort: { fields: frontmatter___date, order: DESC }
-          limit: 22
+          limit: 21
           filter: { frontmatter: { publish: { eq: true } } }
+          skip: 1
         ) {
           ...AllMdxFrag
         }
@@ -47,10 +48,10 @@ const AllPosts = ({ related = false, to = [], exclude = "" }) => {
     `
   )
 
-  if (related) return <Related data={allMdx} tags={to} exclude={exclude} />
+  if (related) return <Related tags={to} exclude={exclude} />
 
-  return allMdx.edges.map(({ node }, index) => {
-    return <PostCard key={index} node={node} />
+  return allMdx.edges.map(({ node }) => {
+    return <PostCard key={node.fields.slug} node={node} />
   })
 }
 
