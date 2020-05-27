@@ -8,11 +8,13 @@ import PageLayout from "../components/layouts/page-layout"
 import StyledTitle from "../components/title"
 import { StyledTagLinks } from "../components/layouts/post-layout/tags"
 
-const sortPopular = (a, b) => b.totalCount - a.totalCount
 const sortAtoZ = (a, b) =>
   a.fieldValue.toLowerCase() > b.fieldValue.toLowerCase() ? 1 : -1
-const sortZtoA = (a, b) =>
-  a.fieldValue.toLowerCase() > b.fieldValue.toLowerCase() ? -1 : 1
+
+// const sortZtoA = (a, b) =>
+// a.fieldValue.toLowerCase() > b.fieldValue.toLowerCase() ? -1 : 1
+
+// const sortPopular = (a, b) => b.totalCount - a.totalCount
 
 const TagsPage = ({
   data: {
