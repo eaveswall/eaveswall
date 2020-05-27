@@ -55,7 +55,7 @@ const footerLinks = [
         text: "Tags",
       },
       {
-        link: "/author/",
+        link: "/authors/",
         text: "Authors",
       },
     ],
