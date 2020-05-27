@@ -9,7 +9,7 @@ const STATIC_THEME = {
   primaryLight: `#732f4c`,
   themeColor: `#B80B2C`,
   themeColorAlt: `#1A2B2F`,
-  primaryGradient: `linear-gradient(90deg, #2b121c 5%, #1A2B2F 55%, #B80B2C 100%);`,
+  primaryGradient: `linear-gradient(90deg, #2b121c 5%, #B80B2C 100%);`,
   secondary: `darksalmon`,
   secondaryLight: `bisque`,
   borderWidth: `1px`,
