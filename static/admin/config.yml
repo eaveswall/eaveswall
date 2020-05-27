@@ -18,15 +18,16 @@ collections:
       - {
           label: "Author's Twitter",
           name: "author-twitter",
-          widget: "string",
+          widget: "hidden",
           default: "@eaveswall",
         }
-      - { label: "Created Date", name: "date", widget: "date" }
+      - { label: "Created Date", name: "date", widget: "hidden", default: 2020-05-02 }
       - {
           label: "Last modified",
           name: "last-modified",
           widget: "hidden",
-          default: "{{day}}-{{month}}-{{year}}",
+          default: true,
+          default: 2020-05-02
         }
       - { label: "Description", name: "desc", widget: "text" }
       - {
