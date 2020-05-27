@@ -7,6 +7,7 @@ import Footer from "../footer"
 import { SiteTheme, GlobalStyle, SIZES } from "../theme"
 import NWSForm from "../newsletter-sub"
 import Divider from "../divider"
+import Spotlight from "../spotlight"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -23,7 +24,8 @@ const Layout = ({ children }) => {
   return (
     <SiteTheme>
       <GlobalStyle />
-      <Header siteTitle={data.site.siteMetadata.title} shade sticky isHome />
+      <Header siteTitle={data.site.siteMetadata.title} sticky isHome />
+      <Spotlight />
       <div
         className="d-flex flex-column"
         style={{ minHeight: `calc(100vh - ${SIZES.headerHeight})` }}
