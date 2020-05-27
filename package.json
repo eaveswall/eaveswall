@@ -67,7 +67,8 @@
     "prebuild": "cd functions && npm install",
     "serve": "gatsby serve",
     "start": "npm run develop",
-    "svg-icon": "svgo --config svgo.yml -i eaveswall-icon.inline.svg",
+    "svg-icon": "svgo --config src/images/svg/svgo.yml -i src/images/svg/eaveswall-icon.inline.svg",
+    "path-clip": "svgo --config src/images/svg/svgo.yml -i src/images/svg/clip-path.inline.svg",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "repository": {
