@@ -28,7 +28,7 @@ const StyledList = styled.li`
     display: inline-block;
     height: calc(100% + 1.5rem);
     position: absolute;
-    top: 1.2rem;
+    top: 1.25rem;
     left: 0.31rem;
     width: 1px;
     background-color: ${({ theme }) =>
