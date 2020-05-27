@@ -28,7 +28,7 @@ function SEO({ description, lang, meta, keywords = [], title, image, isHome }) {
     `
   )
 
-  const host = site.siteMetadata.siteUrl | HOST
+  const host = site.siteMetadata.siteUrl || HOST
   const metaDescription = description || site.siteMetadata.description
   const og = [
     {
