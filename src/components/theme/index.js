@@ -46,9 +46,9 @@ const GlobalStyle = createGlobalStyle`
   }
   a:not([class]) {
     color: ${({ theme: { main } }) => main.fg};
-    text-decoration: underline dashed;
+    text-decoration: underline;
     &:hover {
-      color: ${({ theme: { themeColor } }) => themeColor};
+      color: cornflowerblue;
       text-decoration: underline dashed;
     }
   }

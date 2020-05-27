@@ -34,9 +34,9 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
       color: ${({ theme: { main } }) => main.fg};
     }
     a:not([class*=button]) {
-      text-decoration: underline dashed;
+      text-decoration: underline;
       &:hover {
-        color: darkcyan;
+        color: cornflowerblue;
         text-decoration: underline dashed;
       }
     }
