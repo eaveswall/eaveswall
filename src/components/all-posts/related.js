@@ -65,6 +65,7 @@ const Related = ({ tags, exclude }) => {
   )
 
   const { priorityQueue, relationshipRank } = useRank({ tags, data, exclude }, [
+    tags,
     data,
     exclude,
   ])
