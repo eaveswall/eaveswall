@@ -3,6 +3,7 @@ import styled from "styled-components"
 const StyledTitle = styled.h1`
   margin-top: 1rem;
   display: inline-block;
+  color: ${({ theme: { main } }) => main.fg};
   &:after {
     content: "";
     width: 100%;

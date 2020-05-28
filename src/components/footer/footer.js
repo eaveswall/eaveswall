@@ -37,6 +37,7 @@ const StyledFooterHeading = styled.div`
   font-weight: 500;
   margin-top: 1rem;
   display: inline-block;
+  color: ${({ theme: { main } }) => main.fg};
   @media (max-width: ${L_BREAKPOINTS.lsm}px) {
     display: block;
   }
