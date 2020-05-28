@@ -19,6 +19,7 @@ import CreateTOC from "./toc"
 import PostContent from "./post-content"
 import PostPresentation from "./presentation"
 import Tags from "./tags"
+import IntentShare from "./share"
 
 const shortcodes = { Link, SEO }
 
@@ -53,7 +54,7 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
       border-radius: 20px;
       margin: 2rem 0;
     }
-    blockquote {
+    blockquote:not([class]) {
       color: ${({ theme: { main } }) => main.fg};
       padding: 1rem;
       border-left-width: 5px;
@@ -89,9 +90,29 @@ const updateSidebarHeight = (header, sideNav) => {
 const PostLayout = ({ data: { mdx, site } }) => {
   const sidebarRef = React.useRef(null)
   const headerRef = React.useRef(null)
+  const postUrl = `${site.siteMetadata.siteUrl}${
+    mdx.frontmatter.slug ? `/posts${mdx.frontmatter.slug}` : mdx.fields.slug
+  }`
+  const sharerIntents = [
+    {
+      name: "twitter",
+      text: `${mdx.frontmatter.desc}\n${postUrl}`,
+    },
+    {
+      name: "facebook",
+      text: postUrl,
+    },
+    {
+      name: "linkedin",
+      text: `url=${postUrl}&summary=${mdx.frontmatter.desc}`,
+      url: true
+    },
+  ]
+
   React.useEffect(() => {
     return updateSidebarHeight(headerRef.current, sidebarRef.current)
   }, [headerRef, sidebarRef])
+  console.log(mdx.frontmatter.featuredImage.childImageSharp.fluid.src)
   return (
     <SiteTheme>
       <ComponentScopedGlobalStyle />
@@ -140,7 +161,12 @@ const PostLayout = ({ data: { mdx, site } }) => {
                   fluid={mdx.frontmatter.featuredImage.childImageSharp.fluid}
                 />
               </div>
-              <main className="post p-3 p-md-5" role="main">
+              <IntentShare
+                className="p-3 px-md-5 pt-md-5 pb-md-3"
+                intents={sharerIntents}
+              />
+
+              <main className="post p-3 px-md-5" role="main">
                 <MDXProvider components={shortcodes}>
                   <MDXRenderer frontmatter={mdx.frontmatter}>
                     {mdx.body}
@@ -191,6 +217,7 @@ export const pageQuery = graphql`
         last_modified(formatString: "MMM DD, YYYY")
         desc
         tags
+        slug
         featuredImage {
           childImageSharp {
             fluid(maxWidth: 1200) {
@@ -199,12 +226,16 @@ export const pageQuery = graphql`
           }
         }
       }
+      fields {
+        slug
+      }
       timeToRead
       tableOfContents
     }
     site {
       siteMetadata {
         title
+        siteUrl
       }
     }
   }
