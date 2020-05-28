@@ -8,7 +8,7 @@ const StyledTocLink = styled.a`
   color: ${({ theme: { main } }) => main.fgFair};
   &:hover,
   &:active {
-    color: rgb(34, 139, 236);
+    color: cornflowerblue;
     text-decoration: none;
   }
 `
