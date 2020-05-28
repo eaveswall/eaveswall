@@ -11,7 +11,9 @@ import {
   StyledSpotButton,
 } from "./spotlight"
 
-const Spotlight = ({ children, className, ...rest }) => {
+import ArrowRight from "../../images/svg/arrow-right.inline.svg"
+
+const Spotlight = () => {
   let { spotlight } = useStaticQuery(graphql`
     query {
       spotlight: allMdx(
@@ -52,10 +54,15 @@ const Spotlight = ({ children, className, ...rest }) => {
               {spotlight.excerpt}
             </div>
             <div>
-              <StyledSpotButton
-                to={spotlight.fields.slug}
-                text="Continue reading"
-              />
+              <StyledSpotButton to={spotlight.fields.slug}>
+                Continue reading
+                <span className="ml-1">
+                  <ArrowRight
+                    presentation="true"
+                    style={{ fill: `currentColor` }}
+                  />
+                </span>
+              </StyledSpotButton>
             </div>
           </StyledSpotGridChild>
 
@@ -99,7 +106,7 @@ Spotlight.propTypes = {
               slug: PropTypes.string,
             }),
             excerpt: PropTypes.string,
-          })
+          }),
         })
       ),
     }),

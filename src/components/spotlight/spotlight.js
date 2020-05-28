@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 import { LinkButton } from "../button"
 import { BREAKPOINTS, L_BREAKPOINTS } from "../theme"
 
@@ -40,6 +40,21 @@ const StyledSpotTitle = styled.div`
   font-size: 2rem;
 `
 
+const shine = keyframes`
+  0% {
+    transform: translateX(-5px);
+  }
+  15% {
+    transform: translateX(5px);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  35% {
+    transform: translateX(0);
+  }
+`
+
 const StyledSpotButton = styled(LinkButton)`
   font-size: 1rem;
   color: #ffffff;
@@ -50,6 +65,9 @@ const StyledSpotButton = styled(LinkButton)`
   &:hover {
     color: ${({ theme: { themeColor } }) => themeColor};
     background-color: #ffffff;
+  }
+  & > span svg {
+    animation: ${shine} 2s linear 1s infinite alternate-reverse;
   }
 `
 
