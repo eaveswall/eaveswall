@@ -35,6 +35,7 @@ module.exports = {
         path: `${__dirname}/src/data/`,
       },
     },
+
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-json`,
@@ -42,6 +43,8 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          `gatsby-remark-embedder`,
+          `gatsby-remark-responsive-iframe`,
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -93,6 +96,7 @@ module.exports = {
       options: {
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
+          `gatsby-remark-embedder`,
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -130,9 +134,14 @@ module.exports = {
             family: `Roboto`,
             variants: [`400`, `500`],
           },
+          {
+            family: `Domine`,
+            variants: [`400`, `700`],
+          },
         ],
       },
     },
+    `gatsby-plugin-twitter`,
     `gatsby-plugin-styled-components`,
     // `gatsby-plugin-algolia`,
     `gatsby-plugin-netlify-cms`,
@@ -145,6 +154,15 @@ module.exports = {
         pageTransitionDelay: 1000,
       },
     },
+
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        color: `#B80B2C`,
+        showSpinner: false,
+      },
+    },
+
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
