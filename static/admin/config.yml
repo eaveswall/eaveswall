@@ -26,7 +26,6 @@ collections:
           label: "Last modified",
           name: "last-modified",
           widget: "hidden",
-          default: true,
           default: 2020-05-02
         }
       - { label: "Description", name: "desc", widget: "text" }
