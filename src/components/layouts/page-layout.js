@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "../header"
 import Footer from "../footer"
-import { SiteTheme, GlobalStyle, SIZES } from "../theme"
+import { GlobalStyle, SIZES } from "../theme"
 import Divider from "../divider"
 import { createGlobalStyle } from "styled-components"
 import NWSForm from "../newsletter-sub"
@@ -26,7 +26,7 @@ const PageLayout = ({ children, activeNav = null }) => {
     }
   `)
   return (
-    <SiteTheme>
+    <>
       <GlobalStyle />
       <ComponentScopedGlobalStyle />
       <Header
@@ -47,7 +47,7 @@ const PageLayout = ({ children, activeNav = null }) => {
         <NWSForm className="px-xl-5" />
         <Footer withCredits />
       </div>
-    </SiteTheme>
+    </>
   )
 }
 

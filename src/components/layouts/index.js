@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "../header"
 import Footer from "../footer"
-import { SiteTheme, GlobalStyle, SIZES } from "../theme"
+import { GlobalStyle, SIZES } from "../theme"
 import NWSForm from "../newsletter-sub"
 import Divider from "../divider"
 import Spotlight from "../spotlight"
@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <SiteTheme>
+    <>
       <GlobalStyle />
       <Header siteTitle={data.site.siteMetadata.title} sticky isHome />
       <Spotlight />
@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
         </div>
 
       </div>
-    </SiteTheme>
+    </>
   )
 }
 

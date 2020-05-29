@@ -1,7 +1,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
-import { SiteTheme, GlobalStyle, SIZES } from "../theme"
+import { GlobalStyle, SIZES } from "../theme"
 import Divider from "../divider"
 import { Banner } from "../header/banner"
 
@@ -16,7 +16,7 @@ const NakedLayout = ({ children, title }) => {
     }
   `)
   return (
-    <SiteTheme>
+    <>
       <GlobalStyle />
       <Banner title={site.siteMetadata.title} subtitle={title} />
       <Divider />
@@ -28,7 +28,7 @@ const NakedLayout = ({ children, title }) => {
           <main>{children}</main>
         </div>
       </div>
-    </SiteTheme>
+    </>
   )
 }
 

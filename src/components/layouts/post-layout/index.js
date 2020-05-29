@@ -14,7 +14,7 @@ import AllPosts from "../../all-posts"
 
 import NWSForm from "../../newsletter-sub"
 import AuthorDetails from "../../author-details"
-import { SiteTheme, SIZES, BREAKPOINTS } from "../../theme"
+import { SIZES, BREAKPOINTS } from "../../theme"
 import CreateTOC from "./toc"
 import PostContent from "./post-content"
 import PostPresentation from "./presentation"
@@ -114,7 +114,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
   }, [headerRef, sidebarRef])
   console.log(mdx.frontmatter.featuredImage.childImageSharp.fluid.src)
   return (
-    <SiteTheme>
+    <>
       <ComponentScopedGlobalStyle />
       <SEO
         title={mdx.frontmatter.title}
@@ -200,7 +200,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
           <Footer />
         </PostContent>
       </div>
-    </SiteTheme>
+    </>
   )
 }
 
