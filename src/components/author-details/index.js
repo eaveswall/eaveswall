@@ -25,10 +25,6 @@ const AuthorSubConatainer = styled.div`
 
 const AuthorImage = styled.div`
   border-radius: 50%;
-  ${'' /* border: 2px solid ${({ theme: { main } }) => main.bgAlt};
-  box-shadow: 0 0 0 0.15rem
-    ${({ theme: { main, primary, secondary } }) =>
-      main.day ? primary : secondary}; */}
   position: relative;
   width: 48px;
   height: 48px;
