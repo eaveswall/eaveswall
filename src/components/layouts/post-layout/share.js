@@ -14,7 +14,7 @@ const StyledShare = styled.a`
   padding: 0.55rem 0.3rem;
   margin-right: 1rem;
   &:hover {
-    background: ${({ theme: { themeColor } }) => themeColor};
+    background-color: ${({ theme: { themeColor } }) => themeColor};
     color: #ffffff;
     transition: all linear 0.6s;
   }
