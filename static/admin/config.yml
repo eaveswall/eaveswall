@@ -9,7 +9,7 @@ display_url: https://eaveswall.com
 collections:
   - name: "article"
     label: "Article"
-    folder: "src/posts/featured"
+    folder: "src/wiki"
     create: true
     slug: "{{slug}}"
     fields:
@@ -35,6 +35,52 @@ collections:
           collapsed: false,
           widget: "list",
           default: ["featured"],
+        }
+      - {
+          label: "Thumbnail",
+          name: "featuredImage",
+          widget: "image",
+          media_library: { config: { multiple: false } },
+        }
+      - {
+          label: "Publish",
+          name: "publish",
+          widget: "hidden",
+          default: false,
+        }
+      - {
+          label: "Post Content",
+          name: "body",
+          widget: "markdown",
+          buttons:
+            [
+              "bold",
+              "italic",
+              "heading-two",
+              "heading-three",
+              "heading-four",
+              "link",
+              "bulleted-list",
+              "numbered-list",
+              "quote",
+            ],
+        }
+
+  - name: "persona"
+    label: "Persona Feature"
+    folder: "src/wiki/persona"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Description", name: "desc", widget: "text" }
+      - {
+          label: "Tags",
+          name: "tags",
+          collapsed: false,
+          widget: "list",
+          default: ["featured", "persona"],
         }
       - {
           label: "Thumbnail",
