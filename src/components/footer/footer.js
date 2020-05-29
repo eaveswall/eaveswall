@@ -4,7 +4,8 @@ import { L_BREAKPOINTS } from "../theme"
 
 const StyledFooter = styled.footer`
   background: ${({ theme: { main } }) => main.bgAlt};
-  color: ${({ theme: { main } }) => main.fgFair};
+  color: ${({ theme: { main, themeColorAlt } }) =>
+    main.day ? themeColorAlt : main.fgFair};
   font-size: 0.9rem;
   font-family: "Roboto";
   font-weight: 500;
@@ -47,7 +48,8 @@ const StyledFooterHeading = styled.div`
     height: 5px;
     display: block;
     margin-bottom: 5px;
-    background-color: ${({ theme: { main, primary, secondary } }) => main.day ? primary : secondary};
+    background-color: ${({ theme: { main, primary, secondary } }) =>
+      main.day ? primary : secondary};
   }
 `
 

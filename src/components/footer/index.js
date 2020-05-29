@@ -78,11 +78,11 @@ const FooterSocial = () => {
                 rel="noreferrer noopener"
               >
                 <Icon
-                  width="48"
-                  height="48"
+                  width="40"
+                  height="40"
                   className="icon"
                   presentation="true"
-                  style={{ fill: theme.main.fgFair }}
+                  style={{ fill: theme.main.day ? theme.themeColorAlt : theme.main.fgFair }}
                 />
                 <span className="sr-only">{text}</span>
               </StyledNavButton>
