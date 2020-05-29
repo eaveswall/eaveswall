@@ -12,7 +12,7 @@ const StyledShare = styled.a`
   color: #ffffff;
   border-radius: 50%;
   padding: 0.55rem 0.3rem;
-  margin-inline-end: 1rem;
+  margin-right: 1rem;
   &:hover {
     background: ${({ theme: { themeColor } }) => themeColor};
     color: #ffffff;
