@@ -25,7 +25,7 @@ const headerLinks = [
   },
   {
     text: "Advertise",
-    link: "/advertise/",
+    link: "/promotions/",
   },
   {
     text: "About",
