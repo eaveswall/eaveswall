@@ -36,8 +36,8 @@ const useRank = ({ tags, data, exclude }, deps) => {
       if (rc) {
         if (priorityQueue.includes(rc)) {
           // when relationship becomes ambiguous, make a list for all ambiguously related posts
-          return relationshipRank[rc] instanceof Array
-            ? relationshipRank.push(node)
+          return Array.isArray(relationshipRank[rc])
+            ? relationshipRank[rc].push(node)
             : (relationshipRank[rc] = [relationshipRank[rc]]).push(node)
         }
         priorityQueue.push(rc)
