@@ -14,7 +14,7 @@ import AllPosts from "../../all-posts"
 
 import NWSForm from "../../newsletter-sub"
 import AuthorDetails from "../../author-details"
-import { SIZES, BREAKPOINTS } from "../../theme"
+import { SIZES, BREAKPOINTS, L_BREAKPOINTS } from "../../theme"
 import CreateTOC from "./toc"
 import PostContent from "./post-content"
 import PostPresentation from "./presentation"
@@ -27,6 +27,13 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
   body {
     background-color: ${({ theme: { main } }) => main.bg};
     color: ${({ theme: { main } }) => main.fg};
+  }
+  twitter-widget {
+    @media (max-width: ${L_BREAKPOINTS.lsm}px) {
+      width: calc(100vw - 2rem) !important;
+    }
+    margin: auto !important;
+    overflow-x: auto;
   }
   main.post {
     background-color: ${({ theme: { main } }) => main.bg};
@@ -95,6 +102,10 @@ const PostLayout = ({ data: { mdx, site } }) => {
   }`
   const sharerIntents = [
     {
+      name: "whatsapp",
+      text: `${mdx.frontmatter.desc}\n${postUrl}`,
+    },
+    {
       name: "twitter",
       text: `${mdx.frontmatter.desc}\n${postUrl}`,
     },
@@ -105,7 +116,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
     {
       name: "linkedin",
       text: `url=${postUrl}&summary=${mdx.frontmatter.desc}`,
-      url: true
+      url: true,
     },
   ]
 

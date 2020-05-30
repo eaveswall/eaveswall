@@ -4,6 +4,7 @@ import styled from "styled-components"
 import Twitter from "../../../images/svg/twitter.inline.svg"
 import Facebook from "../../../images/svg/facebook.inline.svg"
 import LinkedIn from "../../../images/svg/linkedin.inline.svg"
+import Whatsapp from "../../../images/svg/whatsapp.inline.svg"
 import Share from "../../../images/svg/share.inline.svg"
 
 const StyledShare = styled.a`
@@ -32,6 +33,10 @@ const allMedia = {
   linkedin: {
     link: "https://www.linkedin.com/shareArticle?mini=false&",
     Icon: LinkedIn,
+  },
+  whatsapp: {
+    link: "https://api.whatsapp.com/send?text=",
+    Icon: Whatsapp,
   },
 }
 
