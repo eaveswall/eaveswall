@@ -214,7 +214,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
               <AuthorDetails author={mdx.frontmatter.author} />
             </div>
 
-            <div className="p-1 px-xl-5 mt-3 mt-xl-0">
+            <div className="p-1 px-xl-5 mt-3 mt-xl-0 ">
               <br />
               <DiscussionEmbed {...disqusConfig} />
             </div>
