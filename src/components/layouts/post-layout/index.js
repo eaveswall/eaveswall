@@ -208,13 +208,13 @@ const PostLayout = ({ data: { mdx, site } }) => {
             </Sidebar>
           </div>
 
-          <div>
+          <div classname="mt-3">
             <Tags tags={mdx.frontmatter.tags} className="px-3 px-md-5" />
             <div className="d-xl-flex p-3 p-md-5">
               <AuthorDetails author={mdx.frontmatter.author} />
             </div>
 
-            <div className="p-5">
+            <div className="p-1 px-xl-5 mt-3 mt-xl-0">
               <br />
               <DiscussionEmbed {...disqusConfig} />
             </div>
