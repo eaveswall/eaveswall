@@ -162,7 +162,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
               <AuthorDetails author={mdx.frontmatter.author} />
             </div>
 
-            <div className="p-3 px-xl-5 mt-3 mt-xl-0" style={{width: `calc(100% - ${SIZES.tocWidth})`}}>
+            <div className="disqus-container p-3 px-xl-5 mt-3 mt-xl-0">
               <DiscussionEmbed key={themeKey} {...disqusConfig} />
             </div>
 

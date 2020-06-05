@@ -1,8 +1,14 @@
 import { createGlobalStyle } from "styled-components"
-import { L_BREAKPOINTS } from "../../theme"
-
+import { BREAKPOINTS, L_BREAKPOINTS, SIZES } from "../../theme"
 
 const ComponentScopedGlobalStyle = createGlobalStyle`
+  @supports (scrollbar-width: thin) {
+    html {
+      scrollbar-color: ${({ theme: { themeColor } }) => themeColor}
+        ${({ theme: { main } }) => main.bg};
+      scrollbar-width: thin;
+    }
+  }
   body {
     background-color: ${({ theme: { main } }) => main.bg};
     color: ${({ theme: { main } }) => main.fg};
@@ -24,7 +30,7 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
       text-decoration: underline;
       &:hover {
         color: ${({ theme }) =>
-        theme.main.day ? theme.primaryLight : theme.secondary};
+          theme.main.day ? theme.primaryLight : theme.secondary};
         text-decoration: underline;
       }
     }
@@ -56,14 +62,14 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
       &:after,
       &:before {
         color: ${({ theme }) =>
-        theme.main.day ? theme.primaryLight : theme.secondary};
+          theme.main.day ? theme.primaryLight : theme.secondary};
         display: block;
         font-size: 3rem;
         font-family: sans-serif;
         position: absolute;
-        text-shadow: 3px 3px 0 ${({ theme }) =>
-        theme.main.bg}, -3px 3px 0 ${({ theme }) =>
-        theme.main.bg};
+        text-shadow: 3px 3px 0 ${({ theme }) => theme.main.bg}, -3px 3px 0 ${({
+  theme,
+}) => theme.main.bg};
         height: 0px;
       }
       &:before {
@@ -76,6 +82,11 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
         bottom: 1.4rem;
         right: 1rem;
       }
+    }
+  }
+  .disqus-container {
+    @media (min-width: ${BREAKPOINTS.xl}px) {
+      width: calc(100% - ${SIZES.tocWidth});
     }
   }
 `

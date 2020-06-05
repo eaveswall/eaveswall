@@ -1,7 +1,11 @@
 import React from "react"
 import day from "./day"
 import night from "./night"
-import { ThemeProvider, ThemeContext, createGlobalStyle } from "styled-components"
+import {
+  ThemeProvider,
+  ThemeContext,
+  createGlobalStyle,
+} from "styled-components"
 import { saveTheme, retrieveTheme } from "./theme-store"
 
 const STATIC_THEME = {
@@ -40,6 +44,13 @@ const L_BREAKPOINTS = {
 }
 
 const GlobalStyle = createGlobalStyle`
+  @supports (scrollbar-width: thin) {
+    html {
+      scrollbar-color: ${({ theme: { themeColor } }) => themeColor}
+        ${({ theme: { main } }) => main.bg};
+      scrollbar-width: thin;
+    }
+  }
   body {
     background-color: ${({ theme: { main } }) => main.bgAlt};
     color: ${({ theme: { main } }) => main.fg};
@@ -100,5 +111,5 @@ export {
   BREAKPOINTS,
   L_BREAKPOINTS,
   useThemeToggle,
-  useThemeKey
+  useThemeKey,
 }
