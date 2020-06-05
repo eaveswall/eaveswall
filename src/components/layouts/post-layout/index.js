@@ -21,8 +21,9 @@ import Tags from "./tags"
 import IntentShare from "./share"
 import ComponentScopedGlobalStyle from "./styles"
 
-const shortcodes = { Link, SEO }
+import { DiscussionEmbed } from "disqus-react"
 
+const shortcodes = { Link, SEO }
 
 
 const updateSidebarHeight = (header, sideNav) => {
@@ -33,8 +34,8 @@ const updateSidebarHeight = (header, sideNav) => {
       document.documentElement.scrollTop > headerHeight
         ? `${sidebarHeight + headerHeight}px`
         : document.documentElement.scrollTop < headerHeight
-        ? `${sidebarHeight + document.documentElement.scrollTop}px`
-        : `${sidebarHeight}px`
+          ? `${sidebarHeight + document.documentElement.scrollTop}px`
+          : `${sidebarHeight}px`
   }
 
   window.matchMedia(`(min-width: ${BREAKPOINTS.lg}px)`).matches &&
@@ -49,7 +50,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
   const headerRef = React.useRef(null)
   const postUrl = `${site.siteMetadata.siteUrl}${
     mdx.frontmatter.slug ? `/posts${mdx.frontmatter.slug}` : mdx.fields.slug
-  }`
+    }`
   const sharerIntents = [
     {
       name: "whatsapp",
@@ -69,6 +70,12 @@ const PostLayout = ({ data: { mdx, site } }) => {
       url: true,
     },
   ]
+
+  //DISQUS
+  const disqusConfig = {
+    shortname: 'eaveswall', //unique disqus name found on their site.
+    config: { identifier: postUrl },
+  }
 
   React.useEffect(() => {
     return updateSidebarHeight(headerRef.current, sidebarRef.current)
@@ -143,18 +150,24 @@ const PostLayout = ({ data: { mdx, site } }) => {
               {mdx.tableOfContents.items !== void 0 ? (
                 <CreateTOC items={mdx.tableOfContents.items} />
               ) : (
-                <span style={{ textAlign: `center`, display: `block` }}>
-                  There are no sub-headings
-                </span>
-              )}
+                  <span style={{ textAlign: `center`, display: `block` }}>
+                    There are no sub-headings
+                  </span>
+                )}
             </Sidebar>
           </div>
 
-          <div>
+          <div classname="mt-3">
             <Tags tags={mdx.frontmatter.tags} className="px-3 px-md-5" />
             <div className="d-xl-flex p-3 p-md-5">
               <AuthorDetails author={mdx.frontmatter.author} />
             </div>
+
+            <div className="p-3 px-xl-5 mt-3 mt-xl-0 ">
+              <br />
+              <DiscussionEmbed {...disqusConfig} />
+            </div>
+
             <NWSForm className="px-xl-5 mt-3 mt-xl-0" />
           </div>
 

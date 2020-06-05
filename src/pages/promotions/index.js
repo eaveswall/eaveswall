@@ -11,7 +11,7 @@ const Promotions = () => {
     <PageLayout>
       <SEO title="Advertise" />
       <div className="mb-3">Want to advertise on Eaveswall?</div>
-      <LinkButtonGeneric href="https://wa.me/2347066029547">
+      <LinkButtonGeneric href="mailto:caleb@eaveswall.com"> {/* https://wa.me/2347066029547  */}
         Contact Caleb
       </LinkButtonGeneric>
     </PageLayout>
