@@ -1,7 +1,7 @@
 import React from "react"
 import day from "./day"
 import night from "./night"
-import { ThemeProvider, createGlobalStyle } from "styled-components"
+import { ThemeProvider, ThemeContext, createGlobalStyle } from "styled-components"
 import { saveTheme, retrieveTheme } from "./theme-store"
 
 const STATIC_THEME = {
@@ -67,6 +67,11 @@ const useThemeToggle = () => {
   return toggle
 }
 
+const useThemeKey = () => {
+  const theme = React.useContext(ThemeContext)
+  return theme.main.day ? "day-theme" : "night-theme"
+}
+
 const SiteTheme = ({ children }) => {
   const [theme, setTheme] = React.useState(
     (typeof retrieveTheme == "function" && retrieveTheme()) || day
@@ -95,4 +100,5 @@ export {
   BREAKPOINTS,
   L_BREAKPOINTS,
   useThemeToggle,
+  useThemeKey
 }
