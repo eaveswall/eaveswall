@@ -1,6 +1,6 @@
 # Eaveswall
 
-[Eaveswall](https://eaveswall.com) is a campus blog site built with [Gatsby](https://gatsbyjs.org) and deployed on [Netlify](https://netlify.com). It was really fun building this blog with Gatsby, React and other underlying technoligies including development, deployment and production. If you've not tried Gatsby, I advise you do so quickly.
+[Eaveswall](https://eaveswall.com) is a campus blog site built with [Gatsby](https://gatsbyjs.org) and deployed on [Netlify](https://netlify.com). It was really fun building this blog with Gatsby, [React](https://reactjs.org) and other underlying technologies including development, deployment and production. If you've not tried Gatsby, I advise you do so quickly.
 Brought to you by [John Oluwakeye](https://github.com/oluwakeye-john) and [Caleb Adepitan](https://github.com/calebpitan)
 
 # Use
@@ -13,4 +13,4 @@ Feel free 🤞 to reach out to us in an email sent to this [address](mailto:team
 
 # License
 
-This repository and the code therein, in all entirety, is licensed under the [MIT License](https://github.com/calebpitan/eaveswall/blob/master/LICENSE). Copyright (c) 2020 The Eaveswall Contibutors
+This repository and the code therein, in all entirety, is licensed under the [MIT License](https://github.com/calebpitan/eaveswall/blob/master/LICENSE). Copyright (c) 2020 The Eaveswall Contributors
