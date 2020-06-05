@@ -4,7 +4,6 @@ import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
-import { createGlobalStyle } from "styled-components"
 
 import Header from "../../header"
 import Footer from "../../footer"
@@ -14,66 +13,17 @@ import AllPosts from "../../all-posts"
 
 import NWSForm from "../../newsletter-sub"
 import AuthorDetails from "../../author-details"
-import { SIZES, BREAKPOINTS, L_BREAKPOINTS } from "../../theme"
+import { SIZES, BREAKPOINTS } from "../../theme"
 import CreateTOC from "./toc"
 import PostContent from "./post-content"
 import PostPresentation from "./presentation"
 import Tags from "./tags"
 import IntentShare from "./share"
+import ComponentScopedGlobalStyle from "./styles"
 
 const shortcodes = { Link, SEO }
 
-const ComponentScopedGlobalStyle = createGlobalStyle`
-  body {
-    background-color: ${({ theme: { main } }) => main.bg};
-    color: ${({ theme: { main } }) => main.fg};
-  }
-  twitter-widget {
-    @media (max-width: ${L_BREAKPOINTS.lsm}px) {
-      width: calc(100vw - 2rem) !important;
-    }
-    margin: auto !important;
-    overflow-x: auto;
-  }
-  main.post {
-    background-color: ${({ theme: { main } }) => main.bg};
-    color: ${({ theme: { main } }) => main.fgAlt};
-    h2, h3, h4, a {
-      color: ${({ theme: { main } }) => main.fg};
-    }
-    a:not([class*=button]) {
-      text-decoration: underline;
-      &:hover {
-        color: cornflowerblue;
-        text-decoration: underline dashed;
-      }
-    }
-    h2, h3, h4 {
-      a.anchor.before {
-        text-decoration: none;
-        svg {
-          display: none;
-        }
-      }
-    }
-    img,
-    span.gatsby-resp-image-background-image {
-      border-radius: 20px;
-      margin: 2rem 0;
-    }
-    blockquote:not([class]) {
-      color: ${({ theme: { main } }) => main.fg};
-      padding: 1rem;
-      border-left-width: 5px;
-      border-left-style: solid;
-      border-left-color: ${({ theme }) =>
-        theme.main.day ? theme.primary : theme.secondary};
-      p:last-of-type {
-        margin: 0;
-      }
-    }
-  }
-`
+
 
 const updateSidebarHeight = (header, sideNav) => {
   const headerHeight = header.offsetHeight
