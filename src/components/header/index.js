@@ -31,6 +31,10 @@ const headerLinks = [
     text: "About",
     link: "/about/",
   },
+  {
+    text: "Contact",
+    link: "/contact/",
+  },
 ]
 const contact = "mailto:team@eaveswall.com"
 
@@ -47,79 +51,81 @@ const handleNav = ({ navState: { isOpen }, setNavState }) => {
     })
 }
 
-const Header = React.forwardRef(({ siteTitle, active, shade, sticky, isHome }, ref) => {
-  const [navState, setNavState] = useState({ isOpen: false, style: null })
-  return (
-    <StyledHeader {...{ isHome, sticky }} ref={ref}>
-      <StyledHeaderGroup className="px-3 py-2" role="banner">
-        <div>
-          <EaveswallIcon width="35" height="35" />
-          <span style={{ fontFamily: `Satisfy` }}>
-            <Link
-              to="/"
-              style={{
-                textDecoration: `none`,
-              }}
-            >
-              {siteTitle}
-            </Link>
-          </span>
-        </div>
-      </StyledHeaderGroup>
-      <StyledHeaderGroup
-        className="d-flex flex-column"
-        role="navigation"
-        style={shade ? { boxShadow: `0 5px 7px rgba(0,0,0,.1)` } : null}
-      >
-        <div className="d-flex d-md-block px-2">
-          <StyledNavButton
-            className="d-md-none"
-            onClick={handleNav.bind(null, { navState, setNavState })}
-          >
-            <MenuIcon
-              width="30"
-              height="30"
-              style={{ fill: `white` }}
-              className="icon"
-              presentation="true"
-            />
-            <span className="sr-only">Menu</span>
-          </StyledNavButton>
-          <ThemeSwitch className="d-md-none ml-auto" />
-        </div>
-        <StyledNavContainer
-          className="d-flex flex-column flex-md-row flex-grow-1"
-          style={navState.style}
-        >
-          {headerLinks.map(({ text, link }, index) => {
-            return (
-              <StyledNavlink
-                to={link}
-                className={`${active === ++index ? "active" : ""}`}
-                key={index}
-                style={navState.isOpen ? { marginTop: 0 } : null}
+const Header = React.forwardRef(
+  ({ siteTitle, active, shade, sticky, isHome }, ref) => {
+    const [navState, setNavState] = useState({ isOpen: false, style: null })
+    return (
+      <StyledHeader {...{ isHome, sticky }} ref={ref}>
+        <StyledHeaderGroup className="px-3 py-2" role="banner">
+          <div>
+            <EaveswallIcon width="35" height="35" />
+            <span style={{ fontFamily: `Satisfy` }}>
+              <Link
+                to="/"
+                style={{
+                  textDecoration: `none`,
+                }}
               >
-                {text}
-              </StyledNavlink>
-            )
-          })}
-          <StyledNavlink
-            as="a"
-            href={contact}
-            style={navState.isOpen ? { marginTop: 0 } : null}
-          >
-            Contact
-          </StyledNavlink>
-          <div className="d-flex ml-0 ml-md-auto">
-            <ThemeSwitch className="d-none d-md-block" />
-            <Divider width="5px" height="100%" vertical />
-            <Social className="ml-auto" />
+                {siteTitle}
+              </Link>
+            </span>
           </div>
-        </StyledNavContainer>
-      </StyledHeaderGroup>
-    </StyledHeader>
-  )
-})
+        </StyledHeaderGroup>
+        <StyledHeaderGroup
+          className="d-flex flex-column"
+          role="navigation"
+          style={shade ? { boxShadow: `0 5px 7px rgba(0,0,0,.1)` } : null}
+        >
+          <div className="d-flex d-md-block px-2">
+            <StyledNavButton
+              className="d-md-none"
+              onClick={handleNav.bind(null, { navState, setNavState })}
+            >
+              <MenuIcon
+                width="30"
+                height="30"
+                style={{ fill: `white` }}
+                className="icon"
+                presentation="true"
+              />
+              <span className="sr-only">Menu</span>
+            </StyledNavButton>
+            <ThemeSwitch className="d-md-none ml-auto" />
+          </div>
+          <StyledNavContainer
+            className="d-flex flex-column flex-md-row flex-grow-1"
+            style={navState.style}
+          >
+            {headerLinks.map(({ text, link }, index) => {
+              return (
+                <StyledNavlink
+                  to={link}
+                  className={`${active === ++index ? "active" : ""}`}
+                  key={index}
+                  style={navState.isOpen ? { marginTop: 0 } : null}
+                >
+                  {text}
+                </StyledNavlink>
+              )
+            })}
+            {/* <StyledNavlink
+              as="a"
+              href={contact}
+              style={navState.isOpen ? { marginTop: 0 } : null}
+            >
+              Contact
+            </StyledNavlink> */}
+            <div className="d-flex ml-0 ml-md-auto">
+              <ThemeSwitch className="d-none d-md-block" />
+              <Divider width="5px" height="100%" vertical />
+              <Social className="ml-auto" />
+            </div>
+          </StyledNavContainer>
+        </StyledHeaderGroup>
+      </StyledHeader>
+    )
+  }
+)
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
