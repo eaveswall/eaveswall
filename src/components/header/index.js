@@ -36,7 +36,6 @@ const headerLinks = [
     link: "/contact/",
   },
 ]
-const contact = "mailto:team@eaveswall.com"
 
 const handleNav = ({ navState: { isOpen }, setNavState }) => {
   if (isOpen) setNavState({ isOpen: false, style: null })

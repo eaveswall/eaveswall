@@ -3,36 +3,46 @@ import React, { useState } from "react"
 import PageLayout from "../components/layouts/page-layout"
 import StyledTitle from "../components/title"
 import SEO from "../components/seo"
-import Input, { SubmitButton } from "../components/newsletter-sub/input"
+import { SubmitButton } from "../components/newsletter-sub/input"
 
 const Contact = () => {
   const [isFetching, setIsFetching] = useState(false)
 
+  const encode = data => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&")
+  }
+
   const handleContactSubmit = e => {
     e.preventDefault()
-    e.target.reset()
     setIsFetching(true)
 
     const form = e.target
     const { name, email, message } = form
-    console.log(name.value, email.value, message.value)
 
-    const formData = new FormData()
-    formData.append("Name", name.value)
-    formData.append("Email", email.value)
-    formData.append("Message", message.value)
+    const data = {
+      "form-name": "contact",
+      name: name.value,
+      email: email.value,
+      message: message.value,
+    }
 
-    fetch("/", {
-      method: "POST",
-      body: formData,
+    fetch(`/`, {
+      method: `POST`,
+      headers: { "Content-Type": `application/x-www-form-urlencoded` },
+      body: encode(data),
     })
-      .then(resp => {
-        console.log(resp)
-        if (!resp.ok) throw Error
+      .then(() => {
         setIsFetching(false)
+        alert("Form submitted successfully")
       })
       .catch(err => {
         setIsFetching(false)
+        alert("Failed to submit")
+      })
+      .finally(() => {
+        form.reset()
       })
   }
 
@@ -43,10 +53,17 @@ const Contact = () => {
         <div style={{ margin: `3rem 0`, fontFamily: ``, fontSize: `1rem` }}>
           <StyledTitle>Contact Us</StyledTitle>
 
-          <form onSubmit={handleContactSubmit} name="Contact Form">
+          <form
+            onSubmit={handleContactSubmit}
+            name="Contact Form"
+            className="mt-2"
+            style={{ fontFamily: "Roboto" }}
+          >
+            <input type="hidden" name="form-name" value="Contact Form" />
+
             <div className="row mb-3">
               <div className="col-lg-6 mb-4">
-                <label>Name</label>
+                <label htmlFor="contact-name">Name</label>
                 <br />
                 <input
                   type="text"
@@ -54,25 +71,27 @@ const Contact = () => {
                   placeholder="John Doe"
                   required
                   name="name"
+                  id="contact-name"
                   style={{ borderRadius: "0" }}
                 />
               </div>
 
               <div className="col-lg-6 mb-4">
-                <label>Email</label>
+                <label htmlFor="contact-email">Email</label>
                 <br />
                 <input
                   type="email"
                   className="form-control"
-                  placeholder="example@gmail.com"
+                  placeholder="johndoe@mail.com"
                   required
                   name="email"
+                  id="contact-email"
                   style={{ borderRadius: "0" }}
                 />
               </div>
 
               <div className="col-lg-12 mb-4">
-                <label>Message</label>
+                <label htmlFor="contact-message">Message</label>
                 <br />
                 <textarea
                   rows="6"
@@ -80,6 +99,7 @@ const Contact = () => {
                   placeholder="Message here"
                   required
                   name="message"
+                  id="contact-message"
                   style={{ borderRadius: "0" }}
                 />
               </div>
@@ -88,7 +108,7 @@ const Contact = () => {
                 <SubmitButton
                   className="mt-2 mt-md-0"
                   name="submit"
-                  value="Subscribe"
+                  value="Submit"
                   type="submit"
                   // disabled={!isFetching ? true : false}
                 />
