@@ -11,7 +11,7 @@ const FormContainer = styled.div`
   position: relative;
 `
 
-const FormDetail = styled.p`
+export const FormDetail = styled.p`
   font-size: 1.4rem;
   font-weight: 500;
   font-family: "Roboto";
