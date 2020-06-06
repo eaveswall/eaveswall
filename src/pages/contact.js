@@ -72,7 +72,6 @@ const Contact = () => {
                   required
                   name="name"
                   id="contact-name"
-                  style={{ borderRadius: "0" }}
                 />
               </div>
 
@@ -86,7 +85,6 @@ const Contact = () => {
                   required
                   name="email"
                   id="contact-email"
-                  style={{ borderRadius: "0" }}
                 />
               </div>
 
@@ -100,7 +98,6 @@ const Contact = () => {
                   required
                   name="message"
                   id="contact-message"
-                  style={{ borderRadius: "0" }}
                 />
               </div>
 
