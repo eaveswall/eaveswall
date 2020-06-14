@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import PageLayout from "../components/layouts/page-layout"
 import StyledTitle from "../components/title"
 import SEO from "../components/seo"
-import { SubmitButton } from "../components/newsletter-sub/input"
+import { SubmitButton } from "../components/form/input"
 
 const Contact = () => {
   const [isFetching, setIsFetching] = useState(false)
