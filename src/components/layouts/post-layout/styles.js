@@ -1,18 +1,13 @@
+import React from "react"
 import { createGlobalStyle } from "styled-components"
-import { BREAKPOINTS, L_BREAKPOINTS, SIZES } from "../../theme"
+import { BREAKPOINTS, L_BREAKPOINTS, SIZES, Scrollbar } from "../../theme"
 
-const ComponentScopedGlobalStyle = createGlobalStyle`
-  @supports (scrollbar-width: thin) {
-    html {
-      scrollbar-color: ${({ theme: { themeColor } }) => themeColor}
-        ${({ theme: { main } }) => main.bg};
-      scrollbar-width: thin;
-    }
-  }
+const ScopedGlobalStyle = createGlobalStyle`
   body {
     background-color: ${({ theme: { main } }) => main.bg};
     color: ${({ theme: { main } }) => main.fg};
   }
+
   twitter-widget {
     @media (max-width: ${L_BREAKPOINTS.lsm}px) {
       width: calc(100vw - 2rem) !important;
@@ -20,12 +15,15 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
     margin: auto !important;
     overflow-x: auto;
   }
+
   main.post {
     background-color: ${({ theme: { main } }) => main.bg};
     color: ${({ theme: { main } }) => main.fgAlt};
+
     h2, h3, h4, a {
       color: ${({ theme: { main } }) => main.fg};
     }
+
     a:not([class*=button]) {
       text-decoration: underline;
       &:hover {
@@ -34,6 +32,7 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
         text-decoration: underline;
       }
     }
+
     h2, h3, h4 {
       a.anchor.before {
         text-decoration: none;
@@ -42,11 +41,13 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
         }
       }
     }
+
     img,
     span.gatsby-resp-image-background-image {
       border-radius: 20px;
       margin: 2rem 0;
     }
+
     blockquote:not([class]) {
       position: relative;
       color: ${({ theme: { main } }) => main.fg};
@@ -56,9 +57,20 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
       border-color: ${({ theme }) =>
         theme.main.day ? theme.primaryLight : theme.secondary};
       border-radius: 10px;
+      margin: 2rem 1.5rem;
+
+      @media (min-width: ${BREAKPOINTS.sm}px) {
+        margin: 2rem 2.5rem;
+      }
+
+      @media (min-width: ${BREAKPOINTS.md}px) {
+        margin: 2rem 3.5rem;
+      }
+
       p:last-of-type {
         margin: 0;
       }
+
       &:after,
       &:before {
         color: ${({ theme }) =>
@@ -68,15 +80,17 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
         font-family: sans-serif;
         position: absolute;
         text-shadow: 3px 3px 0 ${({ theme }) => theme.main.bg}, -3px 3px 0 ${({
-  theme,
-}) => theme.main.bg};
+          theme,
+        }) => theme.main.bg};
         height: 0px;
       }
+
       &:before {
         content: '\u201f';
         top: -1.5rem;
         left: 1rem;
       }
+
       &:after {
         content: '\u201d';
         bottom: 1.4rem;
@@ -84,11 +98,19 @@ const ComponentScopedGlobalStyle = createGlobalStyle`
       }
     }
   }
+
   .disqus-container {
     @media (min-width: ${BREAKPOINTS.xl}px) {
       width: calc(100% - ${SIZES.tocWidth});
     }
   }
 `
+
+const ComponentScopedGlobalStyle = () => (
+  <>
+    <ScopedGlobalStyle />
+    <Scrollbar />
+  </>
+)
 
 export default ComponentScopedGlobalStyle
