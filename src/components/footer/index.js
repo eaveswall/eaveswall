@@ -41,7 +41,7 @@ const footerLinks = [
     ],
     Services: [
       {
-        link: "/advertise/",
+        link: "/promotions/",
         text: "Advertise",
       },
       {
