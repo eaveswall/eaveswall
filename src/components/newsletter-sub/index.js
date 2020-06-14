@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Input, { SubmitButton } from "./input"
+import Input, { SubmitButton } from "../form/input"
 import styled from "styled-components"
 import { BREAKPOINTS } from "../theme"
 
@@ -19,7 +19,6 @@ const FormDetail = styled.p`
 
 const FormSubContainer = styled.div`
   @media (min-width: ${BREAKPOINTS.md}px) {
-    ${"" /* max-width: 860px; */}
     margin: auto;
   }
 `
@@ -47,9 +46,10 @@ const handleSubmitHelper = (data, writeSuccess, writeError) => {
     headers: { "Content-Type": `application/x-www-form-urlencoded` },
     body: encode(data),
   })
-    .then(() => {
-      writeSuccess("Subscribed successfully")
-    })
+    .then((res) => {
+      return res.json()
+
+    }).then((data) => writeSuccess(data.message))
     .catch(error => {
       writeError("Failed to subscribe. Please check your connection")
       console.log(error)
