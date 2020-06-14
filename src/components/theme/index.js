@@ -11,8 +11,9 @@ import { saveTheme, retrieveTheme } from "./theme-store"
 const STATIC_THEME = {
   primary: `#3d1928`,
   primaryLight: `#732f4c`,
-  themeColor: `#B80B2C`,
-  themeColorAlt: `#1A2B2F`,
+  themeColor: `#b80b2c`,
+  themeColorLight: `#b80b4d`,
+  themeColorAlt: `#1a2b2f`,
   primaryGradient: `linear-gradient(90deg, #2b121c 5%, #B80B2C 100%);`,
   secondary: `darksalmon`,
   secondaryLight: `bisque`,
@@ -43,14 +44,7 @@ const L_BREAKPOINTS = {
   lxl: 1200 - BREAKPOINTS.df,
 }
 
-const GlobalStyle = createGlobalStyle`
-  @supports (scrollbar-width: thin) {
-    html {
-      scrollbar-color: ${({ theme: { themeColor } }) => themeColor}
-        ${({ theme: { main } }) => main.bg};
-      scrollbar-width: thin;
-    }
-  }
+const Style = createGlobalStyle`
   body {
     background-color: ${({ theme: { main } }) => main.bgAlt};
     color: ${({ theme: { main } }) => main.fg};
@@ -64,6 +58,37 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 `
+
+const Scrollbar = createGlobalStyle`
+  @supports (scrollbar-width: thin) {
+    html {
+      scrollbar-color: ${({ theme: { themeColor } }) => themeColor}
+        ${({ theme: { main } }) => main.bg};
+      scrollbar-width: thin;
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 8px !important;
+  }
+  ::-webkit-scrollbar-button {
+    visibility: hidden !important;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: ${({ theme: { main } }) => main.bg} !important;
+    border-radius: 50px !important;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme: { themeColor } }) => themeColor} !important;
+    border-radius: 50px !important;
+  }
+`
+
+const GlobalStyle = () => (
+  <>
+    <Style />
+    <Scrollbar />
+  </>
+)
 
 const ThemeUpdaterContext = React.createContext()
 const useThemeToggle = () => {
@@ -107,6 +132,7 @@ const SiteTheme = ({ children }) => {
 export {
   SiteTheme,
   GlobalStyle,
+  Scrollbar,
   SIZES,
   BREAKPOINTS,
   L_BREAKPOINTS,
