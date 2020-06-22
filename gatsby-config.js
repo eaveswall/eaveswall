@@ -164,6 +164,14 @@ module.exports = {
     },
 
     {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+        endpoint: 'https://eaveswall.us10.list-manage.com/subscribe/post?u=cda54cb5c3547ef2d9b060531&amp;id=9b4867bb1d',
+        timeout: 3500,
+      },
+    },
+
+    {
       resolve: `gatsby-plugin-sitemap`,
       options: {
         sitemapSize: 5000,

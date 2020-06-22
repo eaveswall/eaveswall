@@ -3,6 +3,7 @@ import React from "react"
 import { StyledNavButton } from "./header"
 import InstagramSVG from "../../images/svg/instagram.inline.svg"
 import TwitterSVG from "../../images/svg/twitter-circle.inline.svg"
+import WhatsappSVG from "../../images/svg/whatsapp.inline.svg"
 
 const socialLinks = [
   {
@@ -14,6 +15,11 @@ const socialLinks = [
     hyperlink: "https://instagram.com/eaveswall_",
     Icon: InstagramSVG,
     text: "Instagram"
+  },
+  {
+    link: "https://wa.me/2348121594054",
+    Icon: WhatsappSVG,
+    text: "Instagram",
   },
 ]
 

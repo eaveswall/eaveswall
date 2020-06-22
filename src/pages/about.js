@@ -10,7 +10,7 @@ const About = () => (
     <PageLayout activeNav={4}>
       <SEO title="About" />
       <div
-        style={{ margin: `3rem 0`, fontFamily: ``, fontSize: `1rem` }}
+        style={{ margin: `3rem 0` }}
       >
         <StyledTitle>About</StyledTitle>
         <p>

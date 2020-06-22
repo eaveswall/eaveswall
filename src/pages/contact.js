@@ -3,10 +3,13 @@ import React, { useState } from "react"
 import PageLayout from "../components/layouts/page-layout"
 import StyledTitle from "../components/title"
 import SEO from "../components/seo"
-import { SubmitButton } from "../components/form/input"
+import { SubmitButton, Input } from "../components/form/input"
 
 const Contact = () => {
   const [isFetching, setIsFetching] = useState(false)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
 
   const encode = data => {
     return Object.keys(data)
@@ -14,12 +17,9 @@ const Contact = () => {
       .join("&")
   }
 
-  const handleContactSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault()
     setIsFetching(true)
-
-    const form = e.target
-    const { name, email, message } = form
 
     const data = {
       "form-name": "contact",
@@ -37,85 +37,92 @@ const Contact = () => {
         setIsFetching(false)
         alert("Form submitted successfully")
       })
-      .catch(err => {
+      .catch(() => {
         setIsFetching(false)
         alert("Failed to submit")
       })
       .finally(() => {
-        form.reset()
+        console.clear()
+        setName('')
+        setEmail('')
+        setMessage('')
       })
   }
-
+  console.log('rendered')
   return (
     <>
       <PageLayout activeNav={5}>
         <SEO title="Contact" />
-        <div style={{ margin: `3rem 0`, fontFamily: ``, fontSize: `1rem` }}>
+        <div style={{ margin: `3rem 0` }}>
           <StyledTitle>Contact Us</StyledTitle>
 
           <form
-            onSubmit={handleContactSubmit}
-            name="Contact Form"
-            className="mt-2"
-            style={{ fontFamily: "Roboto" }}
+            onSubmit={handleSubmit}
+            name="contact-form"
+            method="post"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            action="/"
           >
-            <input type="hidden" name="form-name" value="Contact Form" />
+            <input type="hidden" name="form-name" value="contact-form" />
 
-            <div className="row mb-3">
-              <div className="col-lg-6 mb-4">
-                <label htmlFor="contact-name">Name</label>
-                <br />
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="John Doe"
-                  required
-                  name="name"
-                  id="contact-name"
-                  style={{ borderRadius: "7px" }}
-                />
+            <div className="d-flex flex-column">
+              <div className="d-flex flex-wrap">
+                <div className="my-3" style={{ flex: `1 1 30ch` }}>
+                  <label htmlFor="contact-name">Name</label>
+                  <Input
+                    id="contact-name"
+                    type="text"
+                    placeholder="John Doe"
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="mx-3" />
+
+                <div className="my-3" style={{ flex: `1 1 30ch` }}>
+                  <label htmlFor="contact-email">Email</label>
+                  <Input
+                    id="contact-email"
+                    type="email"
+                    placeholder="johndoe@mail.com"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="my-4" style={{ flex: `1 1 60ch` }}>
+                  <label htmlFor="contact-message">Message</label>
+                  <Input
+                    as="textarea"
+                    rows="6"
+                    id="contact-message"
+                    placeholder="Hello there! Keep up the good work. I was going to say..."
+                    name="message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
 
-              <div className="col-lg-6 mb-4">
-                <label htmlFor="contact-email">Email</label>
-                <br />
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="johndoe@mail.com"
-                  required
-                  name="email"
-                  id="contact-email"
-                  style={{ borderRadius: "7px" }}
-                />
-              </div>
-
-              <div className="col-lg-12 mb-4">
-                <label htmlFor="contact-message">Message</label>
-                <br />
-                <textarea
-                  rows="6"
-                  className="form-control"
-                  placeholder="Message here"
-                  required
-                  name="message"
-                  id="contact-message"
-                  style={{ borderRadius: "7px" }}
-                />
-              </div>
-
-              <div className="col">
+              <div className="">
                 <SubmitButton
                   className="mt-2 mt-md-0"
-                  name="submit"
-                  value="Submit"
                   type="submit"
-                  // disabled={!isFetching ? true : false}
+                  name="submit"
+                  value="Send message"
                 />
                 {isFetching && (
                   <span className="spinner-border spinner-border-sm ml-1" />
                 )}
               </div>
+
             </div>
           </form>
         </div>

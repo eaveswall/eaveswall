@@ -8,6 +8,7 @@ import {
 } from "./footer"
 import TwitterSVG from "../../images/svg/twitter.inline.svg"
 import InstagramSVG from "../../images/svg/instagram.inline.svg"
+import WhatsappSVG from "../../images/svg/whatsapp.inline.svg"
 import { StyledNavButton } from "../header/header"
 import { ThemeContext } from "styled-components"
 import PropTypes from "prop-types"
@@ -23,6 +24,11 @@ const footerLinks = [
       {
         link: "https://instagram.com/eaveswall_",
         Icon: InstagramSVG,
+        text: "Instagram",
+      },
+      {
+        link: "https://wa.me/2348121594054",
+        Icon: WhatsappSVG,
         text: "Instagram",
       },
     ],

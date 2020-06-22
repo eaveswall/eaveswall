@@ -9,10 +9,7 @@
 @import "~bootstrap/scss/type";
 @import "~bootstrap/scss/utilities/screenreaders";
 @import "~bootstrap/scss/utilities/sizing";
-@import "~bootstrap/scss/utilities/borders";
 @import "~bootstrap/scss/mixins/text-truncate";
-@import "~bootstrap/scss/forms";
-@import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/spinners";
 
 @import "../variables";
@@ -21,7 +18,6 @@ html,
 body {
   height: 100%;
   font-family: "Questrial", sans-serif;
-  // font-weight: 600;
 }
 
 ::selection {

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
-import Input, { SubmitButton } from "../form/input"
 import styled from "styled-components"
+import addToMailChimp from "gatsby-plugin-mailchimp"
+import { StyledInput as Input, SubmitButton } from "../form/input"
 import { BREAKPOINTS } from "../theme"
 
 const FormContainer = styled.div`
@@ -40,20 +41,14 @@ const encode = data => {
     .join("&")
 }
 
-const handleSubmitHelper = (data, writeSuccess, writeError) => {
-  fetch(`/.netlify/functions/subscribe`, {
+const handleSubmitHelper = data => {
+  return fetch(`/.netlify/functions/subscribe`, {
     method: `POST`,
     headers: { "Content-Type": `application/x-www-form-urlencoded` },
     body: encode(data),
+  }).then(res => {
+    return res.json()
   })
-    .then((res) => {
-      return res.json()
-
-    }).then((data) => writeSuccess(data.message))
-    .catch(error => {
-      writeError("Failed to subscribe. Please check your connection")
-      console.log(error)
-    })
 }
 
 const NWSForm = props => {
@@ -61,18 +56,25 @@ const NWSForm = props => {
   const [success, writeSuccess] = useState("")
   const [error, writeError] = useState("")
   const id = new Date().getTime().toString(36)
+
   const handleSubmit = e => {
-    const onsuccess = msg => {
-      writeSuccess(msg)
-      setEmail("")
-    }
-    handleSubmitHelper(
-      { "form-name": "newsletter", email, id },
-      onsuccess,
-      writeError
-    )
+    addToMailChimp(email).then(({result, msg}) => {
+      if (result === "success") {
+        handleSubmitHelper({ "form-name": "newsletter", email, id })
+          .then(data => writeSuccess(data.message))
+          .catch(error => {
+            console.log(`Could not submit to netlify: ${error}`)
+          })
+        setEmail("")
+        writeSuccess(msg)
+        return
+      }
+      writeError("Failed to subscribe. Please check your connection")
+    })
+
     e.preventDefault()
   }
+
   return (
     <FormContainer {...props}>
       <FormSubContainer>
@@ -101,6 +103,7 @@ const NWSForm = props => {
               </label>
               <Input
                 id="nwsIfield"
+                className="my-2"
                 placeholder="you@subscribe.com"
                 name="email"
                 type="email"
