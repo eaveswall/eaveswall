@@ -70,7 +70,10 @@ const NWSForm = props => {
         return
       }
       writeError(`${result}: ${msg}`)
-      setTimeout(() => setEmail(""), 3000) // reset email and trigger re-render after 3000ms
+      setTimeout(() => {
+        setEmail("")
+        writeError("")
+      }, 3000) // reset and trigger re-render after 3000ms
     })
 
     e.preventDefault()
