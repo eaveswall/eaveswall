@@ -21,8 +21,7 @@ const MAIL_ICON = require.resolve("./assets/mail_x128.png")
 const EAVESWALL_TEXT = require.resolve("./assets/eaveswall-text_x192.png")
 
 const generateId = () => {
-  const crypto = require("crypto")
-  return crypto.randomBytes(16).toString("hex")
+  return require("uuid").v4()
 }
 
 const toImageStr = (value, type) => {
@@ -124,9 +123,9 @@ async function handleNewsletter(payload) {
   }
 }
 
-process.on('unhandledRejection', err => {
-  throw err;
-});
+process.on("unhandledRejection", err => {
+  throw err
+})
 
 exports.handler = (event, _ctx, callback) => {
   // console.log(event)
@@ -151,10 +150,11 @@ exports.handler = (event, _ctx, callback) => {
       })
       .catch(err => {
         console.log("AN ERROR OCCURED! ☹: ", err.message || err)
-        callback(e, {
+        callback(err, {
           statusCode: "502",
           body: JSON.stringify({
-            message: "An error occured, could not complete processing your request",
+            message:
+              "An error occured, could not complete processing your request",
             error: err.message,
           }),
         })
