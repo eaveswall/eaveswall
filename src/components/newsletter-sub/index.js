@@ -95,7 +95,7 @@ const NWSForm = props => {
               data-netlify="true"
               data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
-              action="/.netlify/functions/subscribe"
+              action="https://eaveswall.us10.list-manage.com/subscribe/post?u=cda54cb5c3547ef2d9b060531&amp;id=9b4867bb1d"
             >
               <input type="hidden" name="form-name" value="newsletter" />
               <label htmlFor="nwsIfield" className="sr-only">
