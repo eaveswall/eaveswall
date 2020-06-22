@@ -58,7 +58,7 @@ const NWSForm = props => {
   const id = new Date().getTime().toString(36)
 
   const handleSubmit = e => {
-    addToMailChimp(email).then(({result, msg}) => {
+    addToMailChimp(email).then(({ result, msg }) => {
       if (result === "success") {
         handleSubmitHelper({ "form-name": "newsletter", email, id })
           .then(data => writeSuccess(data.message))
