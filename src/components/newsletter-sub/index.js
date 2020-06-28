@@ -58,23 +58,25 @@ const NWSForm = props => {
   const id = new Date().getTime().toString(36)
 
   const handleSubmit = e => {
-    addToMailChimp(email).then(({ result, msg }) => {
-      if (result === "success") {
-        handleSubmitHelper({ "form-name": "newsletter", email, id })
-          .then(data => writeSuccess(data.message))
-          .catch(error => {
-            console.log(`Could not submit to netlify: ${error}`)
-          })
-        setEmail("")
-        writeSuccess(msg)
-        return
+    addToMailChimp(email, { PATHNAME: window.location.pathname }).then(
+      ({ result, msg }) => {
+        if (result === "success") {
+          handleSubmitHelper({ "form-name": "newsletter", email, id })
+            .then(data => writeSuccess(data.message))
+            .catch(error => {
+              console.log(`Could not submit to netlify: ${error}`)
+            })
+          setEmail("")
+          writeSuccess(msg)
+          return
+        }
+        writeError(`${result}: ${msg}`)
+        setTimeout(() => {
+          setEmail("")
+          writeError("")
+        }, 3000) // reset and trigger re-render after 3000ms
       }
-      writeError(`${result}: ${msg}`)
-      setTimeout(() => {
-        setEmail("")
-        writeError("")
-      }, 3000) // reset and trigger re-render after 3000ms
-    })
+    )
 
     e.preventDefault()
   }
