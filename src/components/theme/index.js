@@ -7,6 +7,7 @@ import {
   createGlobalStyle,
 } from "styled-components"
 import { saveTheme, retrieveTheme } from "./theme-store"
+import { tint, shade } from "polished"
 
 const STATIC_THEME = {
   primary: `#3d1928`,
@@ -53,7 +54,7 @@ const Style = createGlobalStyle`
     color: ${({ theme: { main } }) => main.fg};
     text-decoration: underline;
     &:hover {
-      color: cornflowerblue;
+      color: ${({ theme: { main, themeColor } }) => main.day ? shade(0.5, themeColor) : tint(0.2, themeColor)};
       text-decoration: underline dashed;
     }
   }
