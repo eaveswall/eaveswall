@@ -17,7 +17,7 @@ const socialLinks = [
     text: "Instagram"
   },
   {
-    link: "https://wa.me/2348121594054",
+    hyperlink: "https://wa.me/2348121594054",
     Icon: WhatsappSVG,
     text: "Instagram",
   },
