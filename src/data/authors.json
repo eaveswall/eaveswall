@@ -17,6 +17,14 @@
     }
   },
   {
+    "name": "Okorie Aniedi",
+    "bio": "Okorie Aniedi is a writer and a graphics designer of some sort, and a member on the Eaveswall team",
+    "image": "../images/default-profile.png",
+    "social": {
+      "twitter": "oluwakeyejohn"
+    }
+  },
+  {
     "name": "Eaveswall",
     "bio": "Engage in the interesting discussions and gists that happen on the eaves blogging site and the media wall for all",
     "image": "../images/eaveswall-icon.png",
