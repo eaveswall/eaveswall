@@ -29,7 +29,7 @@ const footerLinks = [
       {
         link: "https://wa.me/2348121594054",
         Icon: WhatsappSVG,
-        text: "Instagram",
+        text: "Whatsapp",
       },
     ],
   },
@@ -40,7 +40,7 @@ const footerLinks = [
         text: "About",
       },
       {
-        link: "mailto:team@eaveswall.com",
+        link: "/contact/",
         text: "Contact",
         generic: true,
       },

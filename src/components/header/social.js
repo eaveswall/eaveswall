@@ -12,7 +12,7 @@ const socialLinks = [
     text: "Twitter"
   },
   {
-    hyperlink: "https://instagram.com/eaveswall_",
+    hyperlink: "https://instagram.com/eaveswall_blog",
     Icon: InstagramSVG,
     text: "Instagram"
   },
