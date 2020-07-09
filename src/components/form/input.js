@@ -2,7 +2,11 @@
 import styled from "styled-components"
 import { BREAKPOINTS } from "../theme"
 
-const Input = styled.input`
+const Input = styled.div`
+  position: relative;
+`
+
+const InputBox = styled.input`
   padding: 0.4rem 1rem;
   border-radius: 7px;
   color: ${({ theme: { main } }) => (main.day ? `#000` : `#fff`)};
@@ -15,11 +19,21 @@ const Input = styled.input`
     outline: none;
     box-shadow: 0 0 0 0.1rem ${({ theme: { themeColor } }) => themeColor};
   }
+
+  &:focus + label {
+    font-size: small;
+    transform: translateY(-1.7rem);
+    background-color: transparent;
+  }
+
+  &:not(:placeholder-shown) + label {
+    font-size: small;
+    transform: translateY(-1.7rem);
+    background-color: transparent;
+  }
 `
 
-const StyledInput = styled(Input)`
-  color: #000;
-  background-color: #fff;
+const StyledInputBox = styled(InputBox)`
   @media (min-width: ${BREAKPOINTS.md}px) {
     width: 190px;
     transition: width ease 0.4s, box-shadow ease 0.4s;
@@ -29,7 +43,20 @@ const StyledInput = styled(Input)`
   }
 `
 
-const SubmitButton = styled(Input)`
+const InputLabel = styled.label`
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
+  margin: 0.4rem 1rem;
+  transition: 0.2s;
+  background-color: ${({ theme: { main } }) =>
+    main.day ? main.bg : main.bgAlt};
+  /* background-color: transparent; */
+  pointer-events: none;
+`
+
+const SubmitButton = styled(InputBox)`
   background-color: ${({ theme: { themeColor } }) => themeColor};
   color: #ffffff;
   text-align: center;
@@ -51,4 +78,4 @@ const SubmitButton = styled(Input)`
   }
 `
 
-export { SubmitButton, StyledInput, Input }
+export { SubmitButton, StyledInputBox, Input, InputBox, InputLabel }

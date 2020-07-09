@@ -1,7 +1,12 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import addToMailChimp from "gatsby-plugin-mailchimp"
-import { StyledInput as Input, SubmitButton } from "../form/input"
+import {
+  StyledInputBox as InputBox,
+  Input,
+  InputLabel,
+  SubmitButton,
+} from "../form/input"
 import { BREAKPOINTS } from "../theme"
 
 const FormContainer = styled.div`
@@ -107,15 +112,18 @@ const NWSForm = props => {
               <label htmlFor="nwsIfield" className="sr-only">
                 Email Address
               </label>
-              <Input
-                id="nwsIfield"
-                className="my-2"
-                placeholder="you@subscribe.com"
-                name="email"
-                type="email"
-                value={email}
-                onChange={evt => setEmail(evt.target.value)}
-              />
+              <Input className="my-2" style={{ display: "inline-block" }}>
+                <InputBox
+                  id="nwsIfield"
+                  // className="my-2"
+                  placeholder=" "
+                  name="email"
+                  type="email"
+                  value={email}
+                  onChange={evt => setEmail(evt.target.value)}
+                />
+                <InputLabel>Email</InputLabel>
+              </Input>
               <input type="hidden" name="id" value={id} />
               <SubmitButton
                 className="ml-md-5 mt-2 mt-md-0"

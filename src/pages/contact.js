@@ -3,13 +3,18 @@ import React, { useState } from "react"
 import PageLayout from "../components/layouts/page-layout"
 import StyledTitle from "../components/title"
 import SEO from "../components/seo"
-import { SubmitButton, Input } from "../components/form/input"
+import {
+  SubmitButton,
+  Input,
+  InputBox,
+  InputLabel,
+} from "../components/form/input"
 
 const Contact = () => {
   const [isFetching, setIsFetching] = useState(false)
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [message, setMessage] = useState("")
 
   const encode = data => {
     return Object.keys(data)
@@ -43,12 +48,12 @@ const Contact = () => {
       })
       .finally(() => {
         console.clear()
-        setName('')
-        setEmail('')
-        setMessage('')
+        setName("")
+        setEmail("")
+        setMessage("")
       })
   }
-  console.log('rendered')
+  console.log("rendered")
   return (
     <>
       <PageLayout activeNav={5}>
@@ -69,45 +74,54 @@ const Contact = () => {
             <div className="d-flex flex-column">
               <div className="d-flex flex-wrap">
                 <div className="my-3" style={{ flex: `1 1 30ch` }}>
-                  <label htmlFor="contact-name">Name</label>
-                  <Input
-                    id="contact-name"
-                    type="text"
-                    placeholder="John Doe"
-                    name="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
+                  {/* <label htmlFor="contact-name">Name</label> */}
+                  <Input>
+                    <InputBox
+                      id="contact-name"
+                      type="text"
+                      placeholder=" "
+                      name="name"
+                      value={name}
+                      onChange={e => setName(e.target.value)}
+                      required
+                    />
+                    <InputLabel>Name</InputLabel>
+                  </Input>
                 </div>
 
                 <div className="mx-3" />
 
                 <div className="my-3" style={{ flex: `1 1 30ch` }}>
-                  <label htmlFor="contact-email">Email</label>
-                  <Input
-                    id="contact-email"
-                    type="email"
-                    placeholder="johndoe@mail.com"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
+                  {/* <label htmlFor="contact-email">Email</label> */}
+                  <Input>
+                    <InputBox
+                      id="contact-email"
+                      type="email"
+                      placeholder=" "
+                      name="email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      required
+                    />
+                    <InputLabel>Email</InputLabel>
+                  </Input>
                 </div>
 
                 <div className="my-4" style={{ flex: `1 1 60ch` }}>
-                  <label htmlFor="contact-message">Message</label>
-                  <Input
-                    as="textarea"
-                    rows="6"
-                    id="contact-message"
-                    placeholder="Hello there! Keep up the good work. I was going to say..."
-                    name="message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    required
-                  />
+                  {/* <label htmlFor="contact-message">Message</label> */}
+                  <Input>
+                    <InputBox
+                      as="textarea"
+                      rows="6"
+                      id="contact-message"
+                      placeholder=" "
+                      name="message"
+                      value={message}
+                      onChange={e => setMessage(e.target.value)}
+                      required
+                    />
+                    <InputLabel>Message</InputLabel>
+                  </Input>
                 </div>
               </div>
 
@@ -122,7 +136,6 @@ const Contact = () => {
                   <span className="spinner-border spinner-border-sm ml-1" />
                 )}
               </div>
-
             </div>
           </form>
         </div>
