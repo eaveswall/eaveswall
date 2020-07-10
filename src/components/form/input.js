@@ -4,21 +4,21 @@ import { BREAKPOINTS } from "../theme"
 
 const Input = styled.div`
   position: relative;
-  /* Change the white to any color ;) */
+  input:-webkit-autofill {
+    border: 2px solid
+      ${({ theme: { main } }) => (main.day ? "#000000" : "#1a1a1a")};
+    transition: 0.4s;
+  }
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  textarea:-webkit-autofill,
-  textarea:-webkit-autofill:hover,
-  textarea:-webkit-autofill:focus,
-  select:-webkit-autofill,
-  select:-webkit-autofill:hover,
-  select:-webkit-autofill:focus {
-    border: 2px solid ${({ theme: { themeColor } }) => themeColor};
+  input:-webkit-autofill:focus {
     -webkit-text-fill-color: ${({ theme: { main } }) =>
       main.day ? `#000` : `#fff`};
     -webkit-box-shadow: 0 0 0 30px
       ${({ theme: { main } }) => (main.day ? main.bg : main.bgAlt)} inset !important;
+  }
+  input:-webkit-autofill:focus {
+    border: 2px solid ${({ theme: { themeColor } }) => themeColor};
   }
 `
 
