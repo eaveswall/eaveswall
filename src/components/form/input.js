@@ -4,6 +4,22 @@ import { BREAKPOINTS } from "../theme"
 
 const Input = styled.div`
   position: relative;
+  /* Change the white to any color ;) */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    border: 2px solid ${({ theme: { themeColor } }) => themeColor};
+    -webkit-text-fill-color: ${({ theme: { main } }) =>
+      main.day ? `#000` : `#fff`};
+    -webkit-box-shadow: 0 0 0 30px
+      ${({ theme: { main } }) => (main.day ? main.bg : main.bgAlt)} inset !important;
+  }
 `
 
 const InputBox = styled.input`
@@ -22,14 +38,16 @@ const InputBox = styled.input`
 
   &:focus + label {
     font-size: small;
-    transform: translateY(-1.7rem);
-    background-color: transparent;
+    transform: translateY(-1rem);
+    background-color: ${({ theme: { main } }) =>
+      main.day ? main.bg : main.bgAlt};
   }
 
   &:not(:placeholder-shown) + label {
     font-size: small;
-    transform: translateY(-1.7rem);
-    background-color: transparent;
+    transform: translateY(-1rem);
+    background-color: ${({ theme: { main } }) =>
+      main.day ? main.bg : main.bgAlt};
   }
 `
 
@@ -47,12 +65,11 @@ const InputLabel = styled.label`
   position: absolute;
   top: 0;
   left: 0;
-  padding: 0;
+  /* padding: 0; */
   margin: 0.4rem 1rem;
   transition: 0.2s;
   background-color: ${({ theme: { main } }) =>
     main.day ? main.bg : main.bgAlt};
-  /* background-color: transparent; */
   pointer-events: none;
 `
 
