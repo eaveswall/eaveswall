@@ -8,3 +8,9 @@
   command = "npm run prebuild && npm run build-beta"
   functions = "functions"
   publish = "public"
+
+  [[redirects]]
+  from = "/posts/the-cursed-wheel/the-cursed-wheel/"
+  to = "/posts/the-cursed-wheel/"
+  status = 301
+  force = true # COMMENT: ensure that we always redirect
