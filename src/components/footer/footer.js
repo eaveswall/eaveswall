@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 import { L_BREAKPOINTS } from "../theme"
 import StyledTitle from "../title"
-import { shade, tint } from "polished"
+import { tint } from "polished"
 
 const StyledFooter = styled.footer`
   background: ${({ theme: { main } }) => main.bgAlt};
