@@ -13,22 +13,9 @@ const StyledTocLink = styled.a`
   }
 `
 
-const tocIntersection = evt => {
-  const selector = evt.currentTarget.href.match(/(?:#[a-z0-9-]+)$/)[0]
-  const target = document.querySelector(selector)
-  const y = target.offsetTop
-  if (target) {
-    window.scrollTo({
-      top: y - 47.38,
-      behaviour: "smooth"
-    })
-    window.history.pushState(null, null, selector)
-  }
-  evt.preventDefault()
-}
 
 const TocLink = ({ children, ...rest }) => (
-  <StyledTocLink {...rest} onClick={tocIntersection}>
+  <StyledTocLink {...rest}>
     {children}
   </StyledTocLink>
 )
