@@ -72,7 +72,7 @@ const FooterSocial = () => {
   const theme = React.useContext(ThemeContext)
   return (
     <>
-      <StyledFooterHeading>Social Profiles & Media</StyledFooterHeading>
+      <StyledFooterHeading>Social Profiles</StyledFooterHeading>
       <div className="d-flex">
         {footerLinks[0].Social.map(({ link, Icon, text }, index) => {
           return (
@@ -156,7 +156,7 @@ const Footer = ({ withCredits }) => {
       {withCredits && (
         <div>
           <StyledFooterHeading style={{ marginTop: 0 }}>
-            Images Credit & Attribution
+            Attribution
           </StyledFooterHeading>
           <div className="mt-3">
             Thanks to our folks at{" "}
