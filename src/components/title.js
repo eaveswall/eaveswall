@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { tint } from "polished"
 
 const StyledTitle = styled.h1`
   margin-top: 1rem;
@@ -6,11 +7,12 @@ const StyledTitle = styled.h1`
   color: ${({ theme: { main } }) => main.fg};
   &:after {
     content: "";
-    width: 100%;
+    max-width: 5ch;
     height: 5px;
     display: block;
     margin-bottom: 1rem;
-    background-color: ${({ theme: { main, primary, secondary } }) => main.day ? primary : secondary};
+    border-radius: 5px;
+    background-color: ${({ theme: { themeColor } }) => tint(0.2, themeColor)};
   }
 `
 
