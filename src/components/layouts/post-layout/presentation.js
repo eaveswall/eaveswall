@@ -2,7 +2,9 @@ import React from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
 import { Link } from "gatsby"
-import kebabCase from 'lodash/kebabCase'
+import kebabCase from "lodash/kebabCase"
+import { fluidRange } from "polished"
+import { BREAKPOINTS } from "../../theme"
 
 const Presentation = styled.div`
   background-color: ${({ theme: { primary } }) => primary};
@@ -22,6 +24,11 @@ const PresenterImage = styled.div`
 `
 const AuthorLink = styled(Link)`
   color: currentColor;
+  ${fluidRange(
+    { prop: "max-width", fromSize: "10ch", toSize: "100ch" },
+    '0px',
+    `${BREAKPOINTS.sm}px`
+  )};
   &:hover,
   &:active {
     color: #edfd07;
@@ -47,7 +54,13 @@ const PostDetails = ({ mdx, site }) => {
       <div className="d-flex">
         <ul className="list-unstyled flex-shrink-0 mr-3" role="presentation">
           <li role="presentation">
-            <span className="text-muted-bright" id="author_desc" style={{fontSize: `0.95rem`}}>Author</span>
+            <span
+              className="text-muted-bright"
+              id="author_desc"
+              style={{ fontSize: `0.95rem` }}
+            >
+              Author
+            </span>
           </li>
           <li role="presentation">
             <AuthorLink
@@ -56,17 +69,30 @@ const PostDetails = ({ mdx, site }) => {
                 site.siteMetadata.title
               )}`}
             >
-              <span aria-describedby="author_desc">{mdx.frontmatter.author}</span>
+              <span
+                className="d-block text-truncate"
+                style={{ maxWidth: `inherit` }}
+                aria-describedby="author_desc"
+              >
+                {mdx.frontmatter.author}
+              </span>
             </AuthorLink>
           </li>
         </ul>
         <ul className="list-unstyled mr-2" role="presentation">
           <li role="presentation">
-            <span className="text-muted-bright" id="last_mod_desc" style={{fontSize: `0.95rem`}}>Last updated</span>
+            <span
+              className="text-muted-bright"
+              id="last_mod_desc"
+              style={{ fontSize: `0.95rem` }}
+            >
+              Last updated
+            </span>
           </li>
           <li role="presentation">
             <span aria-describedby="last_mod_desc">
-              {mdx.frontmatter.last_modified} &mdash; {timeToRead(mdx.timeToRead)}
+              {mdx.frontmatter.last_modified} &mdash;{" "}
+              {timeToRead(mdx.timeToRead)}
             </span>
           </li>
         </ul>
