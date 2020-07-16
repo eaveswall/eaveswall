@@ -25,6 +25,14 @@
     }
   },
   {
+    "name": "Remi-Adesida Ibukunoluwa",
+    "bio": "Remi-Adesida Ibukunoluwa is an aspiring writer, a digital artist, and is also in love with history, mystery, science and anything arts",
+    "image": "../images/default-profile.png",
+    "social": {
+      "twitter": "oluwakeyejohn"
+    }
+  },
+  {
     "name": "Eaveswall",
     "bio": "Engage in the interesting discussions and gists that happen on the eaves blogging site and the media wall for all",
     "image": "../images/eaveswall-icon.png",

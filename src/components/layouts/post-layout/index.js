@@ -150,7 +150,7 @@ const PostLayout = ({ data: { mdx, site } }) => {
                 <CreateTOC items={mdx.tableOfContents.items} />
               ) : (
                 <span style={{ textAlign: `center`, display: `block` }}>
-                  There are no sub-headings
+                  Grab a Popsicle 'cause you can't cut sections
                 </span>
               )}
             </Sidebar>

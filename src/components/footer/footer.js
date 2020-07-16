@@ -1,11 +1,13 @@
 import styled from "styled-components"
 import { Link } from "gatsby"
 import { L_BREAKPOINTS } from "../theme"
+import StyledTitle from "../title"
+import { tint } from "polished"
 
 const StyledFooter = styled.footer`
   background: ${({ theme: { main } }) => main.bgAlt};
   color: ${({ theme: { main, themeColorAlt } }) =>
-    main.day ? themeColorAlt : main.fgFair};
+    main.day ? themeColorAlt : tint(0.7, themeColorAlt)};
   font-size: 0.9rem;
   font-family: "Roboto";
   font-weight: 500;
@@ -33,23 +35,18 @@ const StyledFooterLink = styled(Link)`
     text-decoration: underline;
   }
 `
-const StyledFooterHeading = styled.div`
+const StyledFooterHeading = styled(StyledTitle).attrs(() => ({ as: "div" }))`
   font-size: 1.4rem;
   font-weight: 500;
   margin-top: 1rem;
   display: inline-block;
-  color: ${({ theme: { main } }) => main.fg};
+  color: ${({ theme: { main, themeColorAlt } }) =>
+    main.day ? themeColorAlt : tint(0.7, themeColorAlt)};
   @media (max-width: ${L_BREAKPOINTS.lsm}px) {
     display: block;
   }
   &:after {
-    content: "";
-    width: 100%;
-    height: 5px;
-    display: block;
     margin-bottom: 5px;
-    background-color: ${({ theme: { main, primary, secondary } }) =>
-      main.day ? primary : secondary};
   }
 `
 

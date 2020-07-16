@@ -79,7 +79,7 @@ const Scrollbar = createGlobalStyle`
     border-radius: 50px !important;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: ${({ theme: { themeColor } }) => themeColor} !important;
+    background-color: ${({ theme: { themeColor, main } }) => tint(0.1, themeColor)} !important;
     border-radius: 50px !important;
   }
 `
