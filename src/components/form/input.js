@@ -4,22 +4,6 @@ import { BREAKPOINTS } from "../theme"
 
 const Input = styled.div`
   position: relative;
-  input:-webkit-autofill {
-    border: 2px solid
-      ${({ theme: { main } }) => (main.day ? "#000000" : "#1a1a1a")};
-    transition: 0.4s;
-  }
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus {
-    -webkit-text-fill-color: ${({ theme: { main } }) =>
-      main.day ? `#000` : `#fff`};
-    -webkit-box-shadow: 0 0 0 30px
-      ${({ theme: { main } }) => (main.day ? main.bg : main.bgAlt)} inset !important;
-  }
-  input:-webkit-autofill:focus {
-    border: 2px solid ${({ theme: { themeColor } }) => themeColor};
-  }
 `
 
 const InputBox = styled.input`
@@ -28,12 +12,12 @@ const InputBox = styled.input`
   color: ${({ theme: { main } }) => (main.day ? `#000` : `#fff`)};
   background-color: ${({ theme: { main } }) =>
     main.day ? main.bg : main.bgAlt};
-  border: 1px solid ${({ theme: { main } }) => main.shade};
+  border: 1.5px solid ${({ theme: { themeColor } }) => themeColor};
   width: 100%;
   transition: box-shadow ease 0.4s;
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 0.1rem ${({ theme: { themeColor } }) => themeColor};
+    box-shadow: 0 0 0 0.07rem ${({ theme: { themeColor } }) => themeColor};
   }
 
   &:focus + label {

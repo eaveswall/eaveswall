@@ -54,9 +54,19 @@ const Style = createGlobalStyle`
     color: ${({ theme: { main } }) => main.fg};
     text-decoration: underline;
     &:hover {
-      color: ${({ theme: { main, themeColor } }) => main.day ? shade(0.5, themeColor) : tint(0.2, themeColor)};
+      color: ${({ theme: { main, themeColor } }) =>
+        main.day ? shade(0.5, themeColor) : tint(0.2, themeColor)};
       text-decoration: underline dashed;
     }
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: ${({ theme: { main } }) =>
+      main.day ? `#000` : `#fff`};
+    -webkit-box-shadow: 0 0 0 30px
+      ${({ theme: { main } }) =>
+        main.day ? main.bg : main.bgAlt} inset !important;
   }
 `
 
@@ -79,7 +89,8 @@ const Scrollbar = createGlobalStyle`
     border-radius: 50px !important;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: ${({ theme: { themeColor, main } }) => tint(0.1, themeColor)} !important;
+    background-color: ${({ theme: { themeColor, main } }) =>
+      tint(0.1, themeColor)} !important;
     border-radius: 50px !important;
   }
 `
