@@ -16,6 +16,8 @@ const Presents = styled.div`
   h1 {
     color: #ffffff;
   }
+  display: flex;
+  flex-direction: column;
 `
 const PresenterImage = styled.div`
   min-width: 350px;
@@ -51,7 +53,7 @@ const PostDetails = ({ mdx, site }) => {
       <div>
         <p style={{ opacity: 0.8 }}>{mdx.frontmatter.desc}</p>
       </div>
-      <div className="d-flex">
+      <div className="d-flex mt-auto">
         <ul className="list-unstyled flex-shrink-0 mr-3" role="presentation">
           <li role="presentation">
             <span
