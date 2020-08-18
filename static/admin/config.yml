@@ -48,7 +48,7 @@ collections:
           media_library: { config: { multiple: false } },
         }
       - { label: "Publish", name: "publish", widget: "hidden", default: false }
-      - { label: "Slug", name: "slug", widget: "hidden", default: "{{slug}}" }
+      - { label: "Slug", name: "slug", widget: "hidden", default: "{{title}}" }
       - {
           label: "Post Content",
           name: "body",
