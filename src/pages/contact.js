@@ -23,9 +23,9 @@ const Contact = () => {
 
     const data = {
       "form-name": "contact",
-      name: name.value,
-      email: email.value,
-      message: message.value,
+      name,
+      email,
+      message,
     }
 
     fetch(`/`, {
