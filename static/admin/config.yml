@@ -24,14 +24,16 @@ collections:
       - {
           label: "Created Date",
           name: "date",
-          widget: "hidden",
+          widget: "date",
+          format: "YYYY-MM-DD",
+          widget: "date",
           default: "{{year}}-{{month}}-{{day}}",
         }
       - {
           label: "Last modified",
           name: "last-modified",
           widget: "hidden",
-          default: "{{year}}-{{month}}-{{day}}",
+          default: "{{date}}",
         }
       - { label: "Description", name: "desc", widget: "text" }
       - {
