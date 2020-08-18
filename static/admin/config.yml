@@ -26,13 +26,14 @@ collections:
           name: "date",
           widget: "date",
           format: "YYYY-MM-DD",
-          default: "{{year}}-{{month}}-{{day}}",
+          default: "",
         }
       - {
           label: "Last modified",
           name: "last-modified",
-          widget: "hidden",
-          default: "{{date}}",
+          widget: "date",
+          format: "YYYY-MM-DD",
+          default: "",
         }
       - { label: "Description", name: "desc", widget: "text" }
       - {
@@ -48,8 +49,8 @@ collections:
           widget: "image",
           media_library: { config: { multiple: false } },
         }
-      - { label: "Publish", name: "publish", widget: "hidden", default: false }
-      - { label: "Slug", name: "slug", widget: "hidden", default: "{{title}}" }
+      - { label: "Publish", name: "publish", widget: "hidden", default: true }
+      - { label: "Slug", name: "slug", widget: "string", default: "" }
       - {
           label: "Post Content",
           name: "body",
