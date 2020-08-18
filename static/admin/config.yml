@@ -50,7 +50,7 @@ collections:
           media_library: { config: { multiple: false } },
         }
       - { label: "Publish", name: "publish", widget: "hidden", default: true }
-      - { label: "Slug", name: "slug", widget: "string", default: "" }
+      - { label: "Slug", name: "slug", widget: "string", default: "/title-in-kebab-case" }
       - {
           label: "Post Content",
           name: "body",
