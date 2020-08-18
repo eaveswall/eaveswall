@@ -2,14 +2,14 @@ backend:
   name: git-gateway
   branch: master
 publish_mode: editorial_workflow
-media_folder: "src/images/wiki"
-public_folder: "images/wiki"
+media_folder: "src/images/cms"
+public_folder: "../../images/cms"
 site_url: https://eaveswall.com
 display_url: https://eaveswall.com
 collections:
   - name: "article"
     label: "Article"
-    folder: "src/wiki"
+    folder: "src/posts/{{slug}}"
     create: true
     slug: "{{slug}}"
     fields:
@@ -21,12 +21,17 @@ collections:
           widget: "hidden",
           default: "@eaveswall",
         }
-      - { label: "Created Date", name: "date", widget: "hidden", default: 2020-05-02 }
+      - {
+          label: "Created Date",
+          name: "date",
+          widget: "hidden",
+          default: "{{year}}-{{month}}-{{day}}",
+        }
       - {
           label: "Last modified",
           name: "last-modified",
           widget: "hidden",
-          default: 2020-05-02
+          default: "{{year}}-{{month}}-{{day}}",
         }
       - { label: "Description", name: "desc", widget: "text" }
       - {
@@ -42,12 +47,8 @@ collections:
           widget: "image",
           media_library: { config: { multiple: false } },
         }
-      - {
-          label: "Publish",
-          name: "publish",
-          widget: "hidden",
-          default: false,
-        }
+      - { label: "Publish", name: "publish", widget: "hidden", default: false }
+      - { label: "Slug", name: "slug", widget: "hidden", default: "{{slug}}" }
       - {
           label: "Post Content",
           name: "body",
@@ -88,12 +89,7 @@ collections:
           widget: "image",
           media_library: { config: { multiple: false } },
         }
-      - {
-          label: "Publish",
-          name: "publish",
-          widget: "hidden",
-          default: false,
-        }
+      - { label: "Publish", name: "publish", widget: "hidden", default: false }
       - {
           label: "Post Content",
           name: "body",
