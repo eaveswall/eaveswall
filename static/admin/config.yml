@@ -26,7 +26,6 @@ collections:
           name: "date",
           widget: "date",
           format: "YYYY-MM-DD",
-          widget: "date",
           default: "{{year}}-{{month}}-{{day}}",
         }
       - {
